@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:app_barber_shop/screens/pag7.dart'; // Importa o pag7.dart
 
 class Pag6 extends StatelessWidget {
   const Pag6({super.key});
@@ -62,7 +63,12 @@ class _ServiceSelectionScreenState extends State<ServiceSelectionScreen> {
                   buildServiceOption("Combo"),
                   const SizedBox(height: 20),
                   ElevatedButton(
-                    onPressed: selectedService != null ? () {} : null,
+                    onPressed: selectedService != null ? () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) =>  Pag7()),
+                      );
+                    } : null,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: borderColor,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),

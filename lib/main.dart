@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:app_barber_shop/screens/pag6.dart'; // Importa o pag6.dart
-
+import 'package:app_barber_shop/screens/pag7.dart'; // Importa o pag7.dart
 void main() {
   runApp(const MyApp());
 }
