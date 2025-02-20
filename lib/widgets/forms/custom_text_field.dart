@@ -13,7 +13,7 @@ class CustomTextField extends StatelessWidget {
       width: 300,
       height: 60,
       decoration: BoxDecoration(
-        color: Colors.black,
+        color: const Color(0xFF000000),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
           color: const Color(0xFF00FFB4),
