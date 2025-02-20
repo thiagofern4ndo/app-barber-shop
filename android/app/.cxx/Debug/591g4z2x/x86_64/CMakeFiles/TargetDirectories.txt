@@ -1,0 +1,2 @@
+C:/Projetos/AppBarberShop/app_barber_shop/android/app/.cxx/Debug/591g4z2x/x86_64/CMakeFiles/edit_cache.dir
+C:/Projetos/AppBarberShop/app_barber_shop/android/app/.cxx/Debug/591g4z2x/x86_64/CMakeFiles/rebuild_cache.dir
