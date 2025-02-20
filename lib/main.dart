@@ -1,15 +1,26 @@
+import 'package:app_barber_shop/widgets/buttons/button_checkbox.dart';
 import 'package:app_barber_shop/widgets/buttons/button_contact.dart';
+import 'package:app_barber_shop/widgets/buttons/button_instagram.dart';
+import 'package:app_barber_shop/widgets/buttons/profile_button.dart';
+import 'package:app_barber_shop/widgets/text/text_direitos.dart';
 import 'package:flutter/material.dart';
 import 'package:app_barber_shop/widgets/buttons/custom_button.dart'; 
-import 'package:app_barber_shop/widgets/buttons/custom_button2.dart'; // Novo botão
+import 'package:app_barber_shop/widgets/buttons/custom_button2.dart'; 
 import 'package:app_barber_shop/widgets/forms/custom_text_field.dart'; 
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool isChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +48,7 @@ class MyApp extends StatelessWidget {
                 controller: TextEditingController(),
                 hintText: 'Digite algo...',
               ),
-              const SizedBox(height: 20), // Espaçamento entre o campo e o novo botão
+              const SizedBox(height: 20),
               CustomButton2(
                 text: 'Clique aqui',
                 onPressed: () {
@@ -48,7 +59,23 @@ class MyApp extends StatelessWidget {
               ContactButton(
                 text: 'Contato',
                 onPressed: () {
-                 print('Botão Contato clicado'); 
+                  print('Botão Contato clicado'); 
+                },
+              ),
+              const SizedBox(height: 5),
+              TextWidget(),
+              const SizedBox(height: 10),
+              InstagramIconButton(),
+              const SizedBox(height: 10),
+              ProfileIconButton(),
+              const SizedBox(height: 10),
+              CustomCheckBox(
+                text: 'Selecione',
+                isChecked: isChecked,
+                onChanged: (value) {
+                  setState(() {
+                    isChecked = value!;
+                  });
                 },
               ),
             ],
@@ -58,6 +85,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 
 
 
