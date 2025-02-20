@@ -1,3 +1,4 @@
+import 'package:app_barber_shop/widgets/buttons/button_contact.dart';
 import 'package:flutter/material.dart';
 import 'package:app_barber_shop/widgets/buttons/custom_button.dart'; 
 import 'package:app_barber_shop/widgets/buttons/custom_button2.dart'; // Novo botão
@@ -41,6 +42,13 @@ class MyApp extends StatelessWidget {
                 text: 'Clique aqui',
                 onPressed: () {
                   print('Botão 2 clicado!');
+                },
+              ),
+              const SizedBox(height: 20),
+              ContactButton(
+                text: 'Contato',
+                onPressed: () {
+                 print('Botão Contato clicado'); 
                 },
               ),
             ],
