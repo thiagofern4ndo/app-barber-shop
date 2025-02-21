@@ -35,7 +35,8 @@ class _CalendarButtonState extends State<CalendarButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 300, // Largura fixa para o calendário
+      height: 340, // Altura fixa para o calendário
+      width: 340, // Largura fixa para o calendário
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Color(0xFF00FFB4), // Cor de fundo #00ffb4

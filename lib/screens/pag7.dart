@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:app_barber_shop/widgets/buttons/button_calendar_screen.dart'; // Importa o CalendarButton
 import 'package:app_barber_shop/widgets/buttons/custom_buttonGreen.dart'; // Importa o CustomButton
+import 'package:app_barber_shop/widgets/buttons/button_instagram.dart';
+import 'package:app_barber_shop/widgets/buttons/button_contact.dart'; // Importa o ContactButton
+import 'package:app_barber_shop/widgets/buttons/button_back.dart'; // Importa o CustomBackButton
 import 'package:google_fonts/google_fonts.dart'; // Importa o GoogleFonts
 
 class Pag7 extends StatelessWidget {
@@ -32,68 +35,84 @@ class _CalendarScreenState extends State<CalendarScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        elevation: 0, // Remove a sombra do AppBar
-      ),
-      body: Column(
+      body: Stack(
         children: [
-          // Título "Selecione uma Data"
-          Padding(
-            padding: EdgeInsets.only(top: 100, bottom: 0), // 10 pixels acima e 10 abaixo do título
-            child: Text(
-              'Selecione uma Data',
-              style: GoogleFonts.poppins(
-                color: Colors.white,
-                fontSize: 20, // Tamanho do texto
-                fontWeight: FontWeight.bold, // Texto em negrito
-              ),
-            ),
-          ),
-          // Calendário centralizado
-          Expanded(
-            child: Center(
-              child: CalendarButton(
-                selectedDate: _selectedDate,
-                onDateSelected: _onDateSelected,
-              ),
-            ),
-          ),
-          // Botão "Continuar"
-          Padding(
-            padding: EdgeInsets.only(bottom: 100, top: 0),
-            child: CustomButton(
-              text: 'Continuar',
-              onPressed: () {
-                // Ação ao pressionar o botão Continuar
-              },
-            ),
-          ),
-          // Texto no rodapé
-          Padding(
-            padding: EdgeInsets.only(bottom: 20),
-            child: Column(
-              children: [
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'contato',
-                    style: GoogleFonts.poppins(
-                      color: Color(0xFF00FFB4), // Cor #00ffb4
-                      fontSize: 14,
-                      decoration: TextDecoration.underline, // Sublinhado
-                    ),
-                  ),
-                ),
-                Text(
-                  'Todos os direitos reservados',
+          Column(
+            children: [
+              // Título "Selecione uma Data"
+              Padding(
+                padding: EdgeInsets.only(top: 100, bottom: 50), // 10 pixels acima e 10 abaixo do título
+                child: Text(
+                  'Selecione uma Data',
                   style: GoogleFonts.poppins(
-                    color: Colors.white54,
-                    fontSize: 12,
+                    color: Colors.white,
+                    fontSize: 20, // Tamanho do texto
+                    fontWeight: FontWeight.bold, // Texto em negrito
                   ),
                 ),
-              ],
-            ),
+              ),
+              // Calendário centralizado
+              Expanded(
+                child: Center(
+                  child: CalendarButton(
+                    selectedDate: _selectedDate,
+                    onDateSelected: _onDateSelected,
+                  ),
+                ),
+              ),
+              // Botão "Continuar"
+              Padding(
+                padding: EdgeInsets.only(bottom: 80, top: 100),
+                child: CustomButton(
+                  text: 'Continuar',
+                  onPressed: () {
+                    // Ação ao pressionar o botão Continuar
+                  },
+                ),
+              ),
+              // Texto no rodapé
+              Padding(
+                padding: EdgeInsets.only(bottom: 30),
+                child: Column(
+                  children: [
+                    ContactButton(
+                      text: 'Contato',
+                      onPressed: () {
+                        // Ação ao pressionar o botão de contato
+                      }, 
+                    ),
+                    SizedBox(height: 15),
+                    Text(
+                      'Todos os direitos reservados',
+                      style: GoogleFonts.poppins(
+                        color: Colors.white54,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Positioned(
+            top: 10,
+            left: 20,
+            child: CustomBackButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ), // Adiciona o CustomBackButton no canto superior direito
+
+          ),
+          Positioned(
+            top: 10,
+            right: 20,
+            child: InstagramIconButton(
+
+          
+             
+            ), // Adiciona o IconButton no canto superior direito
+
           ),
         ],
       ),
