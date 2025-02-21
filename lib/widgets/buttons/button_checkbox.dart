@@ -24,7 +24,7 @@ class CustomCheckBox extends StatelessWidget {
       height: height,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.black,
+          backgroundColor: Color(0xFF000000),
           side: const BorderSide(
             color: Color(0xFF00FFB4),
             width: 3,
@@ -53,14 +53,14 @@ class CustomCheckBox extends StatelessWidget {
             Container(
               width: 30,
               height: 30,
-              margin: const EdgeInsets.only(left: 10), // Deslocando o círculo para a direita
+              margin: const EdgeInsets.only(left: 10),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
                   color: Color(0xFF00FFB4),
                   width: 3,
                 ),
-                color: Colors.black,
+                color: Color(0xFF000000),
               ),
               child: isChecked
                   ? Icon(
