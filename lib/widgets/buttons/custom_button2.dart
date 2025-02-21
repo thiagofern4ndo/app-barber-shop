@@ -37,7 +37,7 @@ class CustomButton2 extends StatelessWidget {
           style: GoogleFonts.poppins(
             fontSize: 30,
             fontWeight: FontWeight.w500,
-            color: Colors.white,
+            color: Color(0xFFFFFFFF),
           ),
         ),
       ),

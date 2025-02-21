@@ -3,7 +3,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class InstagramIconButton extends StatelessWidget {
-  final String instagramUrl = 'https://www.instagram.com/seu_perfil_aqui/'; // Substitua pelo link do seu perfil
+
+  final String instagramUrl = 'https://www.instagram.com/seu_perfil_aqui/'; 
+>>>>>>> c24a562da897b5bdcd30b0731afcf76c302c2110
 
   // Função para abrir o link
   _launchURL() async {
@@ -18,11 +20,19 @@ class InstagramIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       icon: FaIcon(
+<<<<<<< HEAD
         FontAwesomeIcons.instagram, // Ícone do Instagram
         color: const Color(0xFF00FFb4), // Customizando a cor para a paleta do seu app
         size: 40, // Tamanho do ícone
       ),
       onPressed: _launchURL, // Ao clicar, abre o link
+=======
+        FontAwesomeIcons.instagram, 
+        color: const Color(0xFF00FFb4), 
+        size: 40, 
+      ),
+      onPressed: _launchURL, 
+>>>>>>> c24a562da897b5bdcd30b0731afcf76c302c2110
     );
   }
 }

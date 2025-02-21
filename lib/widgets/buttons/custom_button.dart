@@ -14,7 +14,7 @@ class CustomButton extends StatelessWidget {
     required this.onPressed,
     this.width = 300,
     this.height = 60,
-    this.color = const Color(0xFF00FFB4), 
+    this.color = const Color(0xFF00FFB4),
   });
 
   @override
@@ -26,7 +26,7 @@ class CustomButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: color,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20), 
+            borderRadius: BorderRadius.circular(20),
           ),
         ),
         onPressed: onPressed,
@@ -34,12 +34,12 @@ class CustomButton extends StatelessWidget {
           text,
           style: GoogleFonts.poppins(
             fontSize: 30,
-            fontWeight: FontWeight.w600, 
-            color: Colors.black,
+            fontWeight: FontWeight.w600,
+            color: Color(0xFF000000),
             shadows: [
               Shadow(
                 offset: Offset(1, 1),
-                color: Colors.black,
+                color: Color(0xFF000000),
                 blurRadius: 1,
               ),
             ],
