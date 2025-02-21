@@ -12,8 +12,8 @@ class CustomButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.onPressed,
-    this.width = 300,
-    this.height = 60,
+    this.width = 150,// largura do botão 
+    this.height = 40,// altura do botão
     this.color = const Color(0xFF00FFB4), 
   });
 
@@ -33,7 +33,7 @@ class CustomButton extends StatelessWidget {
         child: Text(
           text,
           style: GoogleFonts.poppins(
-            fontSize: 30,
+            fontSize: 15, // tamanho da fonte
             fontWeight: FontWeight.w600, 
             color: Colors.black,
             shadows: [
