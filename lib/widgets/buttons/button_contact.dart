@@ -12,9 +12,9 @@ class ContactButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.onPressed,
-    this.width = 130,
+    this.width = 110,
     this.height = 27,
-    this.color = const Color(0xFF000000),
+    this.color = const Color(0xFF000000), // required Type child,
   });
 
   @override
@@ -26,7 +26,7 @@ class ContactButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: color,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(10),
             side: BorderSide(
               color: const Color(0xFF00FFb4),
               width: 3,
@@ -37,7 +37,7 @@ class ContactButton extends StatelessWidget {
         child: Text(
           text,
           style: GoogleFonts.poppins(
-            fontSize: 16,
+            fontSize: 14,
             fontWeight: FontWeight.w300,
             color: const Color(0xFFFFFFFF),
           ),

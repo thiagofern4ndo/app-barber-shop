@@ -12,9 +12,15 @@ class CustomButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.onPressed,
+<<<<<<< HEAD:lib/widgets/buttons/custom_button.dart
     this.width = 300,
     this.height = 60,
     this.color = const Color(0xFF00FFB4),
+=======
+    this.width = 150,// largura do botão 
+    this.height = 40,// altura do botão
+    this.color = const Color(0xFF00FFB4), 
+>>>>>>> b20d51514a52df4c6b0595bb2d45e0be5a775669:lib/widgets/buttons/custom_buttonGreen.dart
   });
 
   @override
@@ -33,8 +39,13 @@ class CustomButton extends StatelessWidget {
         child: Text(
           text,
           style: GoogleFonts.poppins(
+<<<<<<< HEAD:lib/widgets/buttons/custom_button.dart
             fontSize: 30,
             fontWeight: FontWeight.w600,
+=======
+            fontSize: 15, // tamanho da fonte
+            fontWeight: FontWeight.w600, 
+>>>>>>> b20d51514a52df4c6b0595bb2d45e0be5a775669:lib/widgets/buttons/custom_buttonGreen.dart
             color: Color(0xFF000000),
             shadows: [
               Shadow(

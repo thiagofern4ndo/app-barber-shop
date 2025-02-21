@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:app_barber_shop/widgets/buttons/button_calendar_screen.dart'; // Importa o CalendarButton
+import 'package:app_barber_shop/widgets/buttons/custom_buttonGreen.dart'; // Importa o CustomButton
+import 'package:app_barber_shop/widgets/buttons/button_instagram.dart';
+import 'package:app_barber_shop/widgets/buttons/button_contact.dart'; // Importa o ContactButton
+import 'package:app_barber_shop/widgets/buttons/button_back.dart'; // Importa o CustomBackButton
+import 'package:google_fonts/google_fonts.dart'; // Importa o GoogleFonts
+import 'package:app_barber_shop/widgets/text/text_direitos.dart';
 
 class Pag7 extends StatelessWidget {
   @override
@@ -19,9 +26,9 @@ class CalendarScreen extends StatefulWidget {
 class _CalendarScreenState extends State<CalendarScreen> {
   DateTime _selectedDate = DateTime.now();
 
-  void _onDaySelected(int day) {
+  void _onDateSelected(DateTime date) {
     setState(() {
-      _selectedDate = DateTime(_selectedDate.year, _selectedDate.month, day);
+      _selectedDate = date;
     });
   }
 
@@ -29,144 +36,81 @@ class _CalendarScreenState extends State<CalendarScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        elevation: 0, // Remove a sombra do AppBar
-      ),
-      body: Column(
+      body: Stack(
         children: [
-          // Título "Selecione uma Data"
-         Padding(
-            padding: EdgeInsets.only(top: 100, bottom: 0), // 10 pixels acima e 10 abaixo do título
-            child: Text(
-              'Selecione uma Data',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20, // Tamanho do texto
-                fontWeight: FontWeight.bold, // Texto em negrito
-              ),
-            ),
-          ),
-          // Calendário centralizado
-          Expanded(
-            child: Center(
-              child: Container(
-                width: 250, // Largura fixa para o calendário
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Color(0xFF00FFB4), // Cor de fundo #00ffb4
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: _buildCalendar(),
-              ),
-            ),
-          ),
-          // Botão "Continuar"
-          Padding(
-            padding: EdgeInsets.only(bottom: 100, top:0),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF00FFB4), // Cor do botão #00ffb4
-                foregroundColor: Colors.black,
-              ),
-              onPressed: () {
-                // Ação ao pressionar o botão Continuar
-              },
-              child: const Text('Continuar', style: TextStyle(color: Colors.black, fontSize: 16)),
-            ),
-          ),
-          // Texto no rodapé
-          Padding(
-            padding: EdgeInsets.only(bottom: 20),
-            child: Column(
-              children: [
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'contato',
-                    style: TextStyle(
-                      color: Color(0xFF00FFB4), // Cor #00ffb4
-                      fontSize: 14,
-                      // Sublinhado
-                    ),
+          Column(
+            children: [
+              // Título "Selecione uma Data"
+              Padding(
+                padding: EdgeInsets.only(top: 100, bottom: 50), // 10 pixels acima e 10 abaixo do título
+                child: Text(
+                  'Selecione uma Data',
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontSize: 20, // Tamanho do texto
+                    fontWeight: FontWeight.bold, // Texto em negrito
                   ),
                 ),
-                Text('Todos os direitos reservados',
-                     style: TextStyle(color: Colors.white54, fontSize: 12),),
-              ],
-            ),
+              ),
+              // Calendário centralizado
+              Expanded(
+                child: Center(
+                  child: CalendarButton(
+                    selectedDate: _selectedDate,
+                    onDateSelected: _onDateSelected,
+                  ),
+                ),
+              ),
+              // Botão "Continuar"
+              Padding(
+                padding: EdgeInsets.only(bottom: 80, top: 100),
+                child: CustomButton(
+                  text: 'Continuar',
+                  onPressed: () {
+                    // Ação ao pressionar o botão Continuar
+                  },
+                ),
+              ),
+              // Texto no rodapé
+              Padding(
+                padding: EdgeInsets.only(bottom: 30),
+                child: Column(
+                  children: [
+                    ContactButton(
+                      text: 'Contato',
+                      onPressed: () {
+                        // Ação ao pressionar o botão de contato
+                      }, 
+                    ),
+                    SizedBox(height: 15),
+                    TextWidget(),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Positioned(
+            top: 10,
+            left: 20,
+            child: CustomBackButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ), // Adiciona o CustomBackButton no canto superior direito
+
+          ),
+          Positioned(
+            top: 10,
+            right: 20,
+            child: InstagramIconButton(
+
+          
+             
+            ), // Adiciona o IconButton no canto superior direito
+
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildCalendar() {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        _buildWeekDaysRow(),
-        SizedBox(height: 10),
-        _buildDaysGrid(),
-      ],
-    );
-  }
-
-  Widget _buildWeekDaysRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb']
-          .map((day) => Text(day,
-              style:
-                  TextStyle(color: Colors.black, fontWeight: FontWeight.bold)))
-          .toList(),
-    );
-  }
-
-  Widget _buildDaysGrid() {
-    DateTime firstDayOfMonth =
-        DateTime(_selectedDate.year, _selectedDate.month, 1);
-    int daysInMonth =
-        DateTime(_selectedDate.year, _selectedDate.month + 1, 0).day;
-    int startingWeekday = firstDayOfMonth.weekday;
-
-    List<Widget> dayWidgets = [];
-
-    // Preenche os dias vazios no início do mês
-    for (int i = 1; i < startingWeekday; i++) {
-      dayWidgets.add(Container());
-    }
-
-    for (int day = 1; day <= daysInMonth; day++) {
-      dayWidgets.add(
-        GestureDetector(
-          onTap: () => _onDaySelected(day),
-          child: Container(
-            margin: EdgeInsets.all(2),
-            decoration: BoxDecoration(
-              color:
-                  _selectedDate.day == day ? Colors.blue : Colors.transparent,
-              borderRadius: BorderRadius.circular(4),
-            ),
-            child: Center(
-              child: Text(
-                day.toString(),
-                style: TextStyle(
-                  color: _selectedDate.day == day ? Colors.white : Colors.black,
-                ),
-              ),
-            ),
-          ),
-        ),
-      );
-    }
-
-    return GridView.count(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(), // Impede a rolagem do GridView
-      crossAxisCount: 7,
-      childAspectRatio: 1.2, // Ajusta a proporção dos itens
-      children: dayWidgets,
     );
   }
 }
