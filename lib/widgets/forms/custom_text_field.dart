@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart'; // Certifique-se de importar o GoogleFonts
+import 'package:google_fonts/google_fonts.dart'; 
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -13,8 +13,8 @@ class CustomTextField extends StatelessWidget {
       width: 300,
       height: 60,
       decoration: BoxDecoration(
-        color: Colors.black,
-        borderRadius: BorderRadius.circular(25),
+        color: const Color(0xFF000000),
+        borderRadius: BorderRadius.circular(20),
         border: Border.all(
           color: const Color(0xFF00FFB4),
           width: 4,

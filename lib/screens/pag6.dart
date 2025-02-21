@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:app_barber_shop/screens/pag7.dart'; // Importa o pag7.dart
+import 'package:app_barber_shop/widgets/buttons/button_contact.dart'; // Importa o button_contact.dart
+import 'package:app_barber_shop/widgets/buttons/button_ServiceOption.dart'; // Importa o button_service_option.dart
+import 'package:app_barber_shop/widgets/buttons/button_instagram.dart'; // Importa o button_instagram.dart
 
 class Pag6 extends StatelessWidget {
   const Pag6({super.key});
@@ -20,7 +23,8 @@ class ServiceSelectionScreen extends StatefulWidget {
 
 class _ServiceSelectionScreenState extends State<ServiceSelectionScreen> {
   String? selectedService;
-  final Color borderColor = const Color(0xFF00FFB4); // Definição da cor desejada
+  final Color borderColor =
+      const Color(0xFF00FFB4); // Definição da cor desejada
 
   @override
   Widget build(BuildContext context) {
@@ -30,16 +34,7 @@ class _ServiceSelectionScreenState extends State<ServiceSelectionScreen> {
         backgroundColor: Colors.black,
         elevation: 0,
         actions: [
-          IconButton(
-            icon: Icon(
-              Icons.camera_alt_outlined, // Ícone da câmera
-              color: borderColor, // Cor do ícone (substitua borderColor pela cor desejada)
-              size: 40, // Tamanho do ícone
-            ),
-            onPressed: () {
-              // Ação ao pressionar o botão
-            },
-          ),
+          InstagramIconButton(), // Substitui o ícone da câmera pelo InstagramIconButton
           const SizedBox(width: 20), // Espaçamento
         ],
       ),
@@ -55,26 +50,61 @@ class _ServiceSelectionScreenState extends State<ServiceSelectionScreen> {
                   const SizedBox(height: 15),
                   const Text(
                     'Selecione um serviço',
-                    style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 20),
-                  buildServiceOption("Corte"),
-                  buildServiceOption("Barba"),
-                  buildServiceOption("Combo"),
+                  ServiceOptionButton(
+                    service: "Corte",
+                    selectedService: selectedService,
+                    borderColor: borderColor,
+                    onTap: () {
+                      setState(() {
+                        selectedService = "Corte";
+                      });
+                    },
+                  ),
+                  ServiceOptionButton(
+                    service: "Barba",
+                    selectedService: selectedService,
+                    borderColor: borderColor,
+                    onTap: () {
+                      setState(() {
+                        selectedService = "Barba";
+                      });
+                    },
+                  ),
+                  ServiceOptionButton(
+                    service: "Combo",
+                    selectedService: selectedService,
+                    borderColor: borderColor,
+                    onTap: () {
+                      setState(() {
+                        selectedService = "Combo";
+                      });
+                    },
+                  ),
                   const SizedBox(height: 20),
                   ElevatedButton(
-                    onPressed: selectedService != null ? () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) =>  Pag7()),
-                      );
-                    } : null,
+                    onPressed: selectedService != null
+                        ? () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Pag7()),
+                            );
+                          }
+                        : null,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: borderColor,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 15, horizontal: 40),
                     ),
-                    child: const Text('Continuar', style: TextStyle(color: Colors.black, fontSize: 16)),
+                    child: const Text('Continuar',
+                        style: TextStyle(color: Colors.black, fontSize: 16)),
                   ),
                 ],
               ),
@@ -84,12 +114,11 @@ class _ServiceSelectionScreenState extends State<ServiceSelectionScreen> {
             padding: const EdgeInsets.only(bottom: 20),
             child: Column(
               children: [
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'contato',
-                    style: TextStyle(color: borderColor, fontSize: 14, decoration: TextDecoration.underline),
-                  ),
+                ContactButton(
+                  text: 'Contato',
+                  onPressed: () {
+                    print('Botão Contato clicado na Página 6');
+                  },
                 ),
                 const SizedBox(height: 10),
                 const Text(
@@ -100,39 +129,6 @@ class _ServiceSelectionScreenState extends State<ServiceSelectionScreen> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget buildServiceOption(String service) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          selectedService = service;
-        });
-      },
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 8),
-        padding: const EdgeInsets.symmetric(vertical: 15),
-        decoration: BoxDecoration(
-          border: Border.all(color: borderColor, width: 2), // Cor aplicada às bordas
-          borderRadius: BorderRadius.circular(10),
-          color: selectedService == service ? borderColor.withOpacity(0.3) : Colors.transparent,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              service,
-              style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(width: 10),
-            Icon(
-              selectedService == service ? Icons.radio_button_checked : Icons.radio_button_off,
-              color: borderColor, // Cor aplicada ao ícone
-            ),
-          ],
-        ),
       ),
     );
   }
