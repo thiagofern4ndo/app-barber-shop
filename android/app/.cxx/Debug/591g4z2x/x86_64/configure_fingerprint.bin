@@ -2,6 +2,7 @@ C/C++ Structured Logq
 o
 mC:\Projetos\AppBarberShop\app_barber_shop\android\app\.cxx\Debug\591g4z2x\x86_64\additional_project_files.txtC
 A
+<<<<<<< HEAD
 ?com.android.build.gradle.internal.cxx.io.EncodedFileFingerPrint	ûðé£Ò2 ÝŒì¢Ò2n
 l
 jC:\Projetos\AppBarberShop\app_barber_shop\android\app\.cxx\Debug\591g4z2x\x86_64\android_gradle_build.json	ûðé£Ò2¶ ÞŒì¢Ò2s
@@ -26,3 +27,29 @@ j
 hC:\Projetos\AppBarberShop\app_barber_shop\android\app\.cxx\Debug\591g4z2x\x86_64\symbol_folder_index.txt	ûðé£Ò2_ áŒì¢Ò2K
 I
 GC:\flutter\packages\flutter_tools\gradle\src\main\groovy\CMakeLists.txt	ûðé£Ò2§ Ÿ„ô•Ò2
+=======
+?com.android.build.gradle.internal.cxx.io.EncodedFileFingerPrint	ÿÑÐÒ2 µ³ÐÒ2n
+l
+jC:\Projetos\AppBarberShop\app_barber_shop\android\app\.cxx\Debug\591g4z2x\x86_64\android_gradle_build.json	ŽÿÑÐÒ2¶ ¶³ÐÒ2s
+q
+oC:\Projetos\AppBarberShop\app_barber_shop\android\app\.cxx\Debug\591g4z2x\x86_64\android_gradle_build_mini.json	ŽÿÑÐÒ2‘ ·³ÐÒ2`
+^
+\C:\Projetos\AppBarberShop\app_barber_shop\android\app\.cxx\Debug\591g4z2x\x86_64\build.ninja	ŽÿÑÐÒ2¨Ô ùŽ³ÐÒ2d
+b
+`C:\Projetos\AppBarberShop\app_barber_shop\android\app\.cxx\Debug\591g4z2x\x86_64\build.ninja.txt	ŽÿÑÐÒ2i
+g
+eC:\Projetos\AppBarberShop\app_barber_shop\android\app\.cxx\Debug\591g4z2x\x86_64\build_file_index.txt	ŽÿÑÐÒ2G ¹³ÐÒ2j
+h
+fC:\Projetos\AppBarberShop\app_barber_shop\android\app\.cxx\Debug\591g4z2x\x86_64\compile_commands.json	ŽÿÑÐÒ2n
+l
+jC:\Projetos\AppBarberShop\app_barber_shop\android\app\.cxx\Debug\591g4z2x\x86_64\compile_commands.json.bin	ŽÿÑÐÒ2	t
+r
+pC:\Projetos\AppBarberShop\app_barber_shop\android\app\.cxx\Debug\591g4z2x\x86_64\metadata_generation_command.txt	ŽÿÑÐÒ2
+Ë ¸³ÐÒ2g
+e
+cC:\Projetos\AppBarberShop\app_barber_shop\android\app\.cxx\Debug\591g4z2x\x86_64\prefab_config.json	ŽÿÑÐÒ2( ¹³ÐÒ2l
+j
+hC:\Projetos\AppBarberShop\app_barber_shop\android\app\.cxx\Debug\591g4z2x\x86_64\symbol_folder_index.txt	ŽÿÑÐÒ2_ ¹³ÐÒ2K
+I
+GC:\flutter\packages\flutter_tools\gradle\src\main\groovy\CMakeLists.txt	ŽÿÑÐÒ2§ Ÿ„ô•Ò2
+>>>>>>> 29862eb873e14c4e4bcb7006895379f48159454e

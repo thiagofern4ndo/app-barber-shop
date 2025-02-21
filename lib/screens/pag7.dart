@@ -5,6 +5,7 @@ import 'package:app_barber_shop/widgets/buttons/button_instagram.dart';
 import 'package:app_barber_shop/widgets/buttons/button_contact.dart'; // Importa o ContactButton
 import 'package:app_barber_shop/widgets/buttons/button_back.dart'; // Importa o CustomBackButton
 import 'package:google_fonts/google_fonts.dart'; // Importa o GoogleFonts
+import 'package:app_barber_shop/widgets/text/text_direitos.dart';
 
 class Pag7 extends StatelessWidget {
   @override
@@ -82,13 +83,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                       }, 
                     ),
                     SizedBox(height: 15),
-                    Text(
-                      'Todos os direitos reservados',
-                      style: GoogleFonts.poppins(
-                        color: Colors.white54,
-                        fontSize: 12,
-                      ),
-                    ),
+                    TextWidget(),
                   ],
                 ),
               ),

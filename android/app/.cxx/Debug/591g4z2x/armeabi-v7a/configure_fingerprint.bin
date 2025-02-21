@@ -2,6 +2,7 @@ C/C++ Structured Logv
 t
 rC:\Projetos\AppBarberShop\app_barber_shop\android\app\.cxx\Debug\591g4z2x\armeabi-v7a\additional_project_files.txtC
 A
+<<<<<<< HEAD
 ?com.android.build.gradle.internal.cxx.io.EncodedFileFingerPrint	åðé£Ò2 äÿë¢Ò2s
 q
 oC:\Projetos\AppBarberShop\app_barber_shop\android\app\.cxx\Debug\591g4z2x\armeabi-v7a\android_gradle_build.json	åðé£Ò2À åÿë¢Ò2x
@@ -26,3 +27,29 @@ o
 mC:\Projetos\AppBarberShop\app_barber_shop\android\app\.cxx\Debug\591g4z2x\armeabi-v7a\symbol_folder_index.txt	åðé£Ò2d çÿë¢Ò2K
 I
 GC:\flutter\packages\flutter_tools\gradle\src\main\groovy\CMakeLists.txt	åðé£Ò2§ Ÿ„ô•Ò2
+=======
+?com.android.build.gradle.internal.cxx.io.EncodedFileFingerPrint	âþÑÐÒ2 Ø€³ÐÒ2s
+q
+oC:\Projetos\AppBarberShop\app_barber_shop\android\app\.cxx\Debug\591g4z2x\armeabi-v7a\android_gradle_build.json	âþÑÐÒ2À Ú€³ÐÒ2x
+v
+tC:\Projetos\AppBarberShop\app_barber_shop\android\app\.cxx\Debug\591g4z2x\armeabi-v7a\android_gradle_build_mini.json	âþÑÐÒ2› Û€³ÐÒ2e
+c
+aC:\Projetos\AppBarberShop\app_barber_shop\android\app\.cxx\Debug\591g4z2x\armeabi-v7a\build.ninja	âþÑÐÒ2ÁÔ œ€³ÐÒ2i
+g
+eC:\Projetos\AppBarberShop\app_barber_shop\android\app\.cxx\Debug\591g4z2x\armeabi-v7a\build.ninja.txt	âþÑÐÒ2n
+l
+jC:\Projetos\AppBarberShop\app_barber_shop\android\app\.cxx\Debug\591g4z2x\armeabi-v7a\build_file_index.txt	âþÑÐÒ2G Ý€³ÐÒ2o
+m
+kC:\Projetos\AppBarberShop\app_barber_shop\android\app\.cxx\Debug\591g4z2x\armeabi-v7a\compile_commands.json	âþÑÐÒ2s
+q
+oC:\Projetos\AppBarberShop\app_barber_shop\android\app\.cxx\Debug\591g4z2x\armeabi-v7a\compile_commands.json.bin	âþÑÐÒ2	y
+w
+uC:\Projetos\AppBarberShop\app_barber_shop\android\app\.cxx\Debug\591g4z2x\armeabi-v7a\metadata_generation_command.txt	âþÑÐÒ2
+ä Ü€³ÐÒ2l
+j
+hC:\Projetos\AppBarberShop\app_barber_shop\android\app\.cxx\Debug\591g4z2x\armeabi-v7a\prefab_config.json	âþÑÐÒ2( Ü€³ÐÒ2q
+o
+mC:\Projetos\AppBarberShop\app_barber_shop\android\app\.cxx\Debug\591g4z2x\armeabi-v7a\symbol_folder_index.txt	âþÑÐÒ2d Ý€³ÐÒ2K
+I
+GC:\flutter\packages\flutter_tools\gradle\src\main\groovy\CMakeLists.txt	âþÑÐÒ2§ Ÿ„ô•Ò2
+>>>>>>> 29862eb873e14c4e4bcb7006895379f48159454e
