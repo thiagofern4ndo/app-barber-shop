@@ -35,11 +35,11 @@ class CustomButton extends StatelessWidget {
           style: GoogleFonts.poppins(
             fontSize: 30,
             fontWeight: FontWeight.w600, 
-            color: Colors.black,
+            color: Color(0xFF000000),
             shadows: [
               Shadow(
                 offset: Offset(1, 1),
-                color: Colors.black,
+                color: Color(0xFF000000),
                 blurRadius: 1,
               ),
             ],
