@@ -1,4 +1,4 @@
-import 'package:app_barber_shop/widgets/buttons/button_back.dart';
+/*import 'package:app_barber_shop/widgets/buttons/button_back.dart';
 import 'package:app_barber_shop/widgets/buttons/button_checkbox.dart';
 import 'package:app_barber_shop/widgets/buttons/button_contact.dart';
 import 'package:app_barber_shop/widgets/buttons/button_instagram.dart';
@@ -61,6 +61,25 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
       ),
+    );
+  }
+}*/
+
+import 'package:flutter/material.dart';
+import 'package:app_barber_shop/screens/pag7.dart'; // Importa o pag7.dart
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Pag7(), // Define Pag7 como a tela inicial
     );
   }
 }
