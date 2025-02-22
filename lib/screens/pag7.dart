@@ -38,11 +38,28 @@ class _CalendarScreenState extends State<CalendarScreen> {
       backgroundColor: Colors.black,
       body: Stack(
         children: [
+          Positioned(
+            top: 10,
+            left: 20,
+            child: CustomBackButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ), // Adiciona o CustomBackButton no canto superior direito
+          ),
+          Positioned(
+            top: 10,
+            right: 20,
+            child:
+                InstagramIconButton(), // Adiciona o IconButton no canto superior direito
+          ),
           Column(
             children: [
               // Título "Selecione uma Data"
               Padding(
-                padding: EdgeInsets.only(top: 100, bottom: 50), // 10 pixels acima e 10 abaixo do título
+                padding: EdgeInsets.only(
+                    top: 100,
+                    bottom: 50), // 10 pixels acima e 10 abaixo do título
                 child: Text(
                   'Selecione uma Data',
                   style: GoogleFonts.poppins(
@@ -63,7 +80,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               ),
               // Botão "Continuar"
               Padding(
-                padding: EdgeInsets.only(bottom: 80, top: 100),
+                padding: EdgeInsets.only(bottom: 20, top: 20),
                 child: CustomButton(
                   text: 'Continuar',
                   onPressed: () {
@@ -80,7 +97,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                       text: 'Contato',
                       onPressed: () {
                         // Ação ao pressionar o botão de contato
-                      }, 
+                      },
                     ),
                     SizedBox(height: 15),
                     TextWidget(),
@@ -88,26 +105,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 ),
               ),
             ],
-          ),
-          Positioned(
-            top: 10,
-            left: 20,
-            child: CustomBackButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ), // Adiciona o CustomBackButton no canto superior direito
-
-          ),
-          Positioned(
-            top: 10,
-            right: 20,
-            child: InstagramIconButton(
-
-          
-             
-            ), // Adiciona o IconButton no canto superior direito
-
           ),
         ],
       ),
