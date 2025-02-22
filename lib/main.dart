@@ -66,7 +66,7 @@ class _MyAppState extends State<MyApp> {
 }*/
 
 import 'package:flutter/material.dart';
-import 'package:app_barber_shop/screens/pag7.dart'; // Importa o pag7.dart
+import 'package:app_barber_shop/screens/pag8.dart'; // Importa o pag8.dart
 
 void main() {
   runApp(const MyApp());
@@ -79,7 +79,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Pag7(), // Define Pag7 como a tela inicial
+      theme: ThemeData.dark(),
+      home: const Pag8(), // Define Pag8 como a tela inicial
     );
   }
 }
