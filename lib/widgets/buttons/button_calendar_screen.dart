@@ -1,4 +1,4 @@
-// botão calendário com a data selecionada 
+// botão calendário com a data selecionada
 
 import 'package:flutter/material.dart';
 
@@ -58,14 +58,17 @@ class _CalendarButtonState extends State<CalendarButton> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb']
           .map((day) => Text(day,
-              style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)))
+              style:
+                  TextStyle(color: Colors.black, fontWeight: FontWeight.bold)))
           .toList(),
     );
   }
 
   Widget _buildDaysGrid() {
-    DateTime firstDayOfMonth = DateTime(_selectedDate.year, _selectedDate.month, 1);
-    int daysInMonth = DateTime(_selectedDate.year, _selectedDate.month + 1, 0).day;
+    DateTime firstDayOfMonth =
+        DateTime(_selectedDate.year, _selectedDate.month, 1);
+    int daysInMonth =
+        DateTime(_selectedDate.year, _selectedDate.month + 1, 0).day;
     int startingWeekday = firstDayOfMonth.weekday;
 
     List<Widget> dayWidgets = [];
@@ -82,7 +85,8 @@ class _CalendarButtonState extends State<CalendarButton> {
           child: Container(
             margin: EdgeInsets.all(2),
             decoration: BoxDecoration(
-              color: _selectedDate.day == day ? Colors.blue : Colors.transparent,
+              color:
+                  _selectedDate.day == day ? Colors.blue : Colors.transparent,
               borderRadius: BorderRadius.circular(4),
             ),
             child: Center(
