@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomCheckBox extends StatelessWidget {
-  final String text;
-  final bool isChecked;
-  final ValueChanged<bool?> onChanged;
-  final double width;
-  final double height;
+  String text;
+  bool isChecked;
+  ValueChanged<bool?> onChanged;
+  double width;
+  double height;
 
-  const CustomCheckBox({
+   CustomCheckBox({
     Key? key,
     required this.text,
     required this.isChecked,
