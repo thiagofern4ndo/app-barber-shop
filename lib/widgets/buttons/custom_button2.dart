@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CustomButton2 extends StatelessWidget {
-  final String text;
-  final VoidCallback onPressed;
-  final double width;
-  final double height;
+ class CustomButton2 extends StatelessWidget {
+  String text;
+  VoidCallback onPressed;
+   double width;
+   double height;
 
-  const CustomButton2({
+  CustomButton2({
     Key? key,
     required this.text,
     required this.onPressed,
