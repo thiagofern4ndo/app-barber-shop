@@ -4,7 +4,8 @@ import 'package:app_barber_shop/widgets/buttons/button_back.dart'; // Importa o 
 import 'package:app_barber_shop/widgets/buttons/button_horario.dart'; // Importa o ButtonHorario
 import 'package:google_fonts/google_fonts.dart'; // Importa o GoogleFonts
 import 'package:app_barber_shop/widgets/text/text_direitos.dart'; // Importa o TextDireitos
-import 'package:app_barber_shop/widgets/buttons/custom_buttonGreen.dart';
+import 'package:app_barber_shop/widgets/buttons/custom_buttonGreen.dart'; // Importa o CustomButton
+import 'package:app_barber_shop/widgets/buttons/button_contact.dart'; // Importa o ContactButton
 
 class Pag8 extends StatelessWidget {
   const Pag8({super.key});
@@ -39,7 +40,7 @@ class _SelecionarHorarioScreenState extends State<SelecionarHorarioScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: 60), // Espaço para os botões no topo
+                const SizedBox(height: 120),
                 Text(
                   'Selecione um horário',
                   style: GoogleFonts.poppins(
@@ -56,24 +57,23 @@ class _SelecionarHorarioScreenState extends State<SelecionarHorarioScreen> {
                 Center(
                   child: CustomButton(
                     text: 'Continuar',
-                    onPressed: () {},
+                    onPressed: () {
+                      // Chama a função ContactButton
+                    },
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 30),
                 // Botão "Contato"
-                TextButton(
+
+                ContactButton(
                   onPressed: () {},
-                  child: Text(
-                    'contato',
-                    style: GoogleFonts.poppins(
-                      color: Colors.greenAccent,
-                      fontSize: 16,
-                    ),
-                  ),
+                  text: 'contato',
                 ),
+
                 const SizedBox(height: 10),
                 // Rodapé
                 TextWidget(),
+                const SizedBox(height: 7),
               ],
             ),
           ),
