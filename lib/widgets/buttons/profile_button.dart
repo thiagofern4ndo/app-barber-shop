@@ -30,4 +30,3 @@ class ProfileIconButton extends StatelessWidget {
     );
   }
 }
-

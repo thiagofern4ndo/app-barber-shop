@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CustomBackButton extends StatelessWidget {
   final VoidCallback onPressed;
 
-  CustomBackButton({Key? key, required this.onPressed}) : super(key: key);
+  const CustomBackButton({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {

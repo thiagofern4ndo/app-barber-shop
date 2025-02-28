@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomCheckBox extends StatelessWidget {
-  String text;
-  bool isChecked;
-  ValueChanged<bool?> onChanged;
-  double width;
-  double height;
+  final String text;
+  final bool isChecked;
+  final ValueChanged<bool?> onChanged;
+  final double width;
+  final double height;
 
-   CustomCheckBox({
-    Key? key,
+   const CustomCheckBox({
+    super.key,
     required this.text,
     required this.isChecked,
     required this.onChanged,
     this.width = 250,
     this.height = 50,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

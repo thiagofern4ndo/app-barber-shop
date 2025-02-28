@@ -4,11 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 class ContactButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
-   double width;
-   double height;
-  final Color color;
+   final width;
+   final height;
+   final Color color;
 
-   ContactButton({
+   const ContactButton({
     super.key,
     required this.text,
     required this.onPressed,

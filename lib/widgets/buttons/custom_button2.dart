@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
  class CustomButton2 extends StatelessWidget {
-  String text;
-  VoidCallback onPressed;
-   double width;
-   double height;
+ final String text;
+ final double fontSize;
+  final VoidCallback onPressed;
+  final double width;
+  final double height;
 
-  CustomButton2({
-    Key? key,
+  const CustomButton2({
+    super.key,
     required this.text,
     required this.onPressed,
     this.width = 300,
-    this.height = 60,
-  }) : super(key: key);
+    this.height = 60, required this.fontSize,
+  });
 
   @override
   Widget build(BuildContext context) {
