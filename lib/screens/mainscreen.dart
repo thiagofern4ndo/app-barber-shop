@@ -53,6 +53,7 @@ class MainScreen extends StatelessWidget {
                   //  MaterialPageRoute(builder: (context) => LoginPage())
                 // );
               },
+              
                width: 320, // Largura do botão
                height: 50, // Altura do botão
               color: const Color(0xFF00FFB4), // Cor personalizada do botão

@@ -16,8 +16,8 @@ class CustomButton extends StatelessWidget {
     this.width = 300,
     this.height = 60,
     this.color = const Color(0xFF00FFB4), 
-    this.fontSize =  60 * 0.4,
-  });
+    double? fontSize, //permitindo receber um double ou null 
+  }) : fontSize = fontSize ?? height * 0.4; //passando para o construtor um valor default quando nao existe fontsize recebido
 
   @override
   Widget build(BuildContext context) {
