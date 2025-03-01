@@ -7,6 +7,7 @@ class CustomButton extends StatelessWidget {
   final double width;
   final double height;
   final Color color;
+  final double fontSize;
 
   const CustomButton({
     super.key,
@@ -15,7 +16,8 @@ class CustomButton extends StatelessWidget {
     this.width = 300,
     this.height = 60,
     this.color = const Color(0xFF00FFB4), 
-  });
+    double? fontSize, //permitindo receber um double ou null 
+  }) : fontSize = fontSize ?? height * 0.4; //passando para o construtor um valor default quando nao existe fontsize recebido
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class CustomButton extends StatelessWidget {
         child: Text(
           text,
           style: GoogleFonts.poppins(
-            fontSize: 30,
+            fontSize: this.fontSize,
             fontWeight: FontWeight.w600, 
             color: Color(0xFF000000),
             shadows: [
