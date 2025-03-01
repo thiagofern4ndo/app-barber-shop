@@ -7,7 +7,7 @@ class CustomButton extends StatelessWidget {
   final double width;
   final double height;
   final Color color;
-  final double fontSize;
+  final double? fontSize;
 
   const CustomButton({
     super.key,
@@ -15,9 +15,15 @@ class CustomButton extends StatelessWidget {
     required this.onPressed,
     this.width = 300,
     this.height = 60,
-    this.color = const Color(0xFF00FFB4), 
-    double? fontSize, //permitindo receber um double ou null 
-  }) : fontSize = fontSize ?? height * 0.4; //passando para o construtor um valor default quando nao existe fontsize recebido
+    this.color = const Color(0xFF00FFB4),
+    this.fontSize,    // deixei o fontSize opcional, sem lógica no construtor, porque esse parametro ainda não existe, isso é apenas uma classe não um objeto
+  });
+
+  // Criei um getter para calcular o fontSize 
+
+  double get _computedFontSize => fontSize ?? height * 0.4;
+
+    // "_computedFontSize" esse Getter so vai ser chamado quando o widget, no caso o botão for construido for construído
 
   @override
   Widget build(BuildContext context) {
@@ -25,20 +31,23 @@ class CustomButton extends StatelessWidget {
       width: width,
       height: height,
       child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: color,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20), 
+        style: ButtonStyle(
+          backgroundColor: WidgetStateProperty.all(color), // Atualizei esse Widget pq nas proximas versoes do flutter o "MaterialStateProperty.all" vai ser descontinuado,
+          //esse widget é nativo e não depende do material.dart para funcionar
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
           ),
         ),
         onPressed: onPressed,
         child: Text(
           text,
           style: GoogleFonts.poppins(
-            fontSize: this.fontSize,
-            fontWeight: FontWeight.w600, 
-            color: Color(0xFF000000),
-            shadows: [
+            fontSize: _computedFontSize, // Aqui a gente ussa o getter caso seja necessario
+            fontWeight: FontWeight.w600,
+            color: const Color(0xFF000000),
+            shadows: const [
               Shadow(
                 offset: Offset(1, 1),
                 color: Color(0xFF000000),
@@ -51,3 +60,4 @@ class CustomButton extends StatelessWidget {
     );
   }
 }
+
