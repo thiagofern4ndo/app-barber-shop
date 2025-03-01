@@ -1,4 +1,4 @@
-import 'package:app_barber_shop/widgets/buttons/button_back.dart';
+/*import 'package:app_barber_shop/widgets/buttons/button_back.dart';
 import 'package:app_barber_shop/widgets/buttons/button_checkbox.dart';
 import 'package:app_barber_shop/widgets/buttons/button_contact.dart';
 import 'package:app_barber_shop/widgets/buttons/button_instagram.dart';
@@ -93,5 +93,31 @@ class MyAppState extends State<MyApp> {
       ),
     );
   }
+}*/
+
+import 'package:flutter/material.dart';
+import 'package:app_barber_shop/screens/splash.dart';
+import 'package:app_barber_shop/screens/mainscreen.dart';
+
+void main() {
+  runApp(const MyApp());
 }
 
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.black, // Define a cor de fundo global
+      ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const SplashScreen(),
+        '/main': (context) => const MainScreen(),
+      },
+    );
+  }
+}
