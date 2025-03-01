@@ -46,7 +46,7 @@ class CustomCheckBox extends StatelessWidget {
                 style: GoogleFonts.poppins(
                   fontSize: 20,
                   fontWeight: FontWeight.w500,
-                  color: Colors.white,
+                  color: Color(0xFFFFFFFF),
                 ),
               ),
             ),
