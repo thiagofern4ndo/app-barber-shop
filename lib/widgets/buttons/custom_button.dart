@@ -23,7 +23,8 @@ class CustomButton extends StatelessWidget {
 
   double get _computedFontSize => fontSize ?? height * 0.4;
 
-    // "_computedFontSize" esse Getter so vai ser chamado quando o widget, no caso o botão for construido for construído
+    // "_computedFontSize" esse Getter so vai ser chamado quando o widget, no caso o botão for construido for construído 
+    // e caso não tenha sido informado nenhum valor para o fontsize
 
   @override
   Widget build(BuildContext context) {
