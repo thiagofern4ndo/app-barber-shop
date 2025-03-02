@@ -2,44 +2,51 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ContactButton extends StatelessWidget {
-  final String text;
   final VoidCallback onPressed;
-   double width;
-   double height;
-  final Color color;
+  final double? width; 
+  final double? height; 
+  final Color color; 
+  final Color textColor; 
 
-   ContactButton({
+  
+  static const double defaultWidth = 70;
+  static const double defaultHeight = 20;
+
+  ContactButton({
     super.key,
-    required this.text,
     required this.onPressed,
-    this.width = 130,
-    this.height = 27,
-    this.color = const Color(0xFF000000),
+    this.width = defaultWidth,  
+    this.height = defaultHeight,  
+    this.color = const Color(0xFF000000), 
+    this.textColor = const Color(0xFFFFFFFF),  
   });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: width,
-      height: height,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: color,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-            side: BorderSide(
-              color: const Color(0xFF00FFb4),
-              width: 3,
-            ),
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: color,  
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10), 
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+          side: BorderSide(
+            color: const Color(0xFF00FFb4), 
+            width: 3,
           ),
         ),
-        onPressed: onPressed,
-        child: Text(
-          text,
-          style: GoogleFonts.poppins(
-            fontSize: 16,
-            fontWeight: FontWeight.w300,
-            color: const Color(0xFFFFFFFF),
+      ),
+      onPressed: onPressed,
+      child: SizedBox(
+        width: width,  
+        height: height,  
+        child: Center( 
+          child: Text(
+            'Contato', 
+            style: GoogleFonts.poppins(
+              fontSize: 15,
+              fontWeight: FontWeight.w300,
+              color: textColor, 
+            ),
           ),
         ),
       ),

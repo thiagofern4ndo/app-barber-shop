@@ -3,14 +3,26 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class InstagramIconButton extends StatelessWidget {
-   String instagramUrl = 'https://www.instagram.com/seu_perfil_aqui/'; 
+  final String instagramUrl;
+  final Color iconColor;
+  final double iconSize;
 
-  // Função para abrir o link
-  _launchURL() async {
-    if (await canLaunch(instagramUrl)) {
-      await launch(instagramUrl);
+  // melhorei a construção para deixar os parâmetros flexíveis
+  InstagramIconButton({
+    Key? key,
+    this.instagramUrl = 'https://www.instagram.com/seu_perfil_aqui/', 
+    this.iconColor = const Color(0xFF00FFb4), // coloquei a cor pra cá
+    this.iconSize = 40.0, // Tamanho padrão
+  }) : super(key: key);
+
+  Future<void> _launchURL() async {
+    final Uri url = Uri.parse(instagramUrl); // Usando Uri e não uma String, uma classe abstrata do dart ja pronta para trabalhar com url
+
+    if (await canLaunchUrl(url)) { // Usando canLaunchUrl em vez de canLaunch pq e o canLauch foi descontinuado
+      await launchUrl(url); // Usando launchUrl em vez de launch pelo mesmo motivo acima
     } else {
-      throw 'Não foi possível abrir o link';
+      // informe simples para o usuario, depois podemos adicionar tratamento de erro
+      print('Não foi possível abrir o link');
     }
   }
 
@@ -18,11 +30,12 @@ class InstagramIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       icon: FaIcon(
-        FontAwesomeIcons.instagram, 
-        color: const Color(0xFF00FFb4), 
-        size: 40, 
+        FontAwesomeIcons.instagram,
+        color: iconColor, // cor personalizada que vem do construtor a inves de adiconar a cor aqui, tonar o widget mais personalizavel
+        size: iconSize, // tamanho personalizado, pelo mesmo motivo
       ),
-      onPressed: _launchURL, 
+      onPressed: _launchURL, // usa função de abrir o link
     );
   }
 }
+
