@@ -8,7 +8,7 @@ class CustomBackButton extends StatelessWidget {
   CustomBackButton({
     Key? key,
     required this.onPressed,
-    this.size = 40,  // Tamanho padrão é 40 mas agora e mais facilmente customizavel
+    this.size = 30,  // Tamanho padrão é 40 mas agora e mais facilmente customizavel
     this.color = const Color(0xFF00FFB4),  // Cor padrão é a mesma, mas tbm pode ser alterada com mais facilidade e ser for instacianada novamente pode receber novo parametro
   }) : super(key: key);
 
