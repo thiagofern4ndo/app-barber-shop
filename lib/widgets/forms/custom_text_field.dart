@@ -13,9 +13,9 @@ class CustomTextField extends StatelessWidget {
     Key? key,
     required this.controller,
     required this.hintText,
-    this.width = 300, // tamanho padrão, mas podendo ser customizado
-    this.height = 60, // Tamanho padrão, mas podendo ser customizado
-    this.keyboardType = TextInputType.text, // Tipo de teclado padrão
+    this.width = 300, 
+    this.height = 60, 
+    this.keyboardType = TextInputType.text, 
     this.obscureText = false, 
   }) : super(key: key);
 
@@ -58,5 +58,4 @@ class CustomTextField extends StatelessWidget {
     );
   }
 }
-
 
