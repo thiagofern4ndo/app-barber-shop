@@ -4,8 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
+  final bool obscureText; //adicionei obscuretext pra senha
 
-  const CustomTextField({super.key, required this.controller, required this.hintText});
+  const CustomTextField({super.key, required this.controller, required this.hintText, required this.obscureText});//adicionei obscuretext pra senha
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +23,7 @@ class CustomTextField extends StatelessWidget {
       ),
       child: TextField(
         controller: controller,
+        obscureText: obscureText,//adicionei obscuretext pra senha
         style: GoogleFonts.poppins(
           fontWeight: FontWeight.w600, 
           fontSize: 22, 

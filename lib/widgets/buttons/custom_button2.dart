@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
- class CustomButton2 extends StatelessWidget {
-  String text;
-  VoidCallback onPressed;
+ class CustomButton2 extends StatelessWidget {    
+   String text;
+   VoidCallback onPressed;
    double width;
    double height;
 
