@@ -6,7 +6,6 @@ import 'package:app_barber_shop/widgets/buttons/button_back.dart';
 import 'package:app_barber_shop/widgets/forms/custom_text_field.dart';
 import 'package:app_barber_shop/widgets/buttons/custom_button.dart';
 import 'package:url_launcher/url_launcher.dart';
-//import 'profissionais.dart'; // importando tela de profissionais
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -28,52 +27,58 @@ class _LoginPageState extends State<LoginPage> {
 
   void _toggleMode(String mode) => setState(() => _mode = mode);
 
-  final emailRegex =
-      RegExp(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
+  final emailRegex = RegExp(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
 
   bool _validateFields() {
-    bool isValid = true;
-
     setState(() {
       _emailError = _passwordError = _usernameError = null;
+
+      if (_mode == 'register' && _usernameController.text.isEmpty) {
+        _usernameError = 'Por favor, insira um nome de usuário';
+      }
+
+      if (_emailController.text.isEmpty || !emailRegex.hasMatch(_emailController.text)) {
+        _emailError = 'Por favor, insira um email válido';
+      }
+
+      if (_mode != 'recover' && _passwordController.text.length < 6) {
+        _passwordError = 'A senha deve ter pelo menos 6 caracteres';
+      }
     });
 
-    if (_mode == 'register' && _usernameController.text.isEmpty) {
-      setState(() => _usernameError = 'Por favor, insira um nome de usuário');
-      isValid = false;
-    }
-
-    if (_emailController.text.isEmpty ||
-        !emailRegex.hasMatch(_emailController.text)) {
-      setState(() => _emailError = 'Por favor, insira um email válido');
-      isValid = false;
-    }
-
-    if (_mode != 'recover' && _passwordController.text.length < 6) {
-      setState(
-          () => _passwordError = 'A senha deve ter pelo menos 6 caracteres');
-      isValid = false;
-    }
-
-    return isValid;
+    return _emailError == null && _passwordError == null && _usernameError == null;
   }
 
   void _submit() {
     if (!_validateFields()) return;
 
     if (_mode == 'login') {
-      debugPrint(
-          'Login: ${_emailController.text}, ${_passwordController.text}');
-      // Navigator.pushReplacement(
-      // context,
-      // MaterialPageRoute(builder: (context) => ProfissionaisPage()),
-      // );
+      debugPrint('Login: ${_emailController.text}, ${_passwordController.text}');
     } else if (_mode == 'register') {
-      debugPrint(
-          'Registro: ${_usernameController.text}, ${_emailController.text}, ${_passwordController.text}');
+      debugPrint('Registro: ${_usernameController.text}, ${_emailController.text}, ${_passwordController.text}');
     } else {
       debugPrint('Recuperação de senha: ${_emailController.text}');
     }
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _usernameController.dispose();
+    super.dispose();
+  }
+  Widget _buildHeader() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          CustomBackButton(onPressed: () => Navigator.maybePop(context)),
+          InstagramIconButton(),
+        ],
+      ),
+    );
   }
 
   Widget _buildTextField({
@@ -109,9 +114,7 @@ class _LoginPageState extends State<LoginPage> {
               hintText: 'Nome de Usuário',
               errorText: _usernameError),
         _buildTextField(
-            controller: _emailController,
-            hintText: 'Email',
-            errorText: _emailError),
+            controller: _emailController, hintText: 'Email', errorText: _emailError),
         if (_mode != 'recover')
           _buildTextField(
               controller: _passwordController,
@@ -119,11 +122,7 @@ class _LoginPageState extends State<LoginPage> {
               obscureText: true,
               errorText: _passwordError),
         CustomButton(
-          text: _mode == 'login'
-              ? 'Login'
-              : _mode == 'register'
-                  ? 'Cadastrar'
-                  : 'Recuperar Senha',
+          text: _mode == 'login' ? 'Login' : _mode == 'register' ? 'Cadastrar' : 'Recuperar Senha',
           onPressed: _submit,
           width: 200,
           height: 35,
@@ -132,17 +131,35 @@ class _LoginPageState extends State<LoginPage> {
         TextButton(
           onPressed: () => _toggleMode(_mode == 'login' ? 'register' : 'login'),
           child: Text(
-              _mode == 'login'
-                  ? 'Criar uma conta'
-                  : 'Já tem uma conta? Faça login',
+              _mode == 'login' ? 'Criar uma conta' : 'Já tem uma conta? Faça login',
               style: const TextStyle(color: Colors.white)),
         ),
         if (_mode == 'login')
           TextButton(
             onPressed: () => _toggleMode('recover'),
-            child: const Text('Esqueceu a senha?',
-                style: TextStyle(color: Colors.white)),
+            child: const Text('Esqueceu a senha?', style: TextStyle(color: Colors.white)),
           ),
+      ],
+    );
+  }
+  Widget _buildFooter() {
+    return Column(
+      children: [
+        ContactButton(
+          onPressed: () async {
+            const whatsappUrl = 'https://wa.me/5581999999999';
+            if (await canLaunchUrl(Uri.parse(whatsappUrl))) {
+              await launchUrl(Uri.parse(whatsappUrl));
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Não foi possível abrir o WhatsApp')),
+              );
+            }
+          },
+        ),
+        const SizedBox(height: 20),
+        TextWidget(),
+        const SizedBox(height: 20),
       ],
     );
   }
@@ -153,30 +170,8 @@ class _LoginPageState extends State<LoginPage> {
       body: SafeArea(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomBackButton(
-                      onPressed: () => Navigator.maybePop(context)),
-                  InstagramIconButton(),
-                ],
-              ),
-            ),
+            _buildHeader(),
             const SizedBox(height: 70),
-            Text(
-              _mode == 'login'
-                  ? 'Login'
-                  : _mode == 'register'
-                      ? 'Cadastro'
-                      : 'Recuperação de Senha',
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 20),
             Expanded(
               child: Center(
                 child: Padding(
@@ -185,23 +180,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            const SizedBox(height: 80),
-            ContactButton(
-              text: 'Contato', // Texto exibido no botão
-              onPressed: () async {
-                const whatsappUrl =
-                    'https://wa.me/5581999999999'; // URL para abrir o WhatsApp com um número específico
-                if (await canLaunchUrl(Uri.parse(whatsappUrl))) {
-                  await launchUrl(
-                      Uri.parse(whatsappUrl)); // Tenta abrir o WhatsApp
-                } else {
-                  throw 'Não foi possível abrir o WhatsApp'; // Erro caso não consiga abrir
-                }
-              },
-            ),
-            const SizedBox(height: 20),
-            TextWidget(),
-            const SizedBox(height: 20),
+            _buildFooter(),
           ],
         ),
       ),

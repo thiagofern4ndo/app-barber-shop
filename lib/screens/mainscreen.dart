@@ -58,7 +58,6 @@ class MainScreen extends StatelessWidget {
           ),
           const SizedBox(height: 30), 
           ContactButton(
-            text: 'Contato', 
             onPressed: () async {
               const whatsappUrl =
                   'https://wa.me/5581999999999'; 
