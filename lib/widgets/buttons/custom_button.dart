@@ -16,15 +16,10 @@ class CustomButton extends StatelessWidget {
     this.width = 300,
     this.height = 60,
     this.color = const Color(0xFF00FFB4),
-    this.fontSize,    // deixei o fontSize opcional, sem lógica no construtor, porque esse parametro ainda não existe, isso é apenas uma classe não um objeto
+    this.fontSize,
   });
 
-  // Criei um getter para calcular o fontSize 
-
   double get _computedFontSize => fontSize ?? height * 0.4;
-
-    // "_computedFontSize" esse Getter so vai ser chamado quando o widget, no caso o botão for construido for construído 
-    // e caso não tenha sido informado nenhum valor para o fontsize
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +28,7 @@ class CustomButton extends StatelessWidget {
       height: height,
       child: ElevatedButton(
         style: ButtonStyle(
-          backgroundColor: WidgetStateProperty.all(color), // Atualizei esse Widget pq nas proximas versoes do flutter o "MaterialStateProperty.all" vai ser descontinuado,
-          //esse widget é nativo e não depende do material.dart para funcionar
+          backgroundColor: WidgetStateProperty.all(color),
           shape: WidgetStateProperty.all(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
@@ -45,7 +39,7 @@ class CustomButton extends StatelessWidget {
         child: Text(
           text,
           style: GoogleFonts.poppins(
-            fontSize: _computedFontSize, // Aqui a gente ussa o getter caso seja necessario
+            fontSize: _computedFontSize,
             fontWeight: FontWeight.w600,
             color: const Color(0xFF000000),
             shadows: const [
@@ -61,4 +55,3 @@ class CustomButton extends StatelessWidget {
     );
   }
 }
-

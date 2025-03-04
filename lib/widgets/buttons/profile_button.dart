@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProfileIconButton extends StatelessWidget {
-  // melhorei esse trecho para  a navegação para ser reutilizável
   void _navigateToTemporaryPage(BuildContext context) {
     Navigator.push(
       context,
@@ -16,7 +15,7 @@ class ProfileIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       icon: const FaIcon(
-        FontAwesomeIcons.circleUser, // usando o ícone atualizado, pq o useCircle foi descontinuado
+        FontAwesomeIcons.circleUser, 
         color: Color(0xFF00FFb4),
         size: 35,
       ),
@@ -25,7 +24,6 @@ class ProfileIconButton extends StatelessWidget {
   }
 }
 
-// Criando a tela temporária como widget separado para melhorar a reutilização
 class TemporaryPage extends StatelessWidget {
   const TemporaryPage({Key? key}) : super(key: key);
 
