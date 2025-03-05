@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'mainscreen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -53,3 +53,4 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     super.dispose();
   }
 }
+*/

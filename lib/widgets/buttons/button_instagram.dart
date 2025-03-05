@@ -23,7 +23,7 @@ class InstagramIconButton extends StatelessWidget {
         size: 40,
       ),
       onPressed: _launchURL,
-      onPressed: _launchURL,
+      
     );
   }
 }

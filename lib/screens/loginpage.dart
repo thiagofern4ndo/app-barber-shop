@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:app_barber_shop/widgets/buttons/button_contact.dart';
 import 'package:app_barber_shop/widgets/text/text_direitos.dart';
 import 'package:app_barber_shop/widgets/buttons/button_instagram.dart';
@@ -187,3 +187,4 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
+*/

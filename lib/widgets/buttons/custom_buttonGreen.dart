@@ -16,6 +16,7 @@ class CustomButton extends StatelessWidget {
     this.width = 150, // largura do botão
     this.height = 40, // altura do botão
     this.color = const Color(0xFF00FFB4),
+    this.fontSize,
   });
 
   double get _computedFontSize => fontSize ?? height * 0.4;
