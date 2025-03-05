@@ -59,11 +59,7 @@ class MyApp extends StatelessWidget {
 }*/
 
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'package:app_barber_shop/screens/pag7.dart'; // Importa o pag8.dart
-=======
-import 'package:app_barber_shop/screens/pag7.dart'; // Importa o pag7.dart
->>>>>>> 3939376d8c2e9bab7c0f25e8ce2628ba6d885059
+import 'package:app_barber_shop/screens/pag8.dart'; // Importa o pag8.dart
 
 void main() {
   runApp(const MyApp());
@@ -76,13 +72,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-<<<<<<< HEAD
       theme: ThemeData.dark(),
-      home:  Pag7(), // Define Pag8 como a tela inicial
-=======
-      
-      home: Pag7(), // Define Pag7 como a tela inicial
->>>>>>> 3939376d8c2e9bab7c0f25e8ce2628ba6d885059
+      home:  Pag8(), // Define Pag8 como a tela inicial
     );
   }
 }
