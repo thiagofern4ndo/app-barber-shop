@@ -8,6 +8,7 @@ class CustomButton extends StatelessWidget {
   final double height;
   final Color color;
   final double? fontSize;
+  final bool isSelected;
 
   const CustomButton({
     super.key,
@@ -16,7 +17,8 @@ class CustomButton extends StatelessWidget {
     this.width = 150, // largura do botão
     this.height = 40, // altura do botão
     this.color = const Color(0xFF00FFB4),
-    this.fontSize, // Inicializa a propriedade fontSize
+    this.fontSize,
+    this.isSelected = false, // Inicializa a propriedade isSelected
   });
 
   double get _computedFontSize => fontSize ?? height * 0.4;

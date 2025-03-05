@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:app_barber_shop/widgets/buttons/custom_button2.dart'; // Importa o CustomButton2
 
 class ButtonHorario extends StatefulWidget {
   const ButtonHorario({super.key});
@@ -16,46 +17,33 @@ class _ButtonHorarioState extends State<ButtonHorario> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: GridView.builder(
-        itemCount: horarios.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          childAspectRatio: 3,
-        ),
-        itemBuilder: (context, index) {
-          return _buildHorarioButton(horarios[index]);
-        },
+    return GridView.builder(
+      shrinkWrap: true,
+      itemCount: horarios.length,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        childAspectRatio: 4,
       ),
+      itemBuilder: (context, index) {
+        return _buildHorarioButton(horarios[index]);
+      },
     );
   }
 
   Widget _buildHorarioButton(String text) {
     bool isSelected = horarioSelecionado == text;
 
-    return OutlinedButton(
-      style: OutlinedButton.styleFrom(
-        side:
-            BorderSide(color: isSelected ? Colors.greenAccent : Colors.white54),
-        backgroundColor: isSelected ? Colors.greenAccent : Colors.black,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        minimumSize: const Size(100, 50),
-      ),
+    return CustomButton2(
+      fontSize: 20,
+      text: text,
+      isSelected: isSelected,
       onPressed: () {
         setState(() {
           horarioSelecionado = text;
         });
       },
-      child: Text(
-        text,
-        style: TextStyle(
-          color: isSelected ? Colors.black : Colors.greenAccent,
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
     );
   }
 }

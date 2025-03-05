@@ -103,7 +103,7 @@ class _Pag7State extends State<Pag7> {
                   text: 'Continuar',
                   onPressed: () {
                     // Ação ao pressionar o botão Continuar
-                  },
+                  }, isSelected: false,
                 ),
               ),
               // Texto no rodapé

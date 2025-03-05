@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:app_barber_shop/widgets/buttons/button_instagram.dart'; // Importa o InstagramIconButton
 import 'package:app_barber_shop/widgets/buttons/button_back.dart'; // Importa o CustomBackButton
+import 'package:app_barber_shop/widgets/buttons/button_horario.dart'; // Importa o ButtonHorario
 import 'package:google_fonts/google_fonts.dart'; // Importa o GoogleFonts
 import 'package:app_barber_shop/widgets/text/text_direitos.dart'; // Importa o TextDireitos
-import 'package:app_barber_shop/widgets/buttons/custom_buttonGreen.dart'; // Importa o CustomButton
-import 'package:app_barber_shop/widgets/buttons/button_contact.dart'; // Importa o ContactButton
-import 'package:app_barber_shop/widgets/buttons/custom_button2.dart'; // Importa o CustomButton2
+import 'package:app_barber_shop/widgets/buttons/custom_buttonGreen.dart';
+import 'package:app_barber_shop/widgets/buttons/button_contact.dart';
 
 class Pag8 extends StatelessWidget {
   const Pag8({super.key});
@@ -29,73 +29,12 @@ class SelecionarHorarioScreen extends StatefulWidget {
 }
 
 class _SelecionarHorarioScreenState extends State<SelecionarHorarioScreen> {
-  final List<String> horarios = [
-    for (int i = 8; i <= 19; i++) '${i.toString().padLeft(2, '0')}:00'
-  ];
-
-  String? horarioSelecionado;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(height: 120),
-                Text(
-                  'Selecione um horário',
-                  style: GoogleFonts.poppins(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                // Lista de horários
-                Expanded(
-                  child: GridView.builder(
-                    itemCount: horarios.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 5,
-                      mainAxisSpacing: 5,
-                      childAspectRatio: 4,
-                      // Ajusta o tamanho da fonte para diminuir o tamanho
-                    ),
-                    itemBuilder: (context, index) {
-                      return _buildHorarioButton(horarios[index]);
-                    },
-                  ),
-                ),
-                const SizedBox(height: 10),
-                // Botão "Continuar"
-                Center(
-                  child: CustomButton(
-                    text: 'Continuar',
-                    onPressed: () {
-                      // Chama a função ContactButton
-                    },
-                  ),
-                ),
-                const SizedBox(height: 30),
-                // Botão "Contato"
-                ContactButton(
-                  onPressed: () {},
-                  text: 'contato',
-                ),
-                const SizedBox(height: 10),
-                // Rodapé
-                TextWidget(),
-                const SizedBox(height: 7),
-              ],
-            ),
-          ),
+        children: <Widget>[
           Positioned(
             top: 10,
             left: 20,
@@ -108,27 +47,75 @@ class _SelecionarHorarioScreenState extends State<SelecionarHorarioScreen> {
           Positioned(
             top: 10,
             right: 20,
-            child:
-                InstagramIconButton(), // Adiciona o InstagramIconButton no canto superior direito
+            child: InstagramIconButton(), // Adiciona o IconButton no canto superior direito
+          ),
+          Center(
+            child: Container(
+              constraints: BoxConstraints(
+                maxWidth: 300, // Defina o tamanho máximo desejado
+              ),
+              child: Column(
+                children: [
+                  const SizedBox(height: 200), // Adiciona espaço extra na parte superior
+                  const SizedBox(height: 60), // Espaço para os botões no topo
+                  Text(
+                    'Selecione um horário',
+                    style: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  // Lista de horários
+                  const Expanded(child: ButtonHorario()),
+                  const SizedBox(height: 10),
+
+
+                  // Botões na parte inferior
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                          child: CustomButton(
+                            text: 'Continuar',
+                            onPressed: () {
+                              // Ação ao pressionar o botão Continuar
+                            },
+                            isSelected: false,
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          child: ContactButton(
+                            text: 'Contato',
+                            onPressed: () {
+                              // Ação ao pressionar o botão de contato
+                            },
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 20),
+                          child: TextWidget(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildHorarioButton(String text) {
-    bool isSelected = horarioSelecionado == text;
-
-    return CustomButton2(
-      text: text,
-      onPressed: () {
-        setState(() {
-          horarioSelecionado = text;
-        });
-      },
-      width: 120, // Define uma largura menor
-      height: 40, // Define uma altura menor
-      fontSize: 20, // Ajusta o tamanho da fonte para diminuir o tamanho
     );
   }
 }
