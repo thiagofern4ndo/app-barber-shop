@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ContactButton extends StatelessWidget {
-  final String text;
   final VoidCallback onPressed;
-  final double width;
-  final double height;
-  final Color color;
+  final double? width; 
+  final double? height; 
+  final Color color; 
+  final Color textColor; 
 
-  const ContactButton({
+  
+  static const double defaultWidth = 70;
+  static const double defaultHeight = 20;
+
+  ContactButton({
     super.key,
-    required this.text,
     required this.onPressed,
     this.width = 110,
     this.height = 27,

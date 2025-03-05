@@ -10,11 +10,11 @@ class InstagramIconButton extends StatelessWidget {
     if (await canLaunch(instagramUrl)) {
       await launch(instagramUrl);
     } else {
-      throw 'Não foi possível abrir o link';
+      print('Não foi possível abrir o link');
     }
   }
-
   @override
+  
   Widget build(BuildContext context) {
     return IconButton(
       icon: FaIcon(
@@ -23,6 +23,8 @@ class InstagramIconButton extends StatelessWidget {
         size: 40,
       ),
       onPressed: _launchURL,
+      onPressed: _launchURL,
     );
   }
 }
+

@@ -7,6 +7,7 @@ class CustomButton extends StatelessWidget {
   final double width;
   final double height;
   final Color color;
+  final double? fontSize;
 
   const CustomButton({
     super.key,
@@ -16,6 +17,8 @@ class CustomButton extends StatelessWidget {
     this.height = 40, // altura do botão
     this.color = const Color(0xFF00FFB4),
   });
+
+  double get _computedFontSize => fontSize ?? height * 0.4;
 
   @override
   Widget build(BuildContext context) {
