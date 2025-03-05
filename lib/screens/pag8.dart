@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:app_barber_shop/widgets/buttons/button_instagram.dart'; // Importa o InstagramIconButton
 import 'package:app_barber_shop/widgets/buttons/button_back.dart'; // Importa o CustomBackButton
-import 'package:app_barber_shop/widgets/buttons/button_horario.dart'; // Importa o ButtonHorario
 import 'package:google_fonts/google_fonts.dart'; // Importa o GoogleFonts
 import 'package:app_barber_shop/widgets/text/text_direitos.dart'; // Importa o TextDireitos
 import 'package:app_barber_shop/widgets/buttons/custom_buttonGreen.dart'; // Importa o CustomButton
 import 'package:app_barber_shop/widgets/buttons/button_contact.dart'; // Importa o ContactButton
+import 'package:app_barber_shop/widgets/buttons/custom_button2.dart'; // Importa o CustomButton2
 
 class Pag8 extends StatelessWidget {
   const Pag8({super.key});
@@ -29,6 +29,12 @@ class SelecionarHorarioScreen extends StatefulWidget {
 }
 
 class _SelecionarHorarioScreenState extends State<SelecionarHorarioScreen> {
+  final List<String> horarios = [
+    for (int i = 8; i <= 19; i++) '${i.toString().padLeft(2, '0')}:00'
+  ];
+
+  String? horarioSelecionado;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +57,22 @@ class _SelecionarHorarioScreenState extends State<SelecionarHorarioScreen> {
                 ),
                 const SizedBox(height: 20),
                 // Lista de horários
-                const ButtonHorario(),
+                Expanded(
+                  child: GridView.builder(
+                    itemCount: horarios.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 5,
+                      mainAxisSpacing: 5,
+                      childAspectRatio: 4,
+                      // Ajusta o tamanho da fonte para diminuir o tamanho
+                    ),
+                    itemBuilder: (context, index) {
+                      return _buildHorarioButton(horarios[index]);
+                    },
+                  ),
+                ),
                 const SizedBox(height: 10),
                 // Botão "Continuar"
                 Center(
@@ -64,12 +85,10 @@ class _SelecionarHorarioScreenState extends State<SelecionarHorarioScreen> {
                 ),
                 const SizedBox(height: 30),
                 // Botão "Contato"
-
                 ContactButton(
                   onPressed: () {},
                   text: 'contato',
                 ),
-
                 const SizedBox(height: 10),
                 // Rodapé
                 TextWidget(),
@@ -94,6 +113,22 @@ class _SelecionarHorarioScreenState extends State<SelecionarHorarioScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildHorarioButton(String text) {
+    bool isSelected = horarioSelecionado == text;
+
+    return CustomButton2(
+      text: text,
+      onPressed: () {
+        setState(() {
+          horarioSelecionado = text;
+        });
+      },
+      width: 120, // Define uma largura menor
+      height: 40, // Define uma altura menor
+      fontSize: 20, // Ajusta o tamanho da fonte para diminuir o tamanho
     );
   }
 }
