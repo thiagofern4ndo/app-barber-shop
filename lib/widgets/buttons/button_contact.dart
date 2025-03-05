@@ -3,12 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ContactButton extends StatelessWidget {
   final VoidCallback onPressed;
-  final double? width; 
-  final double? height; 
-  final Color color; 
-  final Color textColor; 
+  final double? width;
+  final double? height;
+  final Color color;
+  final Color textColor;
+  final String text;
 
-  
   static const double defaultWidth = 70;
   static const double defaultHeight = 20;
 
@@ -17,11 +17,10 @@ class ContactButton extends StatelessWidget {
     required this.onPressed,
     this.width = 110,
     this.height = 27,
-    this.color = const Color(0xFF000000), // required Type child,
-    this.textColor = Colors.white, required String text,
+    this.color = const Color(0xFF000000),
+    this.textColor = Colors.white,
+    required this.text,
   });
-  
-  get text => null;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +44,7 @@ class ContactButton extends StatelessWidget {
           style: GoogleFonts.poppins(
             fontSize: 14,
             fontWeight: FontWeight.w300,
-            color: const Color(0xFFFFFFFF),
+            color: textColor,
           ),
         ),
       ),

@@ -6,6 +6,7 @@ class CustomButton2 extends StatelessWidget {
   VoidCallback onPressed;
   double width;
   double height;
+  double fontSize;
 
   CustomButton2({
     Key? key,
