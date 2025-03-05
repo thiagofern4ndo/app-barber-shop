@@ -6,6 +6,7 @@ class CustomButton2 extends StatelessWidget {
   final VoidCallback onPressed;
   final double width;
   final double height;
+  final double fontSize; // Adiciona o parâmetro fontSize
 
   const CustomButton2({
     Key? key,
@@ -13,6 +14,7 @@ class CustomButton2 extends StatelessWidget {
     required this.onPressed,
     this.width = 300,
     this.height = 60,
+    this.fontSize = 20, // Define um valor padrão para fontSize
   }) : super(key: key);
 
   @override
@@ -35,7 +37,7 @@ class CustomButton2 extends StatelessWidget {
         child: Text(
           text,
           style: GoogleFonts.poppins(
-            fontSize: 30,
+            fontSize: fontSize, // Usa o parâmetro fontSize
             fontWeight: FontWeight.w500,
             color: Color(0xFFFFFFFF),
           ),
@@ -44,4 +46,3 @@ class CustomButton2 extends StatelessWidget {
     );
   }
 }
-
