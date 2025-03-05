@@ -11,8 +11,9 @@ class CustomButton2 extends StatelessWidget {
     Key? key,
     required this.text,
     required this.onPressed,
+    
     this.width = 300,
-    this.height = 60,
+    this.height = 60, required  isSelected,
   }) : super(key: key);
 
   @override

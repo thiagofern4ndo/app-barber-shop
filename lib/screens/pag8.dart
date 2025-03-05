@@ -5,6 +5,7 @@ import 'package:app_barber_shop/widgets/buttons/button_horario.dart'; // Importa
 import 'package:google_fonts/google_fonts.dart'; // Importa o GoogleFonts
 import 'package:app_barber_shop/widgets/text/text_direitos.dart'; // Importa o TextDireitos
 import 'package:app_barber_shop/widgets/buttons/custom_buttonGreen.dart';
+import 'package:app_barber_shop/widgets/buttons/button_contact.dart';
 
 class Pag8 extends StatelessWidget {
   const Pag8({super.key});
@@ -33,50 +34,7 @@ class _SelecionarHorarioScreenState extends State<SelecionarHorarioScreen> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(height: 60), // Espaço para os botões no topo
-                Text(
-                  'Selecione um horário',
-                  style: GoogleFonts.poppins(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                // Lista de horários
-                const ButtonHorario(),
-                const SizedBox(height: 10),
-                // Botão "Continuar"
-                Center(
-                  child: CustomButton(
-                    text: 'Continuar',
-                    onPressed: () {},
-                  ),
-                ),
-                const SizedBox(height: 10),
-                // Botão "Contato"
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'contato',
-                    style: GoogleFonts.poppins(
-                      color: Colors.greenAccent,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                // Rodapé
-                TextWidget(),
-              ],
-            ),
-          ),
+        children: <Widget>[
           Positioned(
             top: 10,
             left: 20,
@@ -89,8 +47,61 @@ class _SelecionarHorarioScreenState extends State<SelecionarHorarioScreen> {
           Positioned(
             top: 10,
             right: 20,
-            child:
-                InstagramIconButton(), // Adiciona o InstagramIconButton no canto superior direito
+            child: InstagramIconButton(), // Adiciona o IconButton no canto superior direito
+          ),
+          Column(
+            children: [
+              const SizedBox(height: 60), // Espaço para os botões no topo
+              Text(
+                'Selecione um horário',
+                style: GoogleFonts.poppins(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 20),
+              // Lista de horários
+              const Expanded(child: ButtonHorario()),
+              const SizedBox(height: 10),
+              // Botões na parte inferior
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      child: CustomButton(
+                        text: 'Continuar',
+                        onPressed: () {
+                          // Ação ao pressionar o botão Continuar
+                        },
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      child: ContactButton(
+                        text: 'Contato',
+                        onPressed: () {
+                          // Ação ao pressionar o botão de contato
+                        },
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: TextWidget(),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ],
       ),

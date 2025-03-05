@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
 }*/
 
 import 'package:flutter/material.dart';
-import 'package:app_barber_shop/screens/pag7.dart'; // Importa o pag7.dart
+import 'package:app_barber_shop/screens/pag8.dart'; // Importa o pag7.dart
 
 void main() {
   runApp(const MyApp());
@@ -73,7 +73,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       
-      home: Pag7(), // Define Pag7 como a tela inicial
+      home: Pag8(), // Define Pag7 como a tela inicial
     );
   }
 }
