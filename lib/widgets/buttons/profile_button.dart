@@ -6,14 +6,7 @@ class ProfileIconButton extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => Scaffold(
-          appBar: AppBar(
-            title: Text('Tela Temporária'),
-          ),
-          body: Center(
-            child: Text('Aguarde a criação da tela de perfil'),
-          ),
-        ),
+        builder: (context) => const TemporaryPage(),
       ),
     );
   }
@@ -21,13 +14,28 @@ class ProfileIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: FaIcon(
-        FontAwesomeIcons.userCircle, 
-        color: const Color(0xFF00FFb4), 
-        size: 35, 
+      icon: const FaIcon(
+        FontAwesomeIcons.circleUser, 
+        color: Color(0xFF00FFb4),
+        size: 35,
       ),
-      onPressed: () => _navigateToTemporaryPage(context), 
+      onPressed: () => _navigateToTemporaryPage(context),
     );
   }
 }
 
+class TemporaryPage extends StatelessWidget {
+  const TemporaryPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Tela Temporária'),
+      ),
+      body: const Center(
+        child: Text('Aguarde a criação da tela de perfil'),
+      ),
+    );
+  }
+}

@@ -13,15 +13,8 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  bool isChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +59,7 @@ class _MyAppState extends State<MyApp> {
 }*/
 
 import 'package:flutter/material.dart';
-import 'package:app_barber_shop/screens/pag8.dart'; // Importa o pag8.dart
+import 'package:app_barber_shop/screens/pag7.dart'; // Importa o pag7.dart
 
 void main() {
   runApp(const MyApp());
@@ -79,8 +72,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
-      home: const Pag8(), // Define Pag8 como a tela inicial
+      
+      home: Pag7(), // Define Pag7 como a tela inicial
     );
   }
 }

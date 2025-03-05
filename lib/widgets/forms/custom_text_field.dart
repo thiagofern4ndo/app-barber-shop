@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart'; 
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
+  final double width;
+  final double height;
+  final TextInputType keyboardType;
+  final bool obscureText;
 
-  const CustomTextField({super.key, required this.controller, required this.hintText});
+  const CustomTextField({
+    Key? key,
+    required this.controller,
+    required this.hintText,
+    this.width = 300, 
+    this.height = 60, 
+    this.keyboardType = TextInputType.text, 
+    this.obscureText = false, 
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 300,
-      height: 60,
+      width: width,
+      height: height,
       decoration: BoxDecoration(
         color: const Color(0xFF000000),
         borderRadius: BorderRadius.circular(20),
@@ -27,6 +39,8 @@ class CustomTextField extends StatelessWidget {
           fontSize: 22, 
           color: Colors.white,
         ),
+        keyboardType: keyboardType, 
+        obscureText: obscureText, 
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: GoogleFonts.poppins(
@@ -44,6 +58,4 @@ class CustomTextField extends StatelessWidget {
     );
   }
 }
-
-
 
