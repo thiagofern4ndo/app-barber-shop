@@ -49,59 +49,67 @@ class _SelecionarHorarioScreenState extends State<SelecionarHorarioScreen> {
             right: 20,
             child: InstagramIconButton(), // Adiciona o IconButton no canto superior direito
           ),
-          Column(
-            children: [
-              const SizedBox(height: 60), // Espaço para os botões no topo
-              Text(
-                'Selecione um horário',
-                style: GoogleFonts.poppins(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+          Center(
+            child: Container(
+              constraints: BoxConstraints(
+                maxWidth: 300, // Defina o tamanho máximo desejado
               ),
-              const SizedBox(height: 20),
-              // Lista de horários
-              const Expanded(child: ButtonHorario()),
-              const SizedBox(height: 10),
-              // Botões na parte inferior
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
+              child: Column(
                 children: [
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      child: CustomButton(
-                        text: 'Continuar',
-                        onPressed: () {
-                          // Ação ao pressionar o botão Continuar
-                        },
-                      ),
+const SizedBox(height: 100), // Adiciona spaço extra na parte superior
+                  const SizedBox(height: 60), // Espaço para os botões no topo
+                  Text(
+                    'Selecione um horário',
+                    style: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      child: ContactButton(
-                        text: 'Contato',
-                        onPressed: () {
-                          // Ação ao pressionar o botão de contato
-                        },
+                  const SizedBox(height: 20),
+                  // Lista de horários
+                  const Expanded(child: ButtonHorario()),
+                  const SizedBox(height: 10),
+                  // Botões na parte inferior
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                          child: CustomButton(
+                            text: 'Continuar',
+                            onPressed: () {
+                              // Ação ao pressionar o botão Continuar
+                            },
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      child: TextWidget(),
-                    ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          child: ContactButton(
+                            text: 'Contato',
+                            onPressed: () {
+                              // Ação ao pressionar o botão de contato
+                            },
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 20),
+                          child: TextWidget(),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
+            ),
           ),
         ],
       ),

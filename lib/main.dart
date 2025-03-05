@@ -73,7 +73,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       
-      home: Pag8(), // Define Pag7 como a tela inicial
+      home: Pag8(), 
     );
   }
 }

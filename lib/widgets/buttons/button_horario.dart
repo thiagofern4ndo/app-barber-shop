@@ -24,7 +24,7 @@ class _ButtonHorarioState extends State<ButtonHorario> {
           crossAxisCount: 2,
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
-          childAspectRatio: 3,
+          childAspectRatio: 4,
         ),
         itemBuilder: (context, index) {
           return _buildHorarioButton(horarios[index]);
