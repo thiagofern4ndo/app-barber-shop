@@ -13,6 +13,7 @@ class CustomButton2 extends StatelessWidget {
     required this.onPressed,
     this.width = 300,
     this.height = 60,
+    this.fontSize = 20, // Define um valor padrão para fontSize
   }) : super(key: key);
 
   @override
@@ -45,4 +46,3 @@ class CustomButton2 extends StatelessWidget {
     );
   }
 }
-
