@@ -6,7 +6,7 @@ import 'package:app_barber_shop/widgets/buttons/button_back.dart';
 import 'package:app_barber_shop/widgets/forms/custom_text_field.dart';
 import 'package:app_barber_shop/widgets/buttons/custom_button.dart';
 import 'package:url_launcher/url_launcher.dart';
-//import 'profissionais.dart'; // importando tela de profissionais
+import 'profissionais.dart'; //importando a tela de profissionais
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -64,10 +64,12 @@ class _LoginPageState extends State<LoginPage> {
     if (_mode == 'login') {
       debugPrint(
           'Login: ${_emailController.text}, ${_passwordController.text}');
-      // Navigator.pushReplacement(
-      // context,
-      // MaterialPageRoute(builder: (context) => ProfissionaisPage()),
-      // );
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                ProfessionalSelectionScreen()), //adicionei a rota para tela de profissionais ao logar
+      );
     } else if (_mode == 'register') {
       debugPrint(
           'Registro: ${_usernameController.text}, ${_emailController.text}, ${_passwordController.text}');
@@ -187,7 +189,6 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 80),
             ContactButton(
-              text: 'Contato', // Texto exibido no botão
               onPressed: () async {
                 const whatsappUrl =
                     'https://wa.me/5581999999999'; // URL para abrir o WhatsApp com um número específico
