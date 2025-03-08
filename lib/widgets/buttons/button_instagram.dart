@@ -10,7 +10,7 @@ class InstagramIconButton extends StatelessWidget {
     if (await canLaunch(instagramUrl)) {
       await launch(instagramUrl);
     } else {
-      throw 'Não foi possível abrir o link';
+      print('Não foi possível abrir o link');
     }
   }
 

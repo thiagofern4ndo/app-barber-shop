@@ -93,7 +93,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 padding: EdgeInsets.only(bottom: 30),
                 child: Column(
                   children: [
-                    ContactButton(
+                    CustomButton(
                       text: 'Contato',
                       onPressed: () {
                         // Ação ao pressionar o botão de contato

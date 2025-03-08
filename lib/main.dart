@@ -13,15 +13,8 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  bool isChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -66,21 +59,51 @@ class _MyAppState extends State<MyApp> {
 }*/
 
 import 'package:flutter/material.dart';
-import 'package:app_barber_shop/screens/pag8.dart'; // Importa o pag8.dart
+import 'package:app_barber_shop/widgets/buttons/button_calendar_screen.dart'; // Importa o CalendarButton
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
-      home: const Pag8(), // Define Pag8 como a tela inicial
+      title: 'Calendar Button Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: CalendarScreen(),
+    );
+  }
+}
+
+class CalendarScreen extends StatefulWidget {
+  @override
+  _CalendarScreenState createState() => _CalendarScreenState();
+}
+
+class _CalendarScreenState extends State<CalendarScreen> {
+  DateTime _selectedDate = DateTime.now();
+
+  void _onDateSelected(DateTime date) {
+    setState(() {
+      _selectedDate = date;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Calendar Button Demo'),
+      ),
+      body: Center(
+        child: CalendarButton(
+          selectedDate: _selectedDate,
+          onDateSelected: _onDateSelected,
+        ),
+      ),
     );
   }
 }

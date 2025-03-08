@@ -8,7 +8,7 @@ class CustomButton2 extends StatelessWidget {
   final double height;
   final double fontSize; // Adiciona o parâmetro fontSize
 
-  const CustomButton2({
+  CustomButton2({
     Key? key,
     required this.text,
     required this.onPressed,

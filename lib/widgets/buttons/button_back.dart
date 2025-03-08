@@ -2,15 +2,22 @@ import 'package:flutter/material.dart';
 
 class CustomBackButton extends StatelessWidget {
   final VoidCallback onPressed;
+  final double size;
+  final Color color;
 
-  const CustomBackButton({Key? key, required this.onPressed}) : super(key: key);
+  CustomBackButton({
+    Key? key,
+    required this.onPressed,
+    this.size = 30,
+    this.color = const Color(0xFF00FFB4),
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
       icon: CustomPaint(
-        size: Size(40, 40),  
-        painter: BackArrowPainter(),
+        size: Size(size, size),
+        painter: BackArrowPainter(color: color),
       ),
       onPressed: onPressed,
     );
@@ -18,17 +25,23 @@ class CustomBackButton extends StatelessWidget {
 }
 
 class BackArrowPainter extends CustomPainter {
+  final Color color;
+
+  BackArrowPainter({required this.color});
+
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()
-      ..color = Color(0xFF00FFB4)
-      ..strokeWidth = 8  
+      ..color = color
+      ..strokeWidth = size.width * 0.22  
+      ..strokeCap = StrokeCap.round  
+      ..strokeJoin = StrokeJoin.round  
       ..style = PaintingStyle.stroke;
 
     Path path = Path()
       ..moveTo(size.width * 0.95, size.height * 0.10)  
-      ..lineTo(size.width * 0.05, size.height * 0.5)  
-      ..lineTo(size.width * 0.95, size.height * 0.90);  
+      ..lineTo(size.width * 0.05, size.height * 0.50)  
+      ..lineTo(size.width * 0.95, size.height * 0.90); 
 
     canvas.drawPath(path, paint);
   }
@@ -36,5 +49,6 @@ class BackArrowPainter extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
+
 
 
