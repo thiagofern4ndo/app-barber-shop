@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:app_barber_shop/widgets/buttons/button_contact.dart';
-import 'package:app_barber_shop/widgets/text/text_direitos.dart';
-import 'package:app_barber_shop/widgets/buttons/button_instagram.dart';
-import 'package:app_barber_shop/widgets/buttons/button_back.dart';
-import 'package:app_barber_shop/widgets/forms/custom_text_field.dart';
-import 'package:app_barber_shop/widgets/buttons/custom_button.dart';
+import 'package:app_barber_shop/components/buttons/button_contact.dart';
+import 'package:app_barber_shop/components/text/text_direitos.dart';
+import 'package:app_barber_shop/components/buttons/button_instagram.dart';
+import 'package:app_barber_shop/components/buttons/button_back.dart';
+import 'package:app_barber_shop/components/forms/custom_text_field.dart';
+import 'package:app_barber_shop/components/buttons/custom_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LoginPage extends StatefulWidget {

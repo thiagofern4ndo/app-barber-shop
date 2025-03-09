@@ -16,7 +16,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
   DateTime _selectedDay = DateTime.now();
   static const _calendarColor = Color(0xFF00FFB4);
   static const _selectedColor = Color(0xFF000000);
-  static const _disabledColor = Color(0xFFB0B0B0);
+  static const _disabledColor = Color(0xFF757575);
 
   bool _isValidDay(DateTime day) {
     return day.isAfter(DateTime.now().subtract(const Duration(days: 1))) && day.month == DateTime.now().month;
@@ -58,7 +58,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
         selectedDayButtonColor: Colors.transparent,
         selectedDayBorderColor: Colors.transparent,
         selectedDayTextStyle: GoogleFonts.poppins(
-          color: Colors.white,
+          color: Color(0xFFFFFFFF),
           fontWeight: FontWeight.w700,
         ),
         headerTextStyle: _headerTextStyle(),

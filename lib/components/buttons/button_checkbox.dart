@@ -21,8 +21,7 @@ class CustomCheckBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ButtonStyle(
-        // substituição de MaterialStateProperty.all por WidgetStateProperty.all pq ele sera descontinuado
-        backgroundColor: WidgetStateProperty.all(Color(0xFF000000)), // Alterado para WidgetStateProperty (evitar erro por descontinuação)
+        backgroundColor: WidgetStateProperty.all(Color(0xFF000000)),
         side: WidgetStateProperty.all(BorderSide(
           color: Color(0xFF00FFB4),
           width: 3,
@@ -37,7 +36,7 @@ class CustomCheckBox extends StatelessWidget {
       ),
       onPressed: () => onChanged(!isChecked),
       child: Row(
-        mainAxisSize: MainAxisSize.min, // ajusta o tamanho do Row ao conteúdo, evitando que ocupe todo o espaço disponível
+        mainAxisSize: MainAxisSize.min, 
         children: [
           Text(
             text,
