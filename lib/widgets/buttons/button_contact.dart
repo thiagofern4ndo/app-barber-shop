@@ -7,10 +7,6 @@ class ContactButton extends StatelessWidget {
   final double? height;
   final Color color;
   final Color textColor;
-<<<<<<< HEAD
-=======
-  final String text;
->>>>>>> 161796c855ff5e1f1202d8b5b9802146bcbc9460
 
   static const double defaultWidth = 70;
   static const double defaultHeight = 20;
@@ -20,14 +16,8 @@ class ContactButton extends StatelessWidget {
     required this.onPressed,
     this.width = 110,
     this.height = 27,
-<<<<<<< HEAD
     this.color = const Color(0xFF000000), // required Type child,
     this.textColor = const Color(0xFF00FFB4),
-=======
-    this.color = const Color(0xFF000000),
-    this.textColor = Colors.white,
-    required this.text,
->>>>>>> 161796c855ff5e1f1202d8b5b9802146bcbc9460
   });
 
   @override
@@ -52,11 +42,7 @@ class ContactButton extends StatelessWidget {
           style: GoogleFonts.poppins(
             fontSize: 14,
             fontWeight: FontWeight.w300,
-<<<<<<< HEAD
             color: const Color(0xFFFFFFFF),
-=======
-            color: textColor,
->>>>>>> 161796c855ff5e1f1202d8b5b9802146bcbc9460
           ),
         ),
       ),

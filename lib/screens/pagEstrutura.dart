@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:app_barber_shop/widgets/buttons/custom_buttonGreen.dart'; // Importa o CustomButton
 import 'package:app_barber_shop/widgets/buttons/button_instagram.dart';
 import 'package:app_barber_shop/widgets/buttons/button_contact.dart'; // Importa o ContactButton
@@ -72,4 +72,4 @@ class _PagEsState extends State<PagEs> {
       ),
     );
   }
-}
+}*/

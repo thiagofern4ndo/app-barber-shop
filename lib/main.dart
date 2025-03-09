@@ -59,60 +59,29 @@ class MyApp extends StatelessWidget {
 }*/
 
 import 'package:flutter/material.dart';
-import 'package:app_barber_shop/widgets/buttons/button_calendar_screen.dart'; // Importa o CalendarButton
+import 'package:app_barber_shop/screens/calendar_selection_screen.dart'; // Importa o CalendarSelectionScreen
+import 'package:intl/date_symbol_data_local.dart'; // Importa o initializeDateFormatting
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  // Inicializa a formatação de data
+  await initializeDateFormatting('pt_BR', null);
+
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-<<<<<<< HEAD
-      title: 'Calendar Button Demo',
+      title: 'Calendar Selection Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: CalendarScreen(),
-    );
-  }
-}
-
-class CalendarScreen extends StatefulWidget {
-  @override
-  _CalendarScreenState createState() => _CalendarScreenState();
-}
-
-class _CalendarScreenState extends State<CalendarScreen> {
-  DateTime _selectedDate = DateTime.now();
-
-  void _onDateSelected(DateTime date) {
-    setState(() {
-      _selectedDate = date;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Calendar Button Demo'),
-      ),
-      body: Center(
-        child: CalendarButton(
-          selectedDate: _selectedDate,
-          onDateSelected: _onDateSelected,
-        ),
-      ),
-    );
-  }
-}
-=======
+      home:
+          CalendarSelectionScreen(), // Define CalendarSelectionScreen como a tela inicial
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
-      home:  Pag8(), // Define Pag8 como a tela inicial
     );
   }
 }
->>>>>>> 161796c855ff5e1f1202d8b5b9802146bcbc9460

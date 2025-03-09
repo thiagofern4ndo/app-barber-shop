@@ -1,25 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:app_barber_shop/widgets/buttons/custom_buttonGreen.dart'; // Importa o CustomButton
+import 'package:app_barber_shop/widgets/buttons/custom_button2.dart'; // Importa o CustomButton
 import 'package:app_barber_shop/widgets/buttons/button_instagram.dart';
-import 'package:app_barber_shop/widgets/buttons/button_contact.dart'; // Importa o ContactButton
 import 'package:app_barber_shop/widgets/buttons/button_back.dart'; // Importa o CustomBackButton
 import 'package:google_fonts/google_fonts.dart'; // Importa o GoogleFonts
 import 'package:app_barber_shop/widgets/text/text_direitos.dart'; // Importa o TextWidget
+import 'package:app_barber_shop/widgets/calendar/calendar_user.dart'; // Importa o CustomCalendar
+import 'package:intl/intl.dart'; // Importa o DateFormat
+import 'package:intl/date_symbol_data_local.dart'; // Importa o initializeDateFormatting
 
-class Pag7 extends StatefulWidget {
+class CalendarSelectionScreen extends StatefulWidget {
   @override
-  _Pag7State createState() => _Pag7State();
+  _CalendarSelectionScreenState createState() =>
+      _CalendarSelectionScreenState();
 }
 
-class _Pag7State extends State<Pag7> {
+class _CalendarSelectionScreenState extends State<CalendarSelectionScreen> {
   String _selectedDate = '';
   String _dateCount = '';
   String _range = '';
   String _rangeCount = '';
 
-  void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
+  @override
+  void initState() {
+    super.initState();
+    initializeDateFormatting('pt_BR', null).then((_) {
+      setState(() {
+        // Atualiza o estado após a inicialização da formatação de data
+      });
+    });
+  }
+
+  void _onSelectionChanged(dynamic args) {
     setState(() {
       if (args.value is DateTime) {
         _selectedDate = DateFormat('dd/MM/yyyy').format(args.value);
@@ -52,13 +64,16 @@ class _Pag7State extends State<Pag7> {
           Positioned(
             top: 10,
             right: 20,
-            child: InstagramIconButton(), // Adiciona o IconButton no canto superior direito
+            child:
+                InstagramIconButton(), // Adiciona o IconButton no canto superior direito
           ),
           Column(
             children: [
               // Título "Selecione uma Data"
               Padding(
-                padding: EdgeInsets.only(top: 100, bottom: 50), // 10 pixels acima e 10 abaixo do título
+                padding: EdgeInsets.only(
+                    top: 80,
+                    bottom: 50), // 10 pixels acima e 10 abaixo do título
                 child: Text(
                   'Selecione uma Data',
                   style: GoogleFonts.poppins(
@@ -72,25 +87,20 @@ class _Pag7State extends State<Pag7> {
               Expanded(
                 child: Center(
                   child: Container(
-                    width: 350, // Define a largura máxima
-                    height: 350, // Define a altura máxima
+                    width: 300, // Define a largura máxima
+                    height: 300, // Define a altura máxima
                     decoration: BoxDecoration(
                       color: Color(0xFF00FFB4), // Define o backgroundColor
-                      borderRadius: BorderRadius.circular(20), // Define o borderRadius
+                      borderRadius:
+                          BorderRadius.circular(20), // Define o borderRadius
                     ),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20), // Define o borderRadius
-                      child: SfDateRangePicker(
-                        headerStyle: DateRangePickerHeaderStyle(
-                          backgroundColor: Color(0xFF00FFB4), // Define o backgroundColor do cabeçalho
-                        ),
-                        headerHeight: 50, // Define a altura do cabeçalho
-                        showNavigationArrow: false,
-                       // locale: const Locale('pt', 'BR'), // Define o locale para Português do Brasil
-                        backgroundColor: Colors.transparent, // Define o backgroundColor como transparente
+                      borderRadius:
+                          BorderRadius.circular(20), // Define o borderRadius
+                      child: CustomCalendar(
                         onSelectionChanged: _onSelectionChanged,
-                        selectionMode: DateRangePickerSelectionMode.single, // Permite selecionar uma única data
-                        initialSelectedDate: DateTime.now(),
+                        aoSelecionarDia:
+                            (DateTime) {}, // Adiciona o callback aoSelecionarDia
                       ),
                     ),
                   ),
@@ -103,7 +113,8 @@ class _Pag7State extends State<Pag7> {
                   text: 'Continuar',
                   onPressed: () {
                     // Ação ao pressionar o botão Continuar
-                  }, isSelected: false,
+                  },
+                  isSelected: false, // Adiciona a propriedade isSelected
                 ),
               ),
               // Texto no rodapé
@@ -111,11 +122,12 @@ class _Pag7State extends State<Pag7> {
                 padding: EdgeInsets.only(bottom: 30),
                 child: Column(
                   children: [
-                    CustomButton(
+                    CustomButton2(
                       text: 'Contato',
                       onPressed: () {
                         // Ação ao pressionar o botão de contato
                       },
+                      isSelected: false, // Adiciona a propriedade isSelected
                     ),
                     SizedBox(height: 15),
                     TextWidget(),
@@ -128,4 +140,15 @@ class _Pag7State extends State<Pag7> {
       ),
     );
   }
+}
+
+class DateRangePickerSelectionChangedArgs {
+  dynamic value;
+}
+
+class PickerDateRange {
+  DateTime startDate;
+  DateTime? endDate;
+
+  PickerDateRange(this.startDate, this.endDate);
 }
