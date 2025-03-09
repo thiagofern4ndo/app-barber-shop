@@ -7,8 +7,10 @@ class CustomButton2 extends StatelessWidget {
   final double width;
   final double height;
   final double fontSize;
+  final Alignment alignment;
+  final double borderRadius; // Adiciona o parâmetro borderRadius
 
-  var isSelected; // Adiciona o parâmetro fontSize
+  var isSelected; // Adiciona o parâmetro isSelected
 
   CustomButton2({
     Key? key,
@@ -17,6 +19,9 @@ class CustomButton2 extends StatelessWidget {
     this.width = 120,
     this.height = 40,
     this.fontSize = 15, // Define um valor padrão para fontSize
+    this.alignment =
+        Alignment.centerLeft, // Define um valor padrão para alignment
+    this.borderRadius = 20, // Define um valor padrão para borderRadius
     required this.isSelected,
   }) : super(key: key);
 
@@ -33,16 +38,24 @@ class CustomButton2 extends StatelessWidget {
             width: 2,
           ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(
+                borderRadius), // Usa o parâmetro borderRadius
           ),
         ),
         onPressed: onPressed,
-        child: Text(
-          text,
-          style: GoogleFonts.poppins(
-            fontSize: fontSize, // Usa o parâmetro fontSize
-            fontWeight: FontWeight.w500,
-            color: Color(0xFFFFFFFF),
+        child: Align(
+          alignment: alignment, // Usa o parâmetro alignment
+          child: Padding(
+            padding:
+                const EdgeInsets.only(left: 10), // Adiciona padding à esquerda
+            child: Text(
+              text,
+              style: GoogleFonts.poppins(
+                fontSize: fontSize, // Usa o parâmetro fontSize
+                fontWeight: FontWeight.w500,
+                color: Color(0xFFFFFFFF),
+              ),
+            ),
           ),
         ),
       ),

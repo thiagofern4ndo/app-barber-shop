@@ -16,9 +16,10 @@ class CustomButton extends StatelessWidget {
     required this.onPressed,
     this.width = 150, // largura do botão
     this.height = 40, // altura do botão
-    this.color = const Color(0xFF00FFB4),
+    this.color = const Color(0xFF00FFB4), // Mantém a cor verde
     this.fontSize,
     required this.isSelected,
+    required int borderRadius,
   });
 
   double get _computedFontSize => fontSize ?? height * 0.4;
@@ -40,7 +41,7 @@ class CustomButton extends StatelessWidget {
           text,
           style: GoogleFonts.poppins(
             color: Color(0xFF000000),
-            fontSize: 15, // tamanho da fonte
+            fontSize: _computedFontSize, // Usa o tamanho da fonte computado
             fontWeight: FontWeight.w600,
             shadows: [
               Shadow(

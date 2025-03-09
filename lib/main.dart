@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
 }*/
 
 import 'package:flutter/material.dart';
-import 'package:app_barber_shop/screens/calendar_selection_screen.dart'; // Importa o CalendarSelectionScreen
+import 'package:app_barber_shop/screens/confirmation_screen.dart'; // Importa o ConfirmationScreen
 import 'package:intl/date_symbol_data_local.dart'; // Importa o initializeDateFormatting
 
 void main() async {
@@ -75,12 +75,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Calendar Selection Demo',
+      title: 'Confirmation Screen Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home:
-          CalendarSelectionScreen(), // Define CalendarSelectionScreen como a tela inicial
+          ConfirmationScreen(), // Define ConfirmationScreen como a tela inicial
       debugShowCheckedModeBanner: false,
     );
   }
