@@ -1,4 +1,4 @@
-import 'package:app_barber_shop/screens/loginpage.dart';
+/*import 'package:app_barber_shop/screens/loginpage.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:app_barber_shop/widgets/buttons/profile_button.dart';
@@ -65,3 +65,4 @@ class MainScreen extends StatelessWidget {
     );
   }
 }
+*/

@@ -3,7 +3,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class InstagramIconButton extends StatelessWidget {
+<<<<<<< HEAD
   final String instagramUrl = 'https://www.instagram.com/seu_perfil_aqui/';
+=======
+  final String instagramUrl = 'https://www.instagram.com/doagustavo12/';
+>>>>>>> 161796c855ff5e1f1202d8b5b9802146bcbc9460
 
   // Função para abrir o link
   _launchURL() async {
@@ -23,6 +27,8 @@ class InstagramIconButton extends StatelessWidget {
         size: 40,
       ),
       onPressed: _launchURL,
+      
     );
   }
 }
+

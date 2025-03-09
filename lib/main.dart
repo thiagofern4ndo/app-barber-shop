@@ -69,6 +69,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+<<<<<<< HEAD
       title: 'Calendar Button Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -107,3 +108,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
     );
   }
 }
+=======
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark(),
+      home:  Pag8(), // Define Pag8 como a tela inicial
+    );
+  }
+}
+>>>>>>> 161796c855ff5e1f1202d8b5b9802146bcbc9460
