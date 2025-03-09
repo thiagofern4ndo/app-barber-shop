@@ -1,3 +1,4 @@
+import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomBackButton extends StatelessWidget {
@@ -9,7 +10,7 @@ class CustomBackButton extends StatelessWidget {
     Key? key,
     required this.onPressed,
     this.size = 30,
-    this.color = const Color(0xFF00FFB4),
+    this.color = AppColors.primary, 
   }) : super(key: key);
 
   @override
@@ -49,6 +50,4 @@ class BackArrowPainter extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
-
-
 

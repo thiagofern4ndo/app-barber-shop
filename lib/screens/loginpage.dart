@@ -6,6 +6,7 @@ import 'package:app_barber_shop/components/buttons/button_back.dart';
 import 'package:app_barber_shop/components/forms/custom_text_field.dart';
 import 'package:app_barber_shop/components/buttons/custom_button.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:app_barber_shop/components/theme/colors.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -68,6 +69,7 @@ class _LoginPageState extends State<LoginPage> {
     _usernameController.dispose();
     super.dispose();
   }
+
   Widget _buildHeader() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -97,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
         if (errorText != null)
           Padding(
             padding: const EdgeInsets.only(top: 4.0),
-            child: Text(errorText, style: const TextStyle(color: Colors.red)),
+            child: Text(errorText, style: TextStyle(color: AppColors.thirdTextColor)),
           ),
         const SizedBox(height: 16),
       ],
@@ -132,16 +134,17 @@ class _LoginPageState extends State<LoginPage> {
           onPressed: () => _toggleMode(_mode == 'login' ? 'register' : 'login'),
           child: Text(
               _mode == 'login' ? 'Criar uma conta' : 'Já tem uma conta? Faça login',
-              style: const TextStyle(color: Colors.white)),
+              style: TextStyle(color: AppColors.primaryText)),
         ),
         if (_mode == 'login')
           TextButton(
             onPressed: () => _toggleMode('recover'),
-            child: const Text('Esqueceu a senha?', style: TextStyle(color: Colors.white)),
+            child: Text('Esqueceu a senha?', style: TextStyle(color: AppColors.primaryText)),
           ),
       ],
     );
   }
+
   Widget _buildFooter() {
     return Column(
       children: [
@@ -152,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
               await launchUrl(Uri.parse(whatsappUrl));
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Não foi possível abrir o WhatsApp')),
+                SnackBar(content: Text('Não foi possível abrir o WhatsApp')),
               );
             }
           },

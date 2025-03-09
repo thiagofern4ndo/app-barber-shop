@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 import 'package:intl/intl.dart'; 
+import 'package:app_barber_shop/components/theme/colors.dart';
 
 class CustomCalendar extends StatefulWidget {
   final Function(DateTime) aoSelecionarDia;
@@ -14,9 +15,6 @@ class CustomCalendar extends StatefulWidget {
 
 class _CustomCalendarState extends State<CustomCalendar> {
   DateTime _selectedDay = DateTime.now();
-  static const _calendarColor = Color(0xFF00FFB4);
-  static const _selectedColor = Color(0xFF000000);
-  static const _disabledColor = Color(0xFF757575);
 
   bool _isValidDay(DateTime day) {
     return day.isAfter(DateTime.now().subtract(const Duration(days: 1))) && day.month == DateTime.now().month;
@@ -37,7 +35,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
       height: 320,
       width: 350,
       decoration: BoxDecoration(
-        color: _calendarColor,
+        color: AppColors.primary,
         borderRadius: BorderRadius.circular(12),
       ),
       padding: const EdgeInsets.all(8),
@@ -49,22 +47,22 @@ class _CustomCalendarState extends State<CustomCalendar> {
         weekdayTextStyle: _textStyle(),
         daysTextStyle: _textStyle(),
         inactiveDaysTextStyle: _disabledTextStyle(),
-        todayButtonColor: Colors.transparent,
-        todayBorderColor: Colors.transparent, 
+        todayButtonColor: AppColors.transparent,
+        todayBorderColor: AppColors.transparent, 
         todayTextStyle: GoogleFonts.poppins(
-          color: _selectedColor,
+          color: AppColors.selectedColor,
           fontWeight: FontWeight.w700,
         ),
-        selectedDayButtonColor: Colors.transparent,
-        selectedDayBorderColor: Colors.transparent,
+        selectedDayButtonColor: AppColors.transparent,
+        selectedDayBorderColor: AppColors.transparent,
         selectedDayTextStyle: GoogleFonts.poppins(
-          color: Color(0xFFFFFFFF),
+          color: AppColors.primaryText,
           fontWeight: FontWeight.w700,
         ),
         headerTextStyle: _headerTextStyle(),
         headerText: _formatMonthHeader(), 
-        leftButtonIcon: const Icon(Icons.chevron_left, color: _selectedColor, size: 20),
-        rightButtonIcon: const Icon(Icons.chevron_right, color: _selectedColor, size: 20),
+        leftButtonIcon: Icon(Icons.chevron_left, color: AppColors.selectedColor, size: 20),
+        rightButtonIcon: Icon(Icons.chevron_right, color: AppColors.selectedColor, size: 20),
         weekFormat: false,
         showHeaderButton: true,
         selectedDateTime: _selectedDay,
@@ -80,13 +78,13 @@ class _CustomCalendarState extends State<CustomCalendar> {
             child: Container(
               decoration: BoxDecoration(
                 color: isSelectedDay
-                    ? _selectedColor
-                    : Colors.transparent, 
+                    ? AppColors.selectedColor
+                    : AppColors.transparent, 
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
                   color: isSelectedDay || isToday
-                      ? _selectedColor
-                      : Colors.transparent,
+                      ? AppColors.selectedColor
+                      : AppColors.transparent,
                   width: 2,
                 ),
               ),
@@ -97,8 +95,8 @@ class _CustomCalendarState extends State<CustomCalendar> {
                 "${day.day}",
                 style: GoogleFonts.poppins(
                   color: isSelectedDay
-                      ? Colors.white
-                      : (isSunday || isPastDay ? _disabledColor : _selectedColor), 
+                      ? AppColors.primaryText
+                      : (isSunday || isPastDay ? AppColors.secondaryText : AppColors.selectedColor), 
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -111,7 +109,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
 
   TextStyle _textStyle() {
     return GoogleFonts.poppins(
-      color: _selectedColor,
+      color: AppColors.selectedColor,
       fontSize: 12,
       fontWeight: FontWeight.w700,
     );
@@ -119,7 +117,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
 
   TextStyle _disabledTextStyle() {
     return GoogleFonts.poppins(
-      color: _disabledColor,
+      color: AppColors.secondaryText,
       fontSize: 12,
       fontWeight: FontWeight.w700,
     );
@@ -127,7 +125,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
 
   TextStyle _headerTextStyle() {
     return GoogleFonts.poppins(
-      color: _selectedColor,
+      color: AppColors.selectedColor,
       fontSize: 18,
       fontWeight: FontWeight.w700,
     );

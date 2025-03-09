@@ -1,3 +1,4 @@
+import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -63,7 +64,7 @@ class _ProfessionalSelectionScreenState
               style: GoogleFonts.poppins(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: AppColors.primaryText
               ),
               textAlign: TextAlign.center,
             ),
@@ -161,10 +162,10 @@ class ProfessionalCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
           side: isSelected
-              ? const BorderSide(color: Color(0xFF00FFB4), width: 3)
+              ? const BorderSide(color: AppColors.primary, width: 3)
               : BorderSide.none,
         ),
-        color: const Color.fromARGB(255, 0, 0, 0),
+        color: AppColors.background,
         child: Column(
           children: [
             Expanded(
@@ -184,7 +185,7 @@ class ProfessionalCard extends StatelessWidget {
               style: GoogleFonts.poppins(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: AppColors.primaryText,
               ),
               textAlign: TextAlign.center,
             ),

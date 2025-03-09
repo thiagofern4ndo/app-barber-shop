@@ -1,3 +1,4 @@
+import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:app_barber_shop/screens/loginpage.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart'; 
@@ -54,7 +55,7 @@ class MainScreen extends StatelessWidget {
 
             width: 320, 
             height: 50, 
-            color: const Color(0xFF00FFB4), 
+            color: AppColors.primary, 
           ),
           const SizedBox(height: 30), 
           ContactButton(

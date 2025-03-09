@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:app_barber_shop/components/theme/colors.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -15,7 +16,7 @@ class CustomButton extends StatelessWidget {
     required this.onPressed,
     this.width = 300,
     this.height = 60,
-    this.color = const Color(0xFF00FFB4),
+    this.color = AppColors.primary,
     this.fontSize,
   });
 
@@ -41,7 +42,7 @@ class CustomButton extends StatelessWidget {
           style: GoogleFonts.poppins(
             fontSize: _computedFontSize,
             fontWeight: FontWeight.w600,
-            color: const Color(0xFF000000),
+            color: AppColors.primaryText,
             shadows: const [
               Shadow(
                 offset: Offset(1, 1),
