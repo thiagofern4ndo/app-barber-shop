@@ -9,5 +9,6 @@ class AppColors {
    static const Color thirdTextColor = Color(0xFFFF0000);
 
 
-  static var selectedColor;
+  static Color selectedColor = primary; 
+
 }

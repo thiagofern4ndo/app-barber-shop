@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart'; 
 import 'package:app_barber_shop/components/buttons/button_contact.dart';
 import 'package:app_barber_shop/components/text/text_direitos.dart';
 import 'package:app_barber_shop/components/buttons/button_instagram.dart';
 import 'package:app_barber_shop/components/buttons/button_back.dart';
 import 'package:app_barber_shop/components/forms/custom_text_field.dart';
 import 'package:app_barber_shop/components/buttons/custom_button.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart'; 
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -16,42 +17,20 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormBuilderState>();  
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
 
   String _mode = 'login';
-  String? _emailError;
-  String? _passwordError;
-  String? _usernameError;
 
   void _toggleMode(String mode) => setState(() => _mode = mode);
 
   final emailRegex = RegExp(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
 
-  bool _validateFields() {
-    setState(() {
-      _emailError = _passwordError = _usernameError = null;
-
-      if (_mode == 'register' && _usernameController.text.isEmpty) {
-        _usernameError = 'Por favor, insira um nome de usuário';
-      }
-
-      if (_emailController.text.isEmpty || !emailRegex.hasMatch(_emailController.text)) {
-        _emailError = 'Por favor, insira um email válido';
-      }
-
-      if (_mode != 'recover' && _passwordController.text.length < 6) {
-        _passwordError = 'A senha deve ter pelo menos 6 caracteres';
-      }
-    });
-
-    return _emailError == null && _passwordError == null && _usernameError == null;
-  }
 
   void _submit() {
-    if (!_validateFields()) return;
+    if (!_formKey.currentState!.saveAndValidate()) return;
 
     if (_mode == 'login') {
       debugPrint('Login: ${_emailController.text}, ${_passwordController.text}');
@@ -82,9 +61,8 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-
   Widget _buildTextField({
-    required TextEditingController controller,
+    required String name,
     required String hintText,
     bool obscureText = false,
     String? errorText,
@@ -92,15 +70,28 @@ class _LoginPageState extends State<LoginPage> {
     return Column(
       children: [
         CustomTextField(
-          controller: controller,
+          controller: name == 'email' ? _emailController : name == 'password' ? _passwordController : _usernameController,
           hintText: hintText,
           obscureText: obscureText,
-        ),
-        if (errorText != null)
-          Padding(
-            padding: const EdgeInsets.only(top: 4.0),
-            child: Text(errorText, style: TextStyle(color: AppColors.thirdTextColor)),
+          child: FormBuilderTextField(
+            name: name,
+            controller: name == 'email' ? _emailController : name == 'password' ? _passwordController : _usernameController,
+            obscureText: obscureText,
+            decoration: InputDecoration(
+              labelText: hintText,
+              errorText: errorText,
+            ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return '$hintText é obrigatório';
+              }
+              if (name == 'email' && !emailRegex.hasMatch(value)) {
+                return 'Email inválido';
+              }
+              return null;
+            },
           ),
+        ),
         const SizedBox(height: 16),
       ],
     );
@@ -111,23 +102,15 @@ class _LoginPageState extends State<LoginPage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         if (_mode == 'register')
-          _buildTextField(
-              controller: _usernameController,
-              hintText: 'Nome de Usuário',
-              errorText: _usernameError),
-        _buildTextField(
-            controller: _emailController, hintText: 'Email', errorText: _emailError),
+          _buildTextField(name: 'username', hintText: 'Nome de Usuário'),
+        _buildTextField(name: 'email', hintText: 'Email'),
         if (_mode != 'recover')
-          _buildTextField(
-              controller: _passwordController,
-              hintText: 'Senha',
-              obscureText: true,
-              errorText: _passwordError),
+          _buildTextField(name: 'password', hintText: 'Senha', obscureText: true),
         CustomButton(
-          text: _mode == 'login' ? 'Login' : _mode == 'register' ? 'Cadastrar' : 'Recuperar Senha',
+          text: _mode == 'login' ? 'Entrar' : _mode == 'register' ? 'Cadastrar' : 'Recuperar Senha',
           onPressed: _submit,
-          width: 200,
-          height: 35,
+          width: 180,
+          height: 40,
         ),
         const SizedBox(height: 20),
         TextButton(
@@ -151,8 +134,10 @@ class _LoginPageState extends State<LoginPage> {
         ContactButton(
           onPressed: () async {
             const whatsappUrl = 'https://wa.me/5581999999999';
-            if (await canLaunchUrl(Uri.parse(whatsappUrl))) {
-              await launchUrl(Uri.parse(whatsappUrl));
+            final uri = Uri.parse(whatsappUrl);
+
+            if (await canLaunch(uri.toString())) {
+              await launchUrl(uri);
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('Não foi possível abrir o WhatsApp')),
@@ -179,7 +164,10 @@ class _LoginPageState extends State<LoginPage> {
               child: Center(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Form(key: _formKey, child: _buildForm()),
+                  child: FormBuilder(
+                    key: _formKey,
+                    child: _buildForm(),
+                  ),
                 ),
               ),
             ),

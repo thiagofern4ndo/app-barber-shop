@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/src/fields/form_builder_text_field.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
 
@@ -17,7 +18,7 @@ class CustomTextField extends StatelessWidget {
     this.width = 300, 
     this.height = 60, 
     this.keyboardType = TextInputType.text, 
-    this.obscureText = false, 
+    this.obscureText = false, required FormBuilderTextField child, 
   }) : super(key: key);
 
   @override
@@ -26,7 +27,7 @@ class CustomTextField extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: AppColors.primary,
+        color: AppColors.background,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
           color: AppColors.selectedColor,
