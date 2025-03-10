@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart'; 
 import 'package:app_barber_shop/components/buttons/button_contact.dart';
 import 'package:app_barber_shop/components/text/text_direitos.dart';
 import 'package:app_barber_shop/components/buttons/button_instagram.dart';
 import 'package:app_barber_shop/components/buttons/button_back.dart';
 import 'package:app_barber_shop/components/forms/custom_text_field.dart';
 import 'package:app_barber_shop/components/buttons/custom_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart'; 
-import 'profissionais.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -18,28 +16,71 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _formKey = GlobalKey<FormBuilderState>();  
-  String _mode = 'login';
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
 
-  void _toggleMode(String mode) => setState(() => _mode = mode);
+  String _mode = 'login';
+  String? _emailError;
+  String? _passwordError;
+  String? _usernameError;
+
+  void _toggleMode(String mode) {
+    setState(() {
+      _mode = mode;
+      _emailController.clear();
+      _passwordController.clear();
+      _usernameController.clear();
+      _emailError = _passwordError = _usernameError = null;
+    });
+  }
 
   final emailRegex = RegExp(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
 
-  void _submit() {
-    if (!_formKey.currentState!.saveAndValidate()) return;
+  bool _validateFields() {
+    bool hasErrors = false;
 
-    final formData = _formKey.currentState!.value;
-    if (_mode == 'login') {
-      debugPrint('Login: ${formData['email']}, ${formData['password']}');
-    } else if (_mode == 'register') {
-      debugPrint('Registro: ${formData['username']}, ${formData['email']}, ${formData['password']}');
-      Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => ProfessionalSelectionScreen()),
-    );
-    } else {
-      debugPrint('Recuperação de senha: ${formData['email']}');
+    if (_mode == 'register' && _usernameController.text.isEmpty) {
+      _usernameError = 'Por favor, insira um nome de usuário';
+      hasErrors = true;
     }
+
+    if (_emailController.text.isEmpty || !emailRegex.hasMatch(_emailController.text)) {
+      _emailError = 'Por favor, insira um email válido';
+      hasErrors = true;
+    }
+
+    if (_mode != 'recover' && _passwordController.text.length < 6) {
+      _passwordError = 'A senha deve ter pelo menos 6 caracteres';
+      hasErrors = true;
+    }
+
+    setState(() {});
+
+    return !hasErrors;
+  }
+
+  void _submit() {
+    if (!_formKey.currentState!.validate()) return;
+
+    if (!_validateFields()) return;
+
+    if (_mode == 'login') {
+      debugPrint('Login: ${_emailController.text}, ${_passwordController.text}');
+    } else if (_mode == 'register') {
+      debugPrint('Registro: ${_usernameController.text}, ${_emailController.text}, ${_passwordController.text}');
+    } else {
+      debugPrint('Recuperação de senha: ${_emailController.text}');
+    }
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _usernameController.dispose();
+    super.dispose();
   }
 
   Widget _buildHeader() {
@@ -56,33 +97,23 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _buildTextField({
-    required String name,
+    required TextEditingController controller,
     required String hintText,
     bool obscureText = false,
+    String? errorText,
   }) {
     return Column(
       children: [
         CustomTextField(
-          controller: TextEditingController(),
+          controller: controller,
           hintText: hintText,
           obscureText: obscureText,
-          child: FormBuilderTextField(
-            name: name,
-            obscureText: obscureText,
-            decoration: InputDecoration(
-              labelText: hintText,
-            ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return '$hintText é obrigatório';
-              }
-              if (name == 'email' && !emailRegex.hasMatch(value)) {
-                return 'Email inválido';
-              }
-              return null;
-            },
-          ),
         ),
+        if (errorText != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 4.0),
+            child: Text(errorText, style: TextStyle(color: AppColors.thirdTextColor)),
+          ),
         const SizedBox(height: 16),
       ],
     );
@@ -93,15 +124,23 @@ class _LoginPageState extends State<LoginPage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         if (_mode == 'register')
-          _buildTextField(name: 'username', hintText: 'Nome de Usuário'),
-        _buildTextField(name: 'email', hintText: 'Email'),
+          _buildTextField(
+              controller: _usernameController,
+              hintText: 'Nome de Usuário',
+              errorText: _usernameError),
+        _buildTextField(
+            controller: _emailController, hintText: 'Email', errorText: _emailError),
         if (_mode != 'recover')
-          _buildTextField(name: 'password', hintText: 'Senha', obscureText: true),
+          _buildTextField(
+              controller: _passwordController,
+              hintText: 'Senha',
+              obscureText: true,
+              errorText: _passwordError),
         CustomButton(
           text: _mode == 'login' ? 'Entrar' : _mode == 'register' ? 'Cadastrar' : 'Recuperar Senha',
           onPressed: _submit,
-          width: 180,
-          height: 40,
+          width: 200,
+          height: 35,
         ),
         const SizedBox(height: 20),
         TextButton(
@@ -125,10 +164,8 @@ class _LoginPageState extends State<LoginPage> {
         ContactButton(
           onPressed: () async {
             const whatsappUrl = 'https://wa.me/5581999999999';
-            final uri = Uri.parse(whatsappUrl);
-
-            if (await canLaunch(uri.toString())) {
-              await launchUrl(uri);
+            if (await canLaunchUrl(Uri.parse(whatsappUrl))) {
+              await launchUrl(Uri.parse(whatsappUrl), mode: LaunchMode.externalApplication);
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('Não foi possível abrir o WhatsApp')),
@@ -155,10 +192,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Center(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: FormBuilder(
-                    key: _formKey,
-                    child: _buildForm(),
-                  ),
+                  child: Form(key: _formKey, child: _buildForm()),
                 ),
               ),
             ),
