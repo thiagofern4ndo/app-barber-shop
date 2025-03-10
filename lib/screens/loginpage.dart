@@ -18,35 +18,23 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormBuilderState>();  
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _usernameController = TextEditingController();
-
   String _mode = 'login';
 
   void _toggleMode(String mode) => setState(() => _mode = mode);
 
   final emailRegex = RegExp(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
 
-
   void _submit() {
     if (!_formKey.currentState!.saveAndValidate()) return;
 
+    final formData = _formKey.currentState!.value;
     if (_mode == 'login') {
-      debugPrint('Login: ${_emailController.text}, ${_passwordController.text}');
+      debugPrint('Login: ${formData['email']}, ${formData['password']}');
     } else if (_mode == 'register') {
-      debugPrint('Registro: ${_usernameController.text}, ${_emailController.text}, ${_passwordController.text}');
+      debugPrint('Registro: ${formData['username']}, ${formData['email']}, ${formData['password']}');
     } else {
-      debugPrint('Recuperação de senha: ${_emailController.text}');
+      debugPrint('Recuperação de senha: ${formData['email']}');
     }
-  }
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    _usernameController.dispose();
-    super.dispose();
   }
 
   Widget _buildHeader() {
@@ -61,25 +49,23 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+
   Widget _buildTextField({
     required String name,
     required String hintText,
     bool obscureText = false,
-    String? errorText,
   }) {
     return Column(
       children: [
         CustomTextField(
-          controller: name == 'email' ? _emailController : name == 'password' ? _passwordController : _usernameController,
+          controller: TextEditingController(),
           hintText: hintText,
           obscureText: obscureText,
           child: FormBuilderTextField(
             name: name,
-            controller: name == 'email' ? _emailController : name == 'password' ? _passwordController : _usernameController,
             obscureText: obscureText,
             decoration: InputDecoration(
               labelText: hintText,
-              errorText: errorText,
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
