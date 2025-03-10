@@ -8,6 +8,7 @@ import 'package:app_barber_shop/components/forms/custom_text_field.dart';
 import 'package:app_barber_shop/components/buttons/custom_button.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart'; 
+import 'profissionais.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -32,6 +33,10 @@ class _LoginPageState extends State<LoginPage> {
       debugPrint('Login: ${formData['email']}, ${formData['password']}');
     } else if (_mode == 'register') {
       debugPrint('Registro: ${formData['username']}, ${formData['email']}, ${formData['password']}');
+      Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => ProfessionalSelectionScreen()),
+    );
     } else {
       debugPrint('Recuperação de senha: ${formData['email']}');
     }
