@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:app_barber_shop/components/theme/colors.dart';
 
 class CustomButton2 extends StatelessWidget {
   String text;
@@ -19,9 +20,9 @@ class CustomButton2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color(0xFF000000),
+        backgroundColor: AppColors.background,
         side: const BorderSide(
-          color: Color(0xFF00FFB4),
+          color: AppColors.primary,
           width: 2,
         ),
         shape: RoundedRectangleBorder(
@@ -30,14 +31,14 @@ class CustomButton2 extends StatelessWidget {
       ),
       onPressed: onPressed,
       child: Row(
-        mainAxisSize: MainAxisSize.min,  
+        mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             text,
             style: GoogleFonts.poppins(
               fontSize: 30,
               fontWeight: FontWeight.w500,
-              color: Color(0xFFFFFFFF),
+              color: AppColors.primaryText,
             ),
           ),
         ],
@@ -45,4 +46,3 @@ class CustomButton2 extends StatelessWidget {
     );
   }
 }
-

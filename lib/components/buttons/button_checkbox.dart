@@ -1,3 +1,4 @@
+import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -21,23 +22,22 @@ class CustomCheckBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ButtonStyle(
-        // substituição de MaterialStateProperty.all por WidgetStateProperty.all pq ele sera descontinuado
-        backgroundColor: WidgetStateProperty.all(Color(0xFF000000)), // Alterado para WidgetStateProperty (evitar erro por descontinuação)
+        backgroundColor: WidgetStateProperty.all(AppColors.background),
         side: WidgetStateProperty.all(BorderSide(
-          color: Color(0xFF00FFB4),
+          color: AppColors.primary,
           width: 3,
-        )), 
+        )),
         shape: WidgetStateProperty.all(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(25),
             ),
           ),
-        ), 
+        ),
       ),
       onPressed: () => onChanged(!isChecked),
       child: Row(
-        mainAxisSize: MainAxisSize.min, // ajusta o tamanho do Row ao conteúdo, evitando que ocupe todo o espaço disponível
+        mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             text,
@@ -45,7 +45,7 @@ class CustomCheckBox extends StatelessWidget {
             style: GoogleFonts.poppins(
               fontSize: 20,
               fontWeight: FontWeight.w500,
-              color: Color(0xFFFFFFFF),
+              color: AppColors.primaryText,
             ),
           ),
           Container(
@@ -55,15 +55,15 @@ class CustomCheckBox extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: Color(0xFF00FFB4),
+                color: AppColors.primary,
                 width: 3,
               ),
-              color: Color(0xFF000000),
+              color: AppColors.background,
             ),
             child: isChecked
                 ? Icon(
                     Icons.check,
-                    color: Color(0xFF00FFB4),
+                    color: AppColors.primary,
                     size: 20,
                   )
                 : null,
