@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/src/fields/form_builder_text_field.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:app_barber_shop/components/theme/colors.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -16,7 +18,7 @@ class CustomTextField extends StatelessWidget {
     this.width = 300, 
     this.height = 60, 
     this.keyboardType = TextInputType.text, 
-    this.obscureText = false, 
+    this.obscureText = false, required FormBuilderTextField child, 
   }) : super(key: key);
 
   @override
@@ -25,10 +27,10 @@ class CustomTextField extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: const Color(0xFF000000),
+        color: AppColors.background,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: const Color(0xFF00FFB4),
+          color: AppColors.selectedColor,
           width: 4,
         ),
       ),
@@ -37,7 +39,7 @@ class CustomTextField extends StatelessWidget {
         style: GoogleFonts.poppins(
           fontWeight: FontWeight.w600, 
           fontSize: 22, 
-          color: Colors.white,
+          color: AppColors.primaryText,
         ),
         keyboardType: keyboardType, 
         obscureText: obscureText, 
@@ -46,7 +48,7 @@ class CustomTextField extends StatelessWidget {
           hintStyle: GoogleFonts.poppins(
             fontWeight: FontWeight.w600, 
             fontSize: 22, 
-            color: const Color(0xFFB0B0B0), 
+            color: AppColors.secondaryText, 
           ),
           border: InputBorder.none,
           contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12), 
@@ -58,4 +60,3 @@ class CustomTextField extends StatelessWidget {
     );
   }
 }
-

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:app_barber_shop/components/theme/colors.dart';
 
 class InstagramIconButton extends StatelessWidget {
   final String instagramUrl;
@@ -10,9 +11,10 @@ class InstagramIconButton extends StatelessWidget {
   InstagramIconButton({
     Key? key,
     this.instagramUrl = 'https://www.instagram.com/seu_perfil_aqui/',
-    this.iconColor = const Color(0xFF00FFb4),
+    this.iconColor = AppColors.primary,
     this.iconSize = 40.0,
   }) : super(key: key);
+
   Future<void> _launchURL() async {
     final Uri url = Uri.parse(instagramUrl);
 
@@ -22,8 +24,8 @@ class InstagramIconButton extends StatelessWidget {
       print('Não foi possível abrir o link');
     }
   }
+
   @override
-  
   Widget build(BuildContext context) {
     return IconButton(
       icon: FaIcon(

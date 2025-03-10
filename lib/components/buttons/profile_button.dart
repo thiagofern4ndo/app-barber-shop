@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:app_barber_shop/components/theme/colors.dart';
 
 class ProfileIconButton extends StatelessWidget {
   void _navigateToTemporaryPage(BuildContext context) {
@@ -14,9 +15,9 @@ class ProfileIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: const FaIcon(
-        FontAwesomeIcons.circleUser, 
-        color: Color(0xFF00FFb4),
+      icon: FaIcon(
+        FontAwesomeIcons.circleUser,
+        color: AppColors.primary,
         size: 35,
       ),
       onPressed: () => _navigateToTemporaryPage(context),

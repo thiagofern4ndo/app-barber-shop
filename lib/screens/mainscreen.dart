@@ -1,11 +1,12 @@
+import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:app_barber_shop/screens/loginpage.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart'; 
-import 'package:app_barber_shop/widgets/buttons/profile_button.dart';
-import 'package:app_barber_shop/widgets/buttons/button_instagram.dart';
-import 'package:app_barber_shop/widgets/buttons/custom_button.dart';
-import 'package:app_barber_shop/widgets/buttons/button_contact.dart';
-import 'package:app_barber_shop/widgets/text/text_direitos.dart';
+import 'package:app_barber_shop/components/buttons/profile_button.dart';
+import 'package:app_barber_shop/components/buttons/button_instagram.dart';
+import 'package:app_barber_shop/components/buttons/custom_button.dart';
+import 'package:app_barber_shop/components/buttons/button_contact.dart';
+import 'package:app_barber_shop/components/text/text_direitos.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -54,7 +55,7 @@ class MainScreen extends StatelessWidget {
 
             width: 320, 
             height: 50, 
-            color: const Color(0xFF00FFB4), 
+            color: AppColors.primary, 
           ),
           const SizedBox(height: 30), 
           ContactButton(
