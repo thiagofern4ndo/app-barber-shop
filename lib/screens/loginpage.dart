@@ -31,12 +31,12 @@ class _LoginPageState extends State<LoginPage> {
     final formData = _formKey.currentState!.value;
     if (_mode == 'login') {
       debugPrint('Login: ${formData['email']}, ${formData['password']}');
-    } else if (_mode == 'register') {
-      debugPrint('Registro: ${formData['username']}, ${formData['email']}, ${formData['password']}');
-      Navigator.pushReplacement(
+       Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => ProfessionalSelectionScreen()),
     );
+    } else if (_mode == 'register') {
+      debugPrint('Registro: ${formData['username']}, ${formData['email']}, ${formData['password']}');
     } else {
       debugPrint('Recuperação de senha: ${formData['email']}');
     }
