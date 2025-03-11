@@ -20,7 +20,10 @@ class CustomCheckBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return SizedBox(
+      width: width,
+      height: height,
+      child: ElevatedButton(
       style: ButtonStyle(
         backgroundColor: WidgetStateProperty.all(AppColors.background),
         side: WidgetStateProperty.all(BorderSide(
@@ -67,9 +70,10 @@ class CustomCheckBox extends StatelessWidget {
                     size: 20,
                   )
                 : null,
-          ),
-        ],
-      ),
-    );
+           ),
+         ],
+       ),
+     ),
+   );
   }
 }
