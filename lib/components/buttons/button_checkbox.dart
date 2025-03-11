@@ -24,56 +24,56 @@ class CustomCheckBox extends StatelessWidget {
       width: width,
       height: height,
       child: ElevatedButton(
-      style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.all(AppColors.background),
-        side: WidgetStateProperty.all(BorderSide(
-          color: AppColors.primary,
-          width: 3,
-        )),
-        shape: WidgetStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(25),
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(AppColors.background),
+          side: MaterialStateProperty.all(BorderSide(
+            color: AppColors.primary,
+            width: 3,
+          )),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(25),
+              ),
             ),
           ),
         ),
-      ),
-      onPressed: () => onChanged(!isChecked),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            text,
-            textAlign: TextAlign.center,
-            style: GoogleFonts.poppins(
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
-              color: AppColors.primaryText,
-            ),
-          ),
-          Container(
-            width: 30,
-            height: 30,
-            margin: const EdgeInsets.only(left: 10),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: AppColors.primary,
-                width: 3,
+        onPressed: () => onChanged(!isChecked),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween, 
+          children: [
+            Text(
+              text,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.poppins(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+                color: AppColors.primaryText,
               ),
-              color: AppColors.background,
             ),
-            child: isChecked
-                ? Icon(
-                    Icons.check,
-                    color: AppColors.primary,
-                    size: 20,
-                  )
-                : null,
-           ),
-         ],
-       ),
-     ),
-   );
+            Container(
+              width: 40,
+              height: 40,
+              margin: const EdgeInsets.only(right: 05), // Ajusta a distância para a margem direita
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: AppColors.primary,
+                  width: 3,
+                ),
+                color: AppColors.background,
+              ),
+              child: isChecked
+                  ? Icon(
+                      Icons.check,
+                      color: AppColors.primary,
+                      size: 20,
+                    )
+                  : null,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
