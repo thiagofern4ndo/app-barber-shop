@@ -14,61 +14,70 @@ class CustomCheckBox extends StatelessWidget {
     required this.text,
     required this.isChecked,
     required this.onChanged,
-    this.width = 250,
+    this.width = 280,
     this.height = 50,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.all(AppColors.background),
-        side: WidgetStateProperty.all(BorderSide(
-          color: AppColors.primary,
-          width: 3,
-        )),
-        shape: WidgetStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(25),
+    return SizedBox(
+      width: width,
+      height: height,
+      child: ElevatedButton(
+        style: ButtonStyle(
+          backgroundColor: WidgetStateProperty.all(AppColors.background),
+          side: WidgetStateProperty.all(BorderSide(
+            color: AppColors.primary,
+            width: 3,
+          )),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(25),
+              ),
             ),
           ),
         ),
-      ),
-      onPressed: () => onChanged(!isChecked),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            text,
-            textAlign: TextAlign.center,
-            style: GoogleFonts.poppins(
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
-              color: AppColors.primaryText,
-            ),
-          ),
-          Container(
-            width: 30,
-            height: 30,
-            margin: const EdgeInsets.only(left: 10),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: AppColors.primary,
-                width: 3,
+        onPressed: () => onChanged(!isChecked),
+        child: Stack( 
+          alignment: Alignment.center,
+          children: [
+            Align( 
+              alignment: Alignment.center,
+              child: Text(
+                text,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.poppins(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.primaryText,
+                ),
               ),
-              color: AppColors.background,
             ),
-            child: isChecked
-                ? Icon(
-                    Icons.check,
+            Positioned( 
+              right: 0, 
+              child: Container(
+                width: 28, 
+                height: 28, 
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
                     color: AppColors.primary,
-                    size: 20,
-                  )
-                : null,
-          ),
-        ],
+                    width: 3,
+                  ),
+                  color: AppColors.background,
+                ),
+                child: isChecked
+                    ? Icon(
+                        Icons.check,
+                        color: AppColors.primary,
+                        size: 18,
+                      )
+                    : null,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

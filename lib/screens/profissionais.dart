@@ -7,6 +7,7 @@ import 'package:app_barber_shop/components/text/text_direitos.dart';
 import 'package:app_barber_shop/components/buttons/button_contact.dart';
 import 'package:app_barber_shop/components/buttons/button_instagram.dart';
 import 'package:app_barber_shop/components/buttons/button_back.dart';
+import 'servico.dart';
 
 
 class ProfessionalSelectionScreen extends StatefulWidget {
@@ -31,6 +32,10 @@ class _ProfessionalSelectionScreenState
 
   void navigateToNextScreen() {
     if (selectedProfessional != null) {
+      Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const ServicoScreen()),
+    );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Por favor, selecione um profissional.')),
