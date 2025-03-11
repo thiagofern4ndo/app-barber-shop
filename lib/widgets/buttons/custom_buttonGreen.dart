@@ -19,7 +19,7 @@ class CustomButton extends StatelessWidget {
     this.color = const Color(0xFF00FFB4), // Mantém a cor verde
     this.fontSize,
     required this.isSelected,
-    required int borderRadius,
+    
   });
 
   double get _computedFontSize => fontSize ?? height * 0.4;
