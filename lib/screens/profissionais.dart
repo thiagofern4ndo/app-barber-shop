@@ -163,32 +163,32 @@ class ProfessionalCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () => onTap(name), 
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-          side: isSelected
-              ? const BorderSide(color: AppColors.primary, width: 3)
-              : BorderSide.none,
-        ),
-        color: AppColors.background,
-        child: Column(
-          children: [
-            Expanded(
-              child: ClipRRect(
-                borderRadius:
-                    const BorderRadius.vertical(top: Radius.circular(15)),
-                child: Image.asset(
-                  imageUrl,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
+      child: Column(
+        children: [
+          Container(
+            width: 120, // 📝 Largura fixa
+            height: 120, // 📝 Altura fixa
+            decoration: BoxDecoration(
+              border: isSelected
+                  ? Border.all(color: AppColors.primary, width: 3)
+                  : null,
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Image.asset(
+                imageUrl,
+                width: 120, 
+                height: 120, 
+                fit: BoxFit.cover,
               ),
             ),
-            const SizedBox(height: 8),
+          ),
+            const SizedBox(height: 5),
             Text(
               name,
               style: GoogleFonts.poppins(
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: FontWeight.bold,
                 color: AppColors.primaryText,
               ),
@@ -196,8 +196,7 @@ class ProfessionalCard extends StatelessWidget {
             ),
             const SizedBox(height: 8),
           ],
-        ),
-      ),
-    );
+       ),
+     );
   }
 }
