@@ -14,7 +14,7 @@ class CustomCheckBox extends StatelessWidget {
     required this.text,
     required this.isChecked,
     required this.onChanged,
-    this.width = 250,
+    this.width = 280,
     this.height = 50,
   }) : super(key: key);
 
@@ -25,12 +25,12 @@ class CustomCheckBox extends StatelessWidget {
       height: height,
       child: ElevatedButton(
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(AppColors.background),
-          side: MaterialStateProperty.all(BorderSide(
+          backgroundColor: WidgetStateProperty.all(AppColors.background),
+          side: WidgetStateProperty.all(BorderSide(
             color: AppColors.primary,
             width: 3,
           )),
-          shape: MaterialStateProperty.all(
+          shape: WidgetStateProperty.all(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(25),
@@ -39,37 +39,42 @@ class CustomCheckBox extends StatelessWidget {
           ),
         ),
         onPressed: () => onChanged(!isChecked),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween, 
+        child: Stack( 
+          alignment: Alignment.center,
           children: [
-            Text(
-              text,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.poppins(
-                fontSize: 20,
-                fontWeight: FontWeight.w500,
-                color: AppColors.primaryText,
+            Align( 
+              alignment: Alignment.center,
+              child: Text(
+                text,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.poppins(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.primaryText,
+                ),
               ),
             ),
-            Container(
-              width: 40,
-              height: 40,
-              margin: const EdgeInsets.only(right: 05), // Ajusta a distância para a margem direita
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: AppColors.primary,
-                  width: 3,
+            Positioned( 
+              right: 0, 
+              child: Container(
+                width: 28, 
+                height: 28, 
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: AppColors.primary,
+                    width: 3,
+                  ),
+                  color: AppColors.background,
                 ),
-                color: AppColors.background,
+                child: isChecked
+                    ? Icon(
+                        Icons.check,
+                        color: AppColors.primary,
+                        size: 18,
+                      )
+                    : null,
               ),
-              child: isChecked
-                  ? Icon(
-                      Icons.check,
-                      color: AppColors.primary,
-                      size: 20,
-                    )
-                  : null,
             ),
           ],
         ),
