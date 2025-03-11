@@ -7,6 +7,7 @@ import 'package:app_barber_shop/components/forms/custom_text_field.dart';
 import 'package:app_barber_shop/components/buttons/custom_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
+import 'profissionais.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -68,6 +69,10 @@ class _LoginPageState extends State<LoginPage> {
 
     if (_mode == 'login') {
       debugPrint('Login: ${_emailController.text}, ${_passwordController.text}');
+      Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(builder: (context) => ProfessionalSelectionScreen()),
+  );
     } else if (_mode == 'register') {
       debugPrint('Registro: ${_usernameController.text}, ${_emailController.text}, ${_passwordController.text}');
     } else {
