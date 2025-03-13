@@ -17,7 +17,7 @@ class ContactButton extends StatelessWidget {
     this.width = 110,
     this.height = 27,
     this.color = const Color(0xFF000000), // required Type child,
-    this.textColor = const Color(0xFF00FFB4),
+    this.textColor = const Color(0xFF00FFB4), required String text,
   });
 
   @override

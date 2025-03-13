@@ -33,7 +33,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
             right: 20,
             child: InstagramIconButton(), // Adiciona o IconButton no canto superior direito
           ),
-          Padding(
+          Padding( // alinhamento do padding para o conteúdo da tela
             padding: const EdgeInsets.only(top: 150), // Adiciona espaço extra na parte superior
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
