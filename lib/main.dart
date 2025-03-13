@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
 }*/
 
 import 'package:flutter/material.dart';
-import 'package:app_barber_shop/screens/confirmation_Success_Screen.dart'; // Importa o ConfirmationScreen
+import 'package:app_barber_shop/screens/screen_perfil.dart'; // Importa o ConfirmationScreen
 import 'package:intl/date_symbol_data_local.dart'; // Importa o initializeDateFormatting
 
 void main() async {
@@ -80,7 +80,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home:
-          ConfirmationSuccessScreen(), // Define ConfirmationScreen como a tela inicial
+          PerfilPages(), // Define ConfirmationScreen como a tela inicial
       debugShowCheckedModeBanner: false,
     );
   }
