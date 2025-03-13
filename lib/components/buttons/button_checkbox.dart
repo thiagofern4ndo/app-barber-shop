@@ -34,6 +34,8 @@ class CustomCheckBox extends StatelessWidget {
             RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(25),
+                topRight: Radius.circular(25), //adicionei
+                bottomRight: Radius.circular(25),//adicionei
               ),
             ),
           ),
