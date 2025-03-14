@@ -10,13 +10,13 @@ class CustomCheckBox extends StatelessWidget {
   double height;
 
   CustomCheckBox({
-    Key? key,
+    super.key,
     required this.text,
     required this.isChecked,
     required this.onChanged,
     this.width = 280,
     this.height = 50,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +34,8 @@ class CustomCheckBox extends StatelessWidget {
             RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(25),
+                topRight: Radius.circular(25), //adicionei
+                bottomRight: Radius.circular(25),//adicionei
               ),
             ),
           ),
