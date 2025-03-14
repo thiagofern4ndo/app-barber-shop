@@ -10,13 +10,13 @@ class CustomCheckBox extends StatelessWidget {
   double height;
 
   CustomCheckBox({
-    Key? key,
+    super.key,
     required this.text,
     required this.isChecked,
     required this.onChanged,
     this.width = 280,
     this.height = 50,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
