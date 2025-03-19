@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
 }*/
 
 import 'package:flutter/material.dart';
-import 'package:app_barber_shop/screens/screen_perfil.dart'; // Importa o ConfirmationScreen
+import 'package:app_barber_shop/screens/appointments.dart'; // Importa o ConfirmationScreen
 import 'package:intl/date_symbol_data_local.dart'; // Importa o initializeDateFormatting
 
 void main() async {
@@ -79,8 +79,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:
-          PerfilPages(), // Define ConfirmationScreen como a tela inicial
+      home: Appointments(), // Define ConfirmationScreen como a tela inicial
       debugShowCheckedModeBanner: false,
     );
   }
