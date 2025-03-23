@@ -11,7 +11,7 @@ Aplicativo desenvolvido em **Flutter** para gerenciamento de agendamentos em uma
 ## 📌 Funcionalidades
 
 - Seleção de profissional e serviços
-- Agendamento de horários
+- Agendamento de datas e horários
 - Consulta de histórico de agendamentos
 - Cancelamento de reservas
 
