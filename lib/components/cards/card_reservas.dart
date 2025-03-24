@@ -10,16 +10,16 @@ class CardReservas extends StatelessWidget {
 
   const CardReservas({
     super.key,
-    this.dayOffset = 0,
+    this.dayOffset = 5,
     this.monthOffset = 0,
-    this.trashOffset = -10,
+    this.trashOffset = -5,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 380,
-      height: 200,
+      width: 400,
+      height: 180,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         gradient: RadialGradient(
@@ -40,8 +40,8 @@ class CardReservas extends StatelessWidget {
               children: [
                 const SizedBox(height: 50),
                 Container(
-                  width: 85,
-                  height: 85,
+                  width: 80,
+                  height: 80,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(color: AppColors.primary, width: 3),
@@ -70,7 +70,7 @@ class CardReservas extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 10),
             child: Container(
-              width: 250,
+              width: 220,
               height: 160,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
@@ -80,7 +80,7 @@ class CardReservas extends StatelessWidget {
               child: Row(
                 children: [
                   SizedBox(
-                    width: 120,
+                    width: 105,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 10, top: 25),
                       child: Column(
@@ -124,7 +124,7 @@ class CardReservas extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: 120,
+                    width: 105,
                     child: Padding(
                       padding: const EdgeInsets.only(right: 15, top: 0),
                       child: Stack(
@@ -143,7 +143,7 @@ class CardReservas extends StatelessWidget {
                           ),
                           Positioned(
                             right: monthOffset,
-                            top: 55,
+                            top: 50,
                             child: Text(
                               'Fev',
                               style: GoogleFonts.poppins(
