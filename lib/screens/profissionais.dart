@@ -19,26 +19,23 @@ class ProfessionalSelectionScreen extends StatefulWidget {
 
 class _ProfessionalSelectionScreenState
     extends State<ProfessionalSelectionScreen> {
-  String? selectedProfessional; // guarda o nome do profissional selecionado
+  String? selectedProfessional; 
 
-  // função para selecionar um profissional
+
   void selectProfessional(String name) {
     setState(() {
       selectedProfessional = name;
     });
   }
 
-  // função para navegar para a tela de serviço se um profissional for selecionado
+
   void navigateToNextScreen() {
     if (selectedProfessional != null) {
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) => ServicoScreen(), // Redireciona para a tela de serviço
-      //   ),
-      // );
+      Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const ServicoScreen()),
+    );
     } else {
-      // mostra um aviso caso nenhum profissional tenha sido selecionado
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Por favor, selecione um profissional.')),
       );
@@ -71,12 +68,11 @@ class _ProfessionalSelectionScreenState
               style: GoogleFonts.poppins(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: AppColors.primaryText
               ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 50),
-            // lista de profissionais
             Expanded(
               child: GridView.count(
                 crossAxisCount: 2,
@@ -145,7 +141,6 @@ class _ProfessionalSelectionScreenState
   }
 }
 
-// widget que representa um card de profissional
 class ProfessionalCard extends StatelessWidget {
   final String name;
   final String imageUrl;
@@ -163,46 +158,44 @@ class ProfessionalCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isSelected =
-        selectedProfessional == name; // ve se o profissional ta selecionado
+        selectedProfessional == name; 
 
     return GestureDetector(
-      onTap: () => onTap(name), // chama função ao tocar no card
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-          side: isSelected
-              ? const BorderSide(color: Color(0xFF00FFB4), width: 3)
-              : BorderSide.none,
-        ),
-        color: const Color.fromARGB(255, 0, 0, 0),
-        child: Column(
-          children: [
-            Expanded(
-              child: ClipRRect(
-                borderRadius:
-                    const BorderRadius.vertical(top: Radius.circular(15)),
-                child: Image.asset(
-                  imageUrl,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
+      onTap: () => onTap(name), 
+      child: Column(
+        children: [
+          Container(
+            width: 120, 
+            height: 120, 
+            decoration: BoxDecoration(
+              border: isSelected
+                  ? Border.all(color: AppColors.primary, width: 3)
+                  : null,
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Image.asset(
+                imageUrl,
+                width: 120, 
+                height: 120, 
+                fit: BoxFit.cover,
               ),
             ),
-            const SizedBox(height: 8),
-            // Nome do profissional
+          ),
+            const SizedBox(height: 5),
             Text(
               name,
               style: GoogleFonts.poppins(
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: AppColors.primaryText,
               ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 8),
           ],
-        ),
-      ),
-    );
+       ),
+     );
   }
 }*/

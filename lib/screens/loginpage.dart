@@ -6,6 +6,8 @@ import 'package:app_barber_shop/widgets/buttons/button_back.dart';
 import 'package:app_barber_shop/widgets/forms/custom_text_field.dart';
 import 'package:app_barber_shop/widgets/buttons/custom_buttonGreen.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:app_barber_shop/components/theme/colors.dart';
+import 'profissionais.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -34,19 +36,22 @@ class _LoginPageState extends State<LoginPage> {
     setState(() {
       _emailError = _passwordError = _usernameError = null;
 
-      if (_mode == 'register' && _usernameController.text.isEmpty) {
-        _usernameError = 'Por favor, insira um nome de usuário';
-      }
+    if (_mode == 'register' && _usernameController.text.isEmpty) {
+      _usernameError = 'Por favor, insira um nome de usuário';
+      hasErrors = true;
+    }
 
       if (_emailController.text.isEmpty ||
           !emailRegex.hasMatch(_emailController.text)) {
         _emailError = 'Por favor, insira um email válido';
       }
 
-      if (_mode != 'recover' && _passwordController.text.length < 6) {
-        _passwordError = 'A senha deve ter pelo menos 6 caracteres';
-      }
-    });
+    if (_mode != 'recover' && _passwordController.text.length < 6) {
+      _passwordError = 'A senha deve ter pelo menos 6 caracteres';
+      hasErrors = true;
+    }
+
+    setState(() {});
 
     return _emailError == null &&
         _passwordError == null &&
@@ -54,6 +59,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _submit() {
+    if (!_formKey.currentState!.validate()) return;
+
     if (!_validateFields()) return;
 
     if (_mode == 'login') {
@@ -74,6 +81,7 @@ class _LoginPageState extends State<LoginPage> {
     _usernameController.dispose();
     super.dispose();
   }
+
 
   Widget _buildHeader() {
     return Padding(
@@ -104,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
         if (errorText != null)
           Padding(
             padding: const EdgeInsets.only(top: 4.0),
-            child: Text(errorText, style: const TextStyle(color: Colors.red)),
+            child: Text(errorText, style: TextStyle(color: AppColors.thirdTextColor)),
           ),
         const SizedBox(height: 16),
       ],
@@ -159,6 +167,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+
   Widget _buildFooter() {
     return Column(
       children: [
@@ -166,7 +175,7 @@ class _LoginPageState extends State<LoginPage> {
           onPressed: () async {
             const whatsappUrl = 'https://wa.me/5581999999999';
             if (await canLaunchUrl(Uri.parse(whatsappUrl))) {
-              await launchUrl(Uri.parse(whatsappUrl));
+              await launchUrl(Uri.parse(whatsappUrl), mode: LaunchMode.externalApplication);
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
