@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:app_barber_shop/components/cards/card_reservas.dart'; // Certifique-se de importar o CardReservas
-
+import 'package:app_barber_shop/components/buttons/profile_button.dart';
 class Appointments extends StatefulWidget {
   @override
   _Appointments createState() => _Appointments();
@@ -42,18 +42,7 @@ class _Appointments extends State<Appointments> {
           Center(
             child: CardReservas(), // Centraliza o CardReservas no centro da tela
           ),
-          Positioned(
-            top: 10,
-            left: 10,
-            child: IconButton(
-              icon: Icon(
-                Icons.person,
-                color: Color(0xFF00FFB4),
-                size: 35,
-              ),
-              onPressed: () {},
-            ),
-          ),
+          ProfileIconButton(), // Adiciona o botão de perfil no canto superior direito
         ],
       ),
     );
