@@ -18,15 +18,15 @@ class CardReservas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 400,
+      width: 350,
       height: 180,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         gradient: RadialGradient(
           colors: [
-            Color(0xFF4A4A4A),
-            Color(0xFF222222),
-            Color(0xFF0F0F0F),
+             Color(0xFF4A4A4A), // Cor inicial
+    Color(0xFF222222), // Cor intermediária
+    Color(0x000F0F0F),
           ],
           center: Alignment.center,
           radius: 2.2,
@@ -40,8 +40,8 @@ class CardReservas extends StatelessWidget {
               children: [
                 const SizedBox(height: 50),
                 Container(
-                  width: 80,
-                  height: 80,
+                  width: 70, // regular tamanho da img barber
+                  height: 70,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(color: AppColors.primary, width: 3),
@@ -71,7 +71,7 @@ class CardReservas extends StatelessWidget {
             padding: const EdgeInsets.only(left: 10),
             child: Container(
               width: 220,
-              height: 160,
+              height: 150,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 color: AppColors.background,

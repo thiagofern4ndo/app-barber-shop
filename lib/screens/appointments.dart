@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:app_barber_shop/components/cards/card_reservas.dart'; // Certifique-se de importar o CardReservas
 
 class Appointments extends StatefulWidget {
   @override
@@ -19,7 +20,7 @@ class _Appointments extends State<Appointments> {
                     top: 50), // Ajuste o valor conforme necessário
                 child: Center(
                   child: Image.asset(
-                    'assets/logo.png', // Substitua pelo caminho da sua imagem
+                    'assets/logo.png',
                     width: 150,
                     height: 80,
                   ),
@@ -28,19 +29,18 @@ class _Appointments extends State<Appointments> {
               SizedBox(
                 height: 20,
               ),
-              Column(
-                children: [
-                  Text(
-                    'agendamentos',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
+              Text(
+                'agendamentos',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
+          ),
+          Center(
+            child: CardReservas(), // Centraliza o CardReservas no centro da tela
           ),
           Positioned(
             top: 10,
