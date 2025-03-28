@@ -2,6 +2,7 @@ import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+// ignore: must_be_immutable
 class CustomCheckBox extends StatelessWidget {
   String text;
   bool isChecked;

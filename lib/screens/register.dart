@@ -1,5 +1,4 @@
 import 'package:app_barber_shop/components/text/text_direitos.dart';
-import 'package:app_barber_shop/screens/register.dart';
 import 'package:flutter/material.dart';
 import 'package:app_barber_shop/components/buttons/button_instagram.dart';
 import 'package:app_barber_shop/components/buttons/button_back.dart';
@@ -7,38 +6,47 @@ import 'package:app_barber_shop/components/forms/custom_text_field.dart';
 import 'package:app_barber_shop/components/buttons/custom_button.dart';
 import 'package:app_barber_shop/components/buttons/button_contact.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
-import 'package:app_barber_shop/screens/profissionais.dart';
-import 'package:app_barber_shop/screens/recoverpass.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:app_barber_shop/screens/loginpage.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
+  final TextEditingController _confirmPasswordController = TextEditingController();
+  
+  String? _fullNameError;
   String? _emailError;
+  String? _phoneError;
   String? _passwordError;
+  String? _confirmPasswordError;
 
-  final emailRegex = RegExp(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$");
+  bool _acceptTerms = false;
 
   bool _validateFields() {
-    setState(() {
-      _emailError = null;
-      _passwordError = null;
-    });
-
     bool hasErrors = false;
 
-    if (_emailController.text.isEmpty || !emailRegex.hasMatch(_emailController.text)) {
+    if (_fullNameController.text.isEmpty) {
+      _fullNameError = 'Por favor, insira seu nome completo';
+      hasErrors = true;
+    }
+
+    if (_emailController.text.isEmpty) {
       _emailError = 'Por favor, insira um email válido';
+      hasErrors = true;
+    }
+
+    if (_phoneController.text.isEmpty) {
+      _phoneError = 'Por favor, insira seu telefone';
       hasErrors = true;
     }
 
@@ -47,23 +55,30 @@ class _LoginPageState extends State<LoginPage> {
       hasErrors = true;
     }
 
+    if (_confirmPasswordController.text != _passwordController.text) {
+      _confirmPasswordError = 'As senhas não coincidem';
+      hasErrors = true;
+    }
+
     setState(() {});
     return !hasErrors;
   }
 
   void _submit() {
+    if (!_formKey.currentState!.validate()) return;
     if (!_validateFields()) return;
-
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const ProfessionalSelectionScreen()),
-    );
+    if (!_acceptTerms) return;
+    
+    debugPrint('Registro: ${_fullNameController.text}, ${_emailController.text}, ${_phoneController.text}, ${_passwordController.text}');
   }
 
   @override
   void dispose() {
+    _fullNameController.dispose();
     _emailController.dispose();
+    _phoneController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -83,33 +98,33 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
             ),
-            const SizedBox(height: 100),
+            const SizedBox(height: 20),
             Column(
               children: [
                 Text(
-                  'Entre',
+                  'Cadastre-se',
                   style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: AppColors.primaryText),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'ou',
-                      style: TextStyle(fontSize: 26,fontWeight: FontWeight.bold, color: AppColors.primaryText),
+                      'ou faça o',
+                      style: TextStyle(fontSize: 26, color: AppColors.primaryText),
                     ),
                     TextButton(
                       onPressed: () => Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => RegisterPage())),
+                          context, MaterialPageRoute(builder: (context) => LoginPage())),
                       child: Text(
-                        'Cadastre-se',
-                        style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900, color: AppColors.primary),
+                        'Login',
+                        style: TextStyle(fontSize: 28, fontWeight: FontWeight.w900, color: AppColors.primary),
                       ),
                     ),
                   ],
                 ),
               ],
             ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 10),
             Expanded(
               child: Center(
                 child: Padding(
@@ -118,50 +133,44 @@ class _LoginPageState extends State<LoginPage> {
                     key: _formKey,
                     child: Column(
                       children: [
-                        CustomTextField(
-                          controller: _emailController,
-                          hintText: 'Email',
-                        ),
-                        if (_emailError != null)
-                          Padding(
-                            padding: const EdgeInsets.only(top: 8.0),
-                            child: Text(
-                              _emailError!,
-                              style: TextStyle(color: AppColors.thirdTextColor),
+                        CustomTextField(controller: _fullNameController, hintText: 'Nome Completo'),
+                        const SizedBox(height: 12),
+                        CustomTextField(controller: _emailController, hintText: 'Email'),
+                        const SizedBox(height: 12),
+                        CustomTextField(controller: _phoneController, hintText: 'Telefone'),
+                        const SizedBox(height: 12),
+                        CustomTextField(controller: _passwordController, hintText: 'Crie uma senha', obscureText: true),
+                        const SizedBox(height: 12),
+                        CustomTextField(controller: _confirmPasswordController, hintText: 'Confirmar senha', obscureText: true),
+                        const SizedBox(height: 5),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Checkbox(
+                              value: _acceptTerms,
+                              onChanged: (value) {
+                                setState(() {
+                                  _acceptTerms = value!;
+                                });
+                              },
+                              shape: CircleBorder(),
+                              activeColor: AppColors.primary,
                             ),
-                          ),
-                        const SizedBox(height: 32),
-                        CustomTextField(
-                          controller: _passwordController,
-                          hintText: 'Senha',
-                          obscureText: true,
-                        ),
-                        if (_passwordError != null)
-                          Padding(
-                            padding: const EdgeInsets.only(top: 8.0),
-                            child: Text(
-                              _passwordError!,
-                              style: TextStyle(color: AppColors.thirdTextColor),
+                            Text(
+                              'Aceito os termos de uso e diretrizes do app',
+                              style: TextStyle(color: AppColors.primaryText),
                             ),
-                          ),
-                        const SizedBox(height: 50),
+                          ],
+                        ),
+                        const SizedBox(height: 15),
                         CustomButton(
-                          text: 'Entrar',
+                          text: 'Cadastrar',
                           onPressed: _submit,
-                          width: 180,
+                          width: 200,
                           height: 45,
                           fontSize: 22,
                         ),
-                        const SizedBox(height: 20),
-                        TextButton(
-                          onPressed: () => Navigator.push(
-                              context, MaterialPageRoute(builder: (context) => RecoverPassPage())),
-                          child: Text(
-                            'Esqueceu a senha?',
-                            style: GoogleFonts.poppins(fontSize: 16, color: AppColors.primaryText),
-                          ),
-                        ),
-                        const SizedBox(height: 60),
+                        const SizedBox(height: 30),
                         ContactButton(
                           onPressed: () async {
                             const whatsappUrl = 'https://wa.me/5581999999999';
@@ -173,7 +182,7 @@ class _LoginPageState extends State<LoginPage> {
                           },
                         ),
                         const SizedBox(height: 5),
-                      TextWidget(),
+                     TextWidget(),
                       ],
                     ),
                   ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
 
+// ignore: must_be_immutable
 class CustomButton2 extends StatelessWidget {
   String text;
   VoidCallback onPressed;
@@ -9,12 +10,12 @@ class CustomButton2 extends StatelessWidget {
   double height;
 
   CustomButton2({
-    Key? key,
+    super.key,
     required this.text,
     required this.onPressed,
     this.width = 300,
     this.height = 60,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
