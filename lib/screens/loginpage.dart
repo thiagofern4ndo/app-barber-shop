@@ -27,8 +27,6 @@ class _LoginPageState extends State<LoginPage> {
   String? _emailError;
   String? _passwordError;
 
-  final emailRegex = RegExp(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$");
-
   bool _validateFields() {
     setState(() {
       _emailError = null;
@@ -37,11 +35,12 @@ class _LoginPageState extends State<LoginPage> {
 
     bool hasErrors = false;
 
-    if (_emailController.text.isEmpty || !emailRegex.hasMatch(_emailController.text)) {
-      _emailError = 'Por favor, insira um email válido';
+    if (_emailController.text.isEmpty) {
+      _emailError = 'Por favor, insira um email';
       hasErrors = true;
     }
 
+    // A senha precisa ter pelo menos 6 caracteres
     if (_passwordController.text.length < 6) {
       _passwordError = 'A senha deve ter pelo menos 6 caracteres';
       hasErrors = true;
@@ -83,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
             ),
-            const SizedBox(height: 100),
+            const SizedBox(height: 90),
             Column(
               children: [
                 Text(
@@ -95,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     Text(
                       'ou',
-                      style: TextStyle(fontSize: 26,fontWeight: FontWeight.bold, color: AppColors.primaryText),
+                      style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: AppColors.primaryText),
                     ),
                     TextButton(
                       onPressed: () => Navigator.push(
@@ -173,7 +172,7 @@ class _LoginPageState extends State<LoginPage> {
                           },
                         ),
                         const SizedBox(height: 5),
-                      TextWidget(),
+                        TextWidget(),
                       ],
                     ),
                   ),
