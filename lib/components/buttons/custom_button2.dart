@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
+import 'package:app_barber_shop/components/theme/fonts.dart';
 
-// ignore: must_be_immutable
 class CustomButton2 extends StatelessWidget {
   String text;
   VoidCallback onPressed;
@@ -36,7 +35,7 @@ class CustomButton2 extends StatelessWidget {
         children: [
           Text(
             text,
-            style: GoogleFonts.poppins(
+            style: AppFonts.main.copyWith(
               fontSize: 30,
               fontWeight: FontWeight.w500,
               color: AppColors.primaryText,

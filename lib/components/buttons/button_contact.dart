@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
+import 'package:app_barber_shop/components/theme/fonts.dart';
 
 class ContactButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -42,7 +42,7 @@ class ContactButton extends StatelessWidget {
         child: Center(
           child: Text(
             'Contato',
-            style: GoogleFonts.poppins(
+            style: AppFonts.main.copyWith(
               fontSize: 15,
               fontWeight: FontWeight.w300,
               color: textColor,

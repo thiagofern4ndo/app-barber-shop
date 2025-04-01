@@ -1,5 +1,6 @@
 import 'package:app_barber_shop/components/text/text_direitos.dart';
 import 'package:app_barber_shop/screens/register.dart';
+import 'package:app_barber_shop/screens/servicos.dart';
 import 'package:flutter/material.dart';
 import 'package:app_barber_shop/components/buttons/button_instagram.dart';
 import 'package:app_barber_shop/components/buttons/button_back.dart';
@@ -7,7 +8,6 @@ import 'package:app_barber_shop/components/forms/custom_text_field.dart';
 import 'package:app_barber_shop/components/buttons/custom_button.dart';
 import 'package:app_barber_shop/components/buttons/button_contact.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
-import 'package:app_barber_shop/screens/profissionais.dart';
 import 'package:app_barber_shop/screens/recoverpass.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
 
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const ProfessionalSelectionScreen()),
+      MaterialPageRoute(builder: (context) => const ServicoScreen()),
     );
   }
 

@@ -1,6 +1,6 @@
 import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:app_barber_shop/components/theme/fonts.dart'; 
 
 // ignore: must_be_immutable
 class CustomCheckBox extends StatelessWidget {
@@ -35,33 +35,33 @@ class CustomCheckBox extends StatelessWidget {
             RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(25),
-                topRight: Radius.circular(25), //adicionei
-                bottomRight: Radius.circular(25),//adicionei
+                topRight: Radius.circular(25),
+                bottomRight: Radius.circular(25),
               ),
             ),
           ),
         ),
         onPressed: () => onChanged(!isChecked),
-        child: Stack( 
+        child: Stack(
           alignment: Alignment.center,
           children: [
-            Align( 
+            Align(
               alignment: Alignment.center,
               child: Text(
                 text,
                 textAlign: TextAlign.center,
-                style: GoogleFonts.poppins(
+                style: AppFonts.main.copyWith( 
                   fontSize: 22,
                   fontWeight: FontWeight.w500,
                   color: AppColors.primaryText,
                 ),
               ),
             ),
-            Positioned( 
-              right: 0, 
+            Positioned(
+              right: 0,
               child: Container(
-                width: 28, 
-                height: 28, 
+                width: 28,
+                height: 28,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
