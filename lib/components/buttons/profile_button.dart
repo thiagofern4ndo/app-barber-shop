@@ -3,6 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
 
 class ProfileIconButton extends StatelessWidget {
+  const ProfileIconButton({super.key});
+
   void _navigateToTemporaryPage(BuildContext context) {
     Navigator.push(
       context,

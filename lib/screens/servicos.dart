@@ -5,9 +5,11 @@ import 'package:app_barber_shop/components/buttons/button_contact.dart';
 import 'package:app_barber_shop/components/buttons/button_instagram.dart';
 import 'package:app_barber_shop/components/buttons/custom_button.dart';
 import 'package:app_barber_shop/components/text/text_direitos.dart';
+import 'package:app_barber_shop/screens/profissionais.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 
 class ServicoScreen extends StatefulWidget {
   const ServicoScreen({super.key});
@@ -19,7 +21,9 @@ class ServicoScreen extends StatefulWidget {
 class _ServicoScreenState extends State<ServicoScreen> {
   final Map<String, bool> _services = {
     'Corte': false,
+    'Corte Infantil': false,
     'Barba': false,
+    'Sobrancelha': false,
     'Combo': false,
   };
 
@@ -35,6 +39,10 @@ class _ServicoScreenState extends State<ServicoScreen> {
 
   void _onContinuePressed() {
     if (_isAnyServiceSelected()) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const ProfessionalSelectionScreen()), 
+      );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Por favor, selecione ao menos um serviço.')),
@@ -90,7 +98,7 @@ class _ServicoScreenState extends State<ServicoScreen> {
 
   Widget _buildTitle() {
     return Text(
-      'Selecione um serviço',
+      'Selecione um ou mais serviços',
       style: GoogleFonts.poppins(
         fontSize: 24,
         fontWeight: FontWeight.bold,
@@ -104,10 +112,10 @@ class _ServicoScreenState extends State<ServicoScreen> {
     return Column(
       children: _services.keys.map((service) {
         return Padding(
-          padding: const EdgeInsets.only(bottom: 20),
+          padding: const EdgeInsets.only(bottom: 25),
           child: CustomCheckBox(
             text: service,
-            isChecked: _services[service]!,
+            isChecked: _services[service]! ,
             onChanged: (value) => _toggleService(service, value),
           ),
         );
@@ -118,9 +126,9 @@ class _ServicoScreenState extends State<ServicoScreen> {
   Widget _buildContinueButton() {
     return CustomButton(
       text: 'Continuar',
-      height: 40,
+      height: 45,
       width: 200,
-      onPressed: _onContinuePressed,
+      onPressed: _onContinuePressed, 
     );
   }
 

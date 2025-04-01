@@ -1,5 +1,6 @@
 import 'package:app_barber_shop/components/text/text_direitos.dart';
 import 'package:app_barber_shop/screens/register.dart';
+import 'package:app_barber_shop/screens/servicos.dart';
 import 'package:flutter/material.dart';
 import 'package:app_barber_shop/components/buttons/button_instagram.dart';
 import 'package:app_barber_shop/components/buttons/button_back.dart';
@@ -7,7 +8,6 @@ import 'package:app_barber_shop/components/forms/custom_text_field.dart';
 import 'package:app_barber_shop/components/buttons/custom_button.dart';
 import 'package:app_barber_shop/components/buttons/button_contact.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
-import 'package:app_barber_shop/screens/profissionais.dart';
 import 'package:app_barber_shop/screens/recoverpass.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -27,8 +27,6 @@ class _LoginPageState extends State<LoginPage> {
   String? _emailError;
   String? _passwordError;
 
-  final emailRegex = RegExp(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$");
-
   bool _validateFields() {
     setState(() {
       _emailError = null;
@@ -37,11 +35,12 @@ class _LoginPageState extends State<LoginPage> {
 
     bool hasErrors = false;
 
-    if (_emailController.text.isEmpty || !emailRegex.hasMatch(_emailController.text)) {
-      _emailError = 'Por favor, insira um email válido';
+    if (_emailController.text.isEmpty) {
+      _emailError = 'Por favor, insira um email';
       hasErrors = true;
     }
 
+    // A senha precisa ter pelo menos 6 caracteres
     if (_passwordController.text.length < 6) {
       _passwordError = 'A senha deve ter pelo menos 6 caracteres';
       hasErrors = true;
@@ -56,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
 
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const ProfessionalSelectionScreen()),
+      MaterialPageRoute(builder: (context) => const ServicoScreen()),
     );
   }
 
@@ -83,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
             ),
-            const SizedBox(height: 100),
+            const SizedBox(height: 90),
             Column(
               children: [
                 Text(
@@ -95,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     Text(
                       'ou',
-                      style: TextStyle(fontSize: 26,fontWeight: FontWeight.bold, color: AppColors.primaryText),
+                      style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: AppColors.primaryText),
                     ),
                     TextButton(
                       onPressed: () => Navigator.push(
@@ -173,7 +172,7 @@ class _LoginPageState extends State<LoginPage> {
                           },
                         ),
                         const SizedBox(height: 5),
-                      TextWidget(),
+                        TextWidget(),
                       ],
                     ),
                   ),

@@ -4,50 +4,37 @@ import 'package:flutter/material.dart';
 class CustomBackButton extends StatelessWidget {
   final VoidCallback onPressed;
   final double size;
-  final Color color;
+  final Color backgroundColor;
+  final Color iconColor;
 
-  CustomBackButton({
-    Key? key,
+  const CustomBackButton({
+    super.key,
     required this.onPressed,
-    this.size = 30,
-    this.color = AppColors.primary, 
-  }) : super(key: key);
+    this.size = 40,
+    this.backgroundColor = AppColors.primary,
+    this.iconColor = AppColors.background,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      icon: CustomPaint(
-        size: Size(size, size),
-        painter: BackArrowPainter(color: color),
+    return InkWell(
+      onTap: onPressed,
+      borderRadius: BorderRadius.circular(size / 2),
+      child: Container(
+        width: size,
+        height: size,
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          shape: BoxShape.circle,
+        ),
+        child: Center(
+          child: Icon(
+            Icons.chevron_left, 
+            size: size * 1,
+            color: iconColor,
+          ),
+        ),
       ),
-      onPressed: onPressed,
     );
   }
 }
-
-class BackArrowPainter extends CustomPainter {
-  final Color color;
-
-  BackArrowPainter({required this.color});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
-      ..color = color
-      ..strokeWidth = size.width * 0.22  
-      ..strokeCap = StrokeCap.round  
-      ..strokeJoin = StrokeJoin.round  
-      ..style = PaintingStyle.stroke;
-
-    Path path = Path()
-      ..moveTo(size.width * 0.95, size.height * 0.10)  
-      ..lineTo(size.width * 0.05, size.height * 0.50)  
-      ..lineTo(size.width * 0.95, size.height * 0.90); 
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => false;
-}
-

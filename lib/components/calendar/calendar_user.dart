@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 import 'package:intl/intl.dart'; 
 import 'package:app_barber_shop/components/theme/colors.dart';
+import 'package:app_barber_shop/components/theme/fonts.dart';
 
 class CustomCalendar extends StatefulWidget {
   final Function(DateTime) aoSelecionarDia;
 
-  const CustomCalendar({Key? key, required this.aoSelecionarDia}) : super(key: key);
+  const CustomCalendar({super.key, required this.aoSelecionarDia});
 
   @override
   _CustomCalendarState createState() => _CustomCalendarState();
@@ -49,13 +49,13 @@ class _CustomCalendarState extends State<CustomCalendar> {
         inactiveDaysTextStyle: _disabledTextStyle(),
         todayButtonColor: AppColors.transparent,
         todayBorderColor: AppColors.transparent, 
-        todayTextStyle: GoogleFonts.poppins(
+        todayTextStyle: AppFonts.main.copyWith(
           color: AppColors.selectedColor,
           fontWeight: FontWeight.w700,
         ),
         selectedDayButtonColor: AppColors.transparent,
         selectedDayBorderColor: AppColors.transparent,
-        selectedDayTextStyle: GoogleFonts.poppins(
+        selectedDayTextStyle: AppFonts.main.copyWith(
           color: AppColors.primaryText,
           fontWeight: FontWeight.w700,
         ),
@@ -93,7 +93,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
               alignment: Alignment.center, 
               child: Text(
                 "${day.day}",
-                style: GoogleFonts.poppins(
+                style: AppFonts.main.copyWith(
                   color: isSelectedDay
                       ? AppColors.primaryText
                       : (isSunday || isPastDay ? AppColors.secondaryText : AppColors.selectedColor), 
@@ -108,7 +108,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
   }
 
   TextStyle _textStyle() {
-    return GoogleFonts.poppins(
+    return AppFonts.main.copyWith(
       color: AppColors.selectedColor,
       fontSize: 12,
       fontWeight: FontWeight.w700,
@@ -116,7 +116,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
   }
 
   TextStyle _disabledTextStyle() {
-    return GoogleFonts.poppins(
+    return AppFonts.main.copyWith(
       color: AppColors.secondaryText,
       fontSize: 12,
       fontWeight: FontWeight.w700,
@@ -124,7 +124,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
   }
 
   TextStyle _headerTextStyle() {
-    return GoogleFonts.poppins(
+    return AppFonts.main.copyWith(
       color: AppColors.selectedColor,
       fontSize: 18,
       fontWeight: FontWeight.w700,

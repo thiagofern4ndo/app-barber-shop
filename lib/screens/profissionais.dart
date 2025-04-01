@@ -7,7 +7,8 @@ import 'package:app_barber_shop/components/text/text_direitos.dart';
 import 'package:app_barber_shop/components/buttons/button_contact.dart';
 import 'package:app_barber_shop/components/buttons/button_instagram.dart';
 import 'package:app_barber_shop/components/buttons/button_back.dart';
-import 'servico.dart';
+import 'package:app_barber_shop/screens/servicos.dart';
+
 
 
 class ProfessionalSelectionScreen extends StatefulWidget {
