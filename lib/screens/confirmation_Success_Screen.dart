@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:app_barber_shop/components/theme/fonts.dart'; // Importa o AppFonts
 
 class ConfirmationSuccessScreen extends StatelessWidget {
   const ConfirmationSuccessScreen({super.key});
@@ -12,7 +13,6 @@ class ConfirmationSuccessScreen extends StatelessWidget {
           Column(
             children: <Widget>[
               const SizedBox(height: 25),
-           
               Padding(
                 padding: const EdgeInsets.only(top: 50), // Ajuste o valor conforme necessário
                 child: Center(
@@ -24,34 +24,28 @@ class ConfirmationSuccessScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 30),
-              const Center(
+              Center(
                 child: Text(
                   'Confirmação bem-sucedida!',
-                  style: TextStyle(
+                  style: AppFonts.main.copyWith(
                     color: Colors.white,
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                
               ),
             ],
           ),
-          
-           const SizedBox(height: 25),
+          const SizedBox(height: 25),
           Center(
             child: const Icon(
               Icons.check_circle,
-              color:  Color(0xFF00FFB4),
+              color: Color(0xFF00FFB4),
               size: 200,
             ),
           ),
-          
         ],
       ),
-      
-      
     );
-    
   }
 }

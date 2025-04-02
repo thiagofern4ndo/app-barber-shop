@@ -1,9 +1,10 @@
-/*import 'package:flutter/material.dart';
-import 'package:app_barber_shop/widgets/buttons/custom_buttonGreen.dart'; // Importa o CustomButton
-import 'package:app_barber_shop/widgets/buttons/button_instagram.dart';
-import 'package:app_barber_shop/widgets/buttons/button_contact.dart'; // Importa o ContactButton
-import 'package:app_barber_shop/widgets/buttons/button_back.dart'; // Importa o CustomBackButton
-import 'package:app_barber_shop/widgets/text/text_direitos.dart'; // Importa o TextWidget
+import 'package:flutter/material.dart';
+import 'package:app_barber_shop/components/buttons/custom_buttonGreen.dart'; // Importa o CustomButtonGreen
+import 'package:app_barber_shop/components/buttons/button_instagram.dart'; // Importa o InstagramIconButton
+import 'package:app_barber_shop/components/buttons/button_contact.dart'; // Importa o ContactButton
+import 'package:app_barber_shop/components/buttons/button_back.dart'; // Importa o CustomBackButton
+import 'package:app_barber_shop/components/text/text_direitos.dart'; // Importa o TextWidget
+import 'package:app_barber_shop/components/theme/fonts.dart'; // Importa o TextWidget
 
 class PagEs extends StatefulWidget {
   @override
@@ -36,14 +37,14 @@ class _PagEsState extends State<PagEs> {
             children: [
               Align(
                 alignment: Alignment.bottomCenter,
-                child: 
-                  Padding(
+                child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                   child: CustomButton(
                     text: 'Continuar',
                     onPressed: () {
                       // Ação ao pressionar o botão Continuar
                     },
+                    isSelected: false,
                   ),
                 ),
               ),
@@ -56,6 +57,7 @@ class _PagEsState extends State<PagEs> {
                     onPressed: () {
                       // Ação ao pressionar o botão de contato
                     },
+                   
                   ),
                 ),
               ),
@@ -63,7 +65,12 @@ class _PagEsState extends State<PagEs> {
                 alignment: Alignment.bottomCenter,
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 20),
-                  child: TextWidget(),
+                  child: TextWidget(
+                    style: AppFonts.main.copyWith(
+                      color: Colors.white70,
+                      fontSize: 14,
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -72,4 +79,4 @@ class _PagEsState extends State<PagEs> {
       ),
     );
   }
-}*/
+}

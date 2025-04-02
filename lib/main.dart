@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
 }*/
 
 import 'package:flutter/material.dart';
-import 'package:app_barber_shop/screens/appointments.dart'; // Importa o ConfirmationScreen
+import 'package:app_barber_shop/screens/time_selection_screen.dart'; // Importa o ConfirmationScreen
 import 'package:intl/date_symbol_data_local.dart'; // Importa o initializeDateFormatting
 
 void main() async {
@@ -75,11 +75,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Confirmation Screen Demo',
+      title: 'Perfil Screen Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Appointments(), // Define ConfirmationScreen como a tela inicial
+      home: Pag8(), // Define PerfilPages como a tela inicial
       debugShowCheckedModeBanner: false,
     );
   }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:app_barber_shop/components/cards/card_reservas.dart'; // Certifique-se de importar o CardReservas
 import 'package:app_barber_shop/components/buttons/profile_button.dart';
+import 'package:app_barber_shop/components/theme/fonts.dart'; // Importa o AppFonts
+
 class Appointments extends StatefulWidget {
   @override
   _Appointments createState() => _Appointments();
@@ -31,7 +33,7 @@ class _Appointments extends State<Appointments> {
               ),
               Text(
                 'agendamentos',
-                style: TextStyle(
+                style: AppFonts.main.copyWith(
                   color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
