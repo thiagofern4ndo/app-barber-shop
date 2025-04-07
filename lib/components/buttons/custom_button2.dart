@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:app_barber_shop/components/theme/fonts.dart';
 
+// ignore: must_be_immutable
 class CustomButton2 extends StatelessWidget {
   String text;
   VoidCallback onPressed;
@@ -12,8 +13,8 @@ class CustomButton2 extends StatelessWidget {
     super.key,
     required this.text,
     required this.onPressed,
-    this.width = 300,
-    this.height = 60,
+    this.width = 200,
+    this.height = 40,
   });
 
   @override
@@ -37,7 +38,7 @@ class CustomButton2 extends StatelessWidget {
             text,
             style: AppFonts.main.copyWith(
               fontSize: 30,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w900,
               color: AppColors.primaryText,
             ),
           ),
