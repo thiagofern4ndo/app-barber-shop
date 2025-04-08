@@ -1,4 +1,3 @@
-import 'package:app_barber_shop/components/text/text_direitos.dart';
 import 'package:app_barber_shop/screens/register.dart';
 import 'package:app_barber_shop/screens/servicos.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +9,6 @@ import 'package:app_barber_shop/components/buttons/button_contact.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:app_barber_shop/screens/recoverpass.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -40,7 +38,6 @@ class _LoginPageState extends State<LoginPage> {
       hasErrors = true;
     }
 
-    // A senha precisa ter pelo menos 6 caracteres
     if (_passwordController.text.length < 6) {
       _passwordError = 'A senha deve ter pelo menos 6 caracteres';
       hasErrors = true;
@@ -68,118 +65,145 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final fontScale = size.width * 0.0025;
+
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomBackButton(onPressed: () => Navigator.maybePop(context)),
-                  InstagramIconButton(),
-                ],
-              ),
-            ),
-            const SizedBox(height: 90),
-            Column(
-              children: [
-                Text(
-                  'Entre',
-                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: AppColors.primaryText),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+        child: SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: size.height),
+            child: IntrinsicHeight(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                child: Column(
                   children: [
-                    Text(
-                      'ou',
-                      style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: AppColors.primaryText),
+                    SizedBox(height: size.height * 0.015),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomBackButton(onPressed: () => Navigator.maybePop(context)),
+                        InstagramIconButton(),
+                      ],
                     ),
-                    TextButton(
-                      onPressed: () => Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => RegisterPage())),
-                      child: Text(
-                        'Cadastre-se',
-                        style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900, color: AppColors.primary),
+                    SizedBox(height: size.height * 0.08),
+                    Text(
+                      'Entre',
+                      style: TextStyle(
+                        fontSize: size.width * 0.08,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.primaryText,
                       ),
+                    ),
+                    SizedBox(height: size.height * 0.005),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'ou',
+                          style: TextStyle(
+                            fontSize: size.width * 0.065,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.primaryText,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const RegisterPage()),
+                            );
+                          },
+                          child: Text(
+                            'Cadastre-se',
+                            style: TextStyle(
+                              fontSize: size.width * 0.075,
+                              fontWeight: FontWeight.w900,
+                              color: AppColors.primary,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: size.height * 0.03),
+                    Expanded(
+                      child: Center(
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              CustomTextField(
+                                controller: _emailController,
+                                hintText: 'Email',
+                              ),
+                              if (_emailError != null)
+                                Padding(
+                                  padding: EdgeInsets.only(top: size.height * 0.01),
+                                  child: Text(
+                                    _emailError!,
+                                    style: TextStyle(
+                                      color: AppColors.thirdTextColor,
+                                      fontSize: size.width * 0.04,
+                                    ),
+                                  ),
+                                ),
+                              SizedBox(height: size.height * 0.04),
+                              CustomTextField(
+                                controller: _passwordController,
+                                hintText: 'Senha',
+                                obscureText: true,
+                              ),
+                              if (_passwordError != null)
+                                Padding(
+                                  padding: EdgeInsets.only(top: size.height * 0.01),
+                                  child: Text(
+                                    _passwordError!,
+                                    style: TextStyle(
+                                      color: AppColors.thirdTextColor,
+                                      fontSize: size.width * 0.04,
+                                    ),
+                                  ),
+                                ),
+                              SizedBox(height: size.height * 0.04),
+                              CustomButton(
+                                text: 'Entrar',
+                                onPressed: _submit,
+                                width: size.width * 0.5,
+                                height: size.height * 0.06,
+                                fontSize: size.width * 0.05,
+                              ),
+                              SizedBox(height: size.height * 0.03),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => const RecoverPassPage()),
+                                  );
+                                },
+                                child: Text(
+                                  'Esqueceu a senha?',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: size.width * 0.04,
+                                    color: AppColors.primaryText,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: size.height * 0.02),
+                    SizedBox(
+                      height: size.height * 0.18,
+                      child: ContactButton(),
                     ),
                   ],
                 ),
-              ],
-            ),
-            const SizedBox(height: 50),
-            Expanded(
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      children: [
-                        CustomTextField(
-                          controller: _emailController,
-                          hintText: 'Email',
-                        ),
-                        if (_emailError != null)
-                          Padding(
-                            padding: const EdgeInsets.only(top: 8.0),
-                            child: Text(
-                              _emailError!,
-                              style: TextStyle(color: AppColors.thirdTextColor),
-                            ),
-                          ),
-                        const SizedBox(height: 32),
-                        CustomTextField(
-                          controller: _passwordController,
-                          hintText: 'Senha',
-                          obscureText: true,
-                        ),
-                        if (_passwordError != null)
-                          Padding(
-                            padding: const EdgeInsets.only(top: 8.0),
-                            child: Text(
-                              _passwordError!,
-                              style: TextStyle(color: AppColors.thirdTextColor),
-                            ),
-                          ),
-                        const SizedBox(height: 50),
-                        CustomButton(
-                          text: 'Entrar',
-                          onPressed: _submit,
-                          width: 180,
-                          height: 45,
-                          fontSize: 22,
-                        ),
-                        const SizedBox(height: 20),
-                        TextButton(
-                          onPressed: () => Navigator.push(
-                              context, MaterialPageRoute(builder: (context) => RecoverPassPage())),
-                          child: Text(
-                            'Esqueceu a senha?',
-                            style: GoogleFonts.poppins(fontSize: 16, color: AppColors.primaryText),
-                          ),
-                        ),
-                        const SizedBox(height: 60),
-                        ContactButton(
-                          onPressed: () async {
-                            const whatsappUrl = 'https://wa.me/5581999999999';
-                            if (await canLaunchUrl(Uri.parse(whatsappUrl))) {
-                              await launchUrl(Uri.parse(whatsappUrl));
-                            } else {
-                              debugPrint('Não foi possível abrir o WhatsApp');
-                            }
-                          },
-                        ),
-                        const SizedBox(height: 5),
-                        TextWidget(),
-                      ],
-                    ),
-                  ),
-                ),
               ),
             ),
-          ],
+          ),
         ),
       ),
     );

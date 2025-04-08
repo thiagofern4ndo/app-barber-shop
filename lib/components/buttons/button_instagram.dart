@@ -6,14 +6,14 @@ import 'package:app_barber_shop/components/theme/colors.dart';
 class InstagramIconButton extends StatelessWidget {
   final String instagramUrl;
   final Color iconColor;
-  final double iconSize;
+  final double? iconSize;
 
-  InstagramIconButton({
-    Key? key,
+  const InstagramIconButton({
+    super.key,
     this.instagramUrl = 'https://www.instagram.com/seu_perfil_aqui/',
     this.iconColor = AppColors.primary,
-    this.iconSize = 40.0,
-  }) : super(key: key);
+    this.iconSize,
+  });
 
   Future<void> _launchURL() async {
     final Uri url = Uri.parse(instagramUrl);
@@ -21,19 +21,23 @@ class InstagramIconButton extends StatelessWidget {
     if (await canLaunchUrl(url)) {
       await launchUrl(url);
     } else {
-      print('Não foi possível abrir o link');
+      debugPrint('Não foi possível abrir o link');
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final double responsiveIconSize = iconSize ?? size.width * 0.1;
+
     return IconButton(
       icon: FaIcon(
         FontAwesomeIcons.instagram,
         color: iconColor,
-        size: iconSize,
+        size: responsiveIconSize,
       ),
       onPressed: _launchURL,
+      tooltip: 'Abrir Instagram',
     );
   }
 }

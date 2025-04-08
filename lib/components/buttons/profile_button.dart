@@ -28,7 +28,7 @@ class ProfileIconButton extends StatelessWidget {
 }
 
 class TemporaryPage extends StatelessWidget {
-  const TemporaryPage({Key? key}) : super(key: key);
+  const TemporaryPage({super.key});
 
   @override
   Widget build(BuildContext context) {

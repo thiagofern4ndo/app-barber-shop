@@ -4,12 +4,10 @@ import 'package:app_barber_shop/components/buttons/button_checkbox.dart';
 import 'package:app_barber_shop/components/buttons/button_contact.dart';
 import 'package:app_barber_shop/components/buttons/button_instagram.dart';
 import 'package:app_barber_shop/components/buttons/custom_button.dart';
-import 'package:app_barber_shop/components/text/text_direitos.dart';
-import 'package:app_barber_shop/screens/profissionais.dart';
+import 'package:app_barber_shop/screens/select_date.dart'; 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 
 class ServicoScreen extends StatefulWidget {
   const ServicoScreen({super.key});
@@ -41,11 +39,14 @@ class _ServicoScreenState extends State<ServicoScreen> {
     if (_isAnyServiceSelected()) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const ProfessionalSelectionScreen()), 
+        MaterialPageRoute(
+            builder: (context) =>
+                const CalendarSelectionScreen()), 
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Por favor, selecione ao menos um serviço.')),
+        const SnackBar(
+            content: Text('Por favor, selecione ao menos um serviço.')),
       );
     }
   }
@@ -115,7 +116,7 @@ class _ServicoScreenState extends State<ServicoScreen> {
           padding: const EdgeInsets.only(bottom: 25),
           child: CustomCheckBox(
             text: service,
-            isChecked: _services[service]! ,
+            isChecked: _services[service]!,
             onChanged: (value) => _toggleService(service, value),
           ),
         );
@@ -128,17 +129,14 @@ class _ServicoScreenState extends State<ServicoScreen> {
       text: 'Continuar',
       height: 45,
       width: 200,
-      onPressed: _onContinuePressed, 
+      onPressed: _onContinuePressed,
     );
   }
 
   Widget _buildFooter() {
     return Column(
       children: [
-        ContactButton(onPressed: _launchWhatsApp),
-        const SizedBox(height: 20),
-        const TextWidget(),
-        const SizedBox(height: 20),
+        ContactButton(),
       ],
     );
   }
