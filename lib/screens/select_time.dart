@@ -3,9 +3,10 @@ import 'package:app_barber_shop/components/buttons/button_contact.dart';
 import 'package:app_barber_shop/components/buttons/custom_button.dart';
 import 'package:app_barber_shop/components/buttons/custom_button2.dart';
 import 'package:app_barber_shop/components/buttons/profile_button.dart';
-import 'package:flutter/material.dart';
+import 'package:app_barber_shop/components/calendar/carousel_calendar.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:app_barber_shop/components/theme/fonts.dart';
+import 'package:flutter/material.dart';
 
 class SelectHourPage extends StatefulWidget {
   const SelectHourPage({super.key});
@@ -16,6 +17,7 @@ class SelectHourPage extends StatefulWidget {
 
 class _SelectHourPageState extends State<SelectHourPage> {
   String? selectedHour;
+  DateTime selectedDate = DateTime.now();
 
   final List<String> hours = [
     '08:00',
@@ -35,7 +37,6 @@ class _SelectHourPageState extends State<SelectHourPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
     final double spacing = size.height * 0.02;
 
     return Scaffold(
@@ -47,6 +48,7 @@ class _SelectHourPageState extends State<SelectHourPage> {
             vertical: size.height * 0.015,
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -57,42 +59,60 @@ class _SelectHourPageState extends State<SelectHourPage> {
                   const ProfileIconButton(),
                 ],
               ),
-              SizedBox(height: spacing * 2),
+              // Ajuste o espaçamento aqui, para evitar overflow
+              SizedBox(height: spacing),
               Text(
-                'Selecione um horário',
+                'Selecione uma data',
                 style: AppFonts.main.copyWith(
-                  fontSize: size.width * 0.06,
+                  fontSize: size.width * 0.05,
                   fontWeight: FontWeight.w600,
                   color: AppColors.primaryText,
                 ),
               ),
-              SizedBox(height: spacing * 1.9),
 
-              // Grade de horários
+              SizedBox(height: spacing),
+              CarouselCalendar(
+                onDaySelected: (day) {
+                  setState(() {
+                    selectedDate = day;
+                  });
+                },
+                aoSelecionarDia: (DateTime) {},
+              ),
+
+              SizedBox(height: spacing),
+              Text(
+                'Selecione um horário',
+                style: AppFonts.main.copyWith(
+                  fontSize: size.width * 0.05,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.primaryText,
+                ),
+              ),
+
+              SizedBox(height: spacing),
               Wrap(
-                spacing: size.width * 0.04,
-                runSpacing: spacing,
+                spacing: size.width * 0.03,
+                runSpacing: spacing * 0.8,
                 children: hours.map((hour) {
-                  return SizedBox(
-                    width: size.width * 0.4,
-                    height: size.height * 0.065,
-                    child: CustomButton2(
-                      text: hour,
-                      onPressed: () {
-                        setState(() {
-                          selectedHour = hour;
-                        });
-                      },
-                      key: ValueKey(hour),
-                    ),
+                  final isSelected = selectedHour == hour;
+                  return CustomButton2(
+                    text: hour,
+                    onPressed: () {
+                      setState(() {
+                        selectedHour = hour;
+                      });
+                    },
+                    isSelected: isSelected,
+                    width: size.width * 0.28,
+                    height: size.height * 0.055,
+                    key: ValueKey(hour),
                   );
                 }).toList(),
               ),
 
-              // Espaço antes do botão continuar
+              // Ajuste o tamanho do botão "Continuar"
               SizedBox(height: size.height * 0.05),
-
-              // Botão continuar
               SizedBox(
                 width: size.width * 0.5,
                 height: size.height * 0.06,
@@ -103,11 +123,10 @@ class _SelectHourPageState extends State<SelectHourPage> {
               ),
 
               SizedBox(height: spacing),
-
-              // Botão de contato
+              // Ajuste para garantir que o botão de contato não sobreponha
               SizedBox(
                 height: size.height * 0.2,
-                child: ContactButton(),
+                child: const ContactButton(),
               ),
             ],
           ),

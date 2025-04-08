@@ -22,7 +22,7 @@ class _ServicoScreenState extends State<ServicoScreen> {
     'Corte Infantil': false,
     'Barba': false,
     'Sobrancelha': false,
-    'Combo': false,
+    'Combo: Corte e Barba': false,
   };
 
   bool _isAnyServiceSelected() {
@@ -87,7 +87,7 @@ class _ServicoScreenState extends State<ServicoScreen> {
                     SizedBox(height: screenHeight * 0.03),
                     _buildTitle(screenWidth),
                     SizedBox(height: screenHeight * 0.04),
-                    _buildServiceList(screenHeight),
+                    _buildServiceList(screenHeight, screenWidth),
                     const Spacer(),
                     _buildContinueButton(screenHeight, screenWidth),
                     SizedBox(height: screenHeight * 0.03),
@@ -125,15 +125,17 @@ class _ServicoScreenState extends State<ServicoScreen> {
     );
   }
 
-  Widget _buildServiceList(double screenHeight) {
+  Widget _buildServiceList(double screenHeight, double screenWidth) {
     return Column(
       children: _services.keys.map((service) {
+        final bool isCombo = service == 'Combo: Corte e Barba';
         return Padding(
           padding: EdgeInsets.only(bottom: screenHeight * 0.025),
           child: CustomCheckBox(
             text: service,
             isChecked: _services[service]!,
             onChanged: (value) => _toggleService(service, value),
+            fontSize: isCombo ? screenWidth * 0.035 : null,
           ),
         );
       }).toList(),

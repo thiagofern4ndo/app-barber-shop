@@ -100,7 +100,7 @@ class _ProfessionalSelectionScreenState
                   ),
                   ProfessionalCard(
                     name: 'Antonio',
-                    imageUrl: 'assets/antonio.jpg',
+                    imageUrl: 'assets/antonio.png',
                     selectedProfessional: selectedProfessional,
                     onTap: selectProfessional,
                   ),

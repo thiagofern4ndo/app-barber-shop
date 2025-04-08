@@ -20,6 +20,7 @@ dependencies:
   syncfusion_flutter_calendar: ^28.2.9
   flutter_calendar_carousel: ^2.4.4
   flutter_form_builder: ^10.0.0
+  table_calendar: ^3.1.3
 
 dev_dependencies:
   flutter_test:
@@ -35,4 +36,4 @@ flutter:
     - assets/carlos.png
     - assets/eduardo.png
     - assets/paulo.png
-    - assets/antonio.jpg
+    - assets/antonio.png
