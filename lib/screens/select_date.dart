@@ -2,13 +2,11 @@ import 'package:app_barber_shop/components/buttons/button_back.dart';
 import 'package:app_barber_shop/components/buttons/button_contact.dart';
 import 'package:app_barber_shop/components/buttons/profile_button.dart';
 import 'package:app_barber_shop/components/calendar/calendar_user.dart';
-import 'package:app_barber_shop/components/text/text_direitos.dart';
 import 'package:app_barber_shop/screens/select_time.dart';
 import 'package:flutter/material.dart';
 import 'package:app_barber_shop/components/buttons/custom_button.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:app_barber_shop/components/theme/fonts.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class CalendarSelectionScreen extends StatefulWidget {
   const CalendarSelectionScreen({super.key});
@@ -96,17 +94,7 @@ class _CalendarSelectionScreenState extends State<CalendarSelectionScreen> {
                       ),
                       const SizedBox(height: 20),
                       ContactButton(
-                        onPressed: () async {
-                          const whatsappUrl = 'https://wa.me/5581999999999';
-                          if (await canLaunchUrl(Uri.parse(whatsappUrl))) {
-                            await launchUrl(Uri.parse(whatsappUrl));
-                          } else {
-                            debugPrint('Não foi possível abrir o WhatsApp');
-                          }
-                        },
                       ),
-                      const SizedBox(height: 5),
-                      TextWidget(),
                     ],
                   ),
                 ),

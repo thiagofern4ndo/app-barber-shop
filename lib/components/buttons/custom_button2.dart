@@ -2,47 +2,50 @@ import 'package:flutter/material.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:app_barber_shop/components/theme/fonts.dart';
 
-// ignore: must_be_immutable
 class CustomButton2 extends StatelessWidget {
-  String text;
-  VoidCallback onPressed;
-  double width;
-  double height;
+  final String text;
+  final VoidCallback onPressed;
+  final double? width;
+  final double? height;
 
-  CustomButton2({
+  const CustomButton2({
     super.key,
     required this.text,
     required this.onPressed,
-    this.width = 200,
-    this.height = 40,
+    this.width,
+    this.height,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.background,
-        side: const BorderSide(
-          color: AppColors.primary,
-          width: 2,
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-      ),
-      onPressed: onPressed,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            text,
-            style: AppFonts.main.copyWith(
-              fontSize: 30,
-              fontWeight: FontWeight.w900,
-              color: AppColors.primaryText,
-            ),
+    final size = MediaQuery.of(context).size;
+    final double buttonWidth = width ?? size.width * 0.5;
+    final double buttonHeight = height ?? size.height * 0.06;
+    final double fontSize = buttonHeight * 0.5;
+
+    return SizedBox(
+      width: buttonWidth,
+      height: buttonHeight,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.background,
+          side: BorderSide(
+            color: AppColors.primary,
+            width: buttonHeight * 0.1,
           ),
-        ],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(buttonHeight * 0.5),
+          ),
+        ),
+        onPressed: onPressed,
+        child: Text(
+          text,
+          style: AppFonts.main.copyWith(
+            fontSize: fontSize,
+            fontWeight: FontWeight.w900,
+            color: AppColors.primaryText,
+          ),
+        ),
       ),
     );
   }

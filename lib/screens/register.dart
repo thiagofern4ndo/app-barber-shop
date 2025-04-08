@@ -1,4 +1,3 @@
-import 'package:app_barber_shop/components/text/text_direitos.dart';
 import 'package:flutter/material.dart';
 import 'package:app_barber_shop/components/buttons/button_instagram.dart';
 import 'package:app_barber_shop/components/buttons/button_back.dart';
@@ -7,7 +6,7 @@ import 'package:app_barber_shop/components/buttons/custom_button.dart';
 import 'package:app_barber_shop/components/buttons/button_contact.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:app_barber_shop/screens/loginpage.dart';
-import 'package:url_launcher/url_launcher.dart';
+
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -22,8 +21,9 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
-  
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+
   String? _fullNameError;
   String? _emailError;
   String? _phoneError;
@@ -68,8 +68,9 @@ class _RegisterPageState extends State<RegisterPage> {
     if (!_formKey.currentState!.validate()) return;
     if (!_validateFields()) return;
     if (!_acceptTerms) return;
-    
-    debugPrint('Registro: ${_fullNameController.text}, ${_emailController.text}, ${_phoneController.text}, ${_passwordController.text}');
+
+    debugPrint(
+        'Registro: ${_fullNameController.text}, ${_emailController.text}, ${_phoneController.text}, ${_passwordController.text}');
   }
 
   @override
@@ -93,7 +94,8 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CustomBackButton(onPressed: () => Navigator.maybePop(context)),
+                  CustomBackButton(
+                      onPressed: () => Navigator.maybePop(context)),
                   InstagramIconButton(),
                 ],
               ),
@@ -103,21 +105,28 @@ class _RegisterPageState extends State<RegisterPage> {
               children: [
                 Text(
                   'Cadastre-se',
-                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: AppColors.primaryText),
+                  style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primaryText),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       'ou faça o',
-                      style: TextStyle(fontSize: 26, color: AppColors.primaryText),
+                      style:
+                          TextStyle(fontSize: 26, color: AppColors.primaryText),
                     ),
                     TextButton(
-                      onPressed: () => Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => LoginPage())),
+                      onPressed: () => Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => LoginPage())),
                       child: Text(
                         'Login',
-                        style: TextStyle(fontSize: 28, fontWeight: FontWeight.w900, color: AppColors.primary),
+                        style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.w900,
+                            color: AppColors.primary),
                       ),
                     ),
                   ],
@@ -133,15 +142,25 @@ class _RegisterPageState extends State<RegisterPage> {
                     key: _formKey,
                     child: Column(
                       children: [
-                        CustomTextField(controller: _fullNameController, hintText: 'Nome Completo'),
+                        CustomTextField(
+                            controller: _fullNameController,
+                            hintText: 'Nome Completo'),
                         const SizedBox(height: 12),
-                        CustomTextField(controller: _emailController, hintText: 'Email'),
+                        CustomTextField(
+                            controller: _emailController, hintText: 'Email'),
                         const SizedBox(height: 12),
-                        CustomTextField(controller: _phoneController, hintText: 'Telefone'),
+                        CustomTextField(
+                            controller: _phoneController, hintText: 'Telefone'),
                         const SizedBox(height: 12),
-                        CustomTextField(controller: _passwordController, hintText: 'Crie uma senha', obscureText: true),
+                        CustomTextField(
+                            controller: _passwordController,
+                            hintText: 'Crie uma senha',
+                            obscureText: true),
                         const SizedBox(height: 12),
-                        CustomTextField(controller: _confirmPasswordController, hintText: 'Confirmar senha', obscureText: true),
+                        CustomTextField(
+                            controller: _confirmPasswordController,
+                            hintText: 'Confirmar senha',
+                            obscureText: true),
                         const SizedBox(height: 5),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -171,18 +190,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           fontSize: 22,
                         ),
                         const SizedBox(height: 30),
-                        ContactButton(
-                          onPressed: () async {
-                            const whatsappUrl = 'https://wa.me/5581999999999';
-                            if (await canLaunchUrl(Uri.parse(whatsappUrl))) {
-                              await launchUrl(Uri.parse(whatsappUrl));
-                            } else {
-                              debugPrint('Não foi possível abrir o WhatsApp');
-                            }
-                          },
-                        ),
-                        const SizedBox(height: 5),
-                     TextWidget(),
+                        ContactButton(),
                       ],
                     ),
                   ),

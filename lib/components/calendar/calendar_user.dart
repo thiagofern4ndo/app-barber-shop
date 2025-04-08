@@ -14,7 +14,7 @@ class CustomCalendar extends StatefulWidget {
 }
 
 class _CustomCalendarState extends State<CustomCalendar> {
-  DateTime? _selectedDay; // Começa sem nenhum dia selecionado
+  DateTime? _selectedDay;
 
   bool _isValidDay(DateTime day) {
     return day.isAfter(DateTime.now().subtract(const Duration(days: 1))) &&
@@ -39,40 +39,49 @@ class _CustomCalendarState extends State<CustomCalendar> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final double calendarHeight = size.height * 0.4;
+    final double calendarWidth = size.width * 0.9;
+    final double padding = size.width * 0.02;
+    final double daySize = size.width * 0.08;
+    final double fontSize = size.width * 0.03;
+
     return Container(
-      height: 320,
-      width: 350,
+      height: calendarHeight,
+      width: calendarWidth,
+      padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
         color: AppColors.primary,
         borderRadius: BorderRadius.circular(12),
       ),
-      padding: const EdgeInsets.all(8),
       child: CalendarCarousel(
         onDayPressed: (DateTime date, List events) {
           _selectDay(date);
         },
-        weekendTextStyle: _textStyle(),
-        weekdayTextStyle: _textStyle(),
-        daysTextStyle: _textStyle(),
-        inactiveDaysTextStyle: _disabledTextStyle(),
+        weekendTextStyle: _textStyle(fontSize),
+        weekdayTextStyle: _textStyle(fontSize),
+        daysTextStyle: _textStyle(fontSize),
+        inactiveDaysTextStyle: _disabledTextStyle(fontSize),
         todayButtonColor: AppColors.transparent,
         todayBorderColor: AppColors.transparent,
         todayTextStyle: AppFonts.main.copyWith(
           color: AppColors.background,
           fontWeight: FontWeight.w700,
+          fontSize: fontSize,
         ),
         selectedDayButtonColor: AppColors.transparent,
         selectedDayBorderColor: AppColors.transparent,
         selectedDayTextStyle: AppFonts.main.copyWith(
           color: AppColors.primary,
           fontWeight: FontWeight.w700,
+          fontSize: fontSize,
         ),
-        headerTextStyle: _headerTextStyle(),
+        headerTextStyle: _headerTextStyle(size),
         headerText: _formatMonthHeader(),
         leftButtonIcon: Icon(Icons.chevron_left,
-            color: AppColors.selectedColor, size: 20),
+            color: AppColors.selectedColor, size: fontSize * 1.5),
         rightButtonIcon: Icon(Icons.chevron_right,
-            color: AppColors.selectedColor, size: 20),
+            color: AppColors.selectedColor, size: fontSize * 1.5),
         weekFormat: false,
         showHeaderButton: true,
         selectedDateTime: _selectedDay,
@@ -99,9 +108,12 @@ class _CustomCalendarState extends State<CustomCalendar> {
 
           return Center(
             child: Container(
+              width: daySize,
+              height: daySize,
+              alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: isSelected ? AppColors.background : AppColors.primary,
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(daySize * 0.25),
                 border: Border.all(
                   color: today
                       ? AppColors.background
@@ -111,9 +123,6 @@ class _CustomCalendarState extends State<CustomCalendar> {
                   width: today || isSelected ? 2 : 0,
                 ),
               ),
-              width: 32,
-              height: 32,
-              alignment: Alignment.center,
               child: Text(
                 "${day.day}",
                 style: AppFonts.main.copyWith(
@@ -123,6 +132,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
                           ? AppColors.secondaryText
                           : AppColors.background,
                   fontWeight: FontWeight.w700,
+                  fontSize: fontSize,
                 ),
               ),
             ),
@@ -132,26 +142,26 @@ class _CustomCalendarState extends State<CustomCalendar> {
     );
   }
 
-  TextStyle _textStyle() {
+  TextStyle _textStyle(double fontSize) {
     return AppFonts.main.copyWith(
       color: AppColors.background,
-      fontSize: 12,
+      fontSize: fontSize,
       fontWeight: FontWeight.w700,
     );
   }
 
-  TextStyle _disabledTextStyle() {
+  TextStyle _disabledTextStyle(double fontSize) {
     return AppFonts.main.copyWith(
       color: AppColors.secondaryText,
-      fontSize: 12,
+      fontSize: fontSize,
       fontWeight: FontWeight.w700,
     );
   }
 
-  TextStyle _headerTextStyle() {
+  TextStyle _headerTextStyle(Size size) {
     return AppFonts.main.copyWith(
       color: AppColors.selectedColor,
-      fontSize: 18,
+      fontSize: size.width * 0.05,
       fontWeight: FontWeight.w700,
     );
   }
