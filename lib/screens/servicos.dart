@@ -1,13 +1,13 @@
+import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
+import 'package:app_barber_shop/components/theme/fonts.dart';
 import 'package:app_barber_shop/components/buttons/button_back.dart';
 import 'package:app_barber_shop/components/buttons/button_checkbox.dart';
 import 'package:app_barber_shop/components/buttons/button_contact.dart';
 import 'package:app_barber_shop/components/buttons/button_instagram.dart';
 import 'package:app_barber_shop/components/buttons/custom_button.dart';
-import 'package:app_barber_shop/screens/select_date.dart'; 
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:app_barber_shop/screens/select_date.dart';
 
 class ServicoScreen extends StatefulWidget {
   const ServicoScreen({super.key});
@@ -40,13 +40,14 @@ class _ServicoScreenState extends State<ServicoScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) =>
-                const CalendarSelectionScreen()), 
+          builder: (context) => const CalendarSelectionScreen(),
+        ),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-            content: Text('Por favor, selecione ao menos um serviço.')),
+          content: Text('Por favor, selecione ao menos um serviço.'),
+        ),
       );
     }
   }
@@ -58,29 +59,44 @@ class _ServicoScreenState extends State<ServicoScreen> {
       await launchUrl(uri);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Não foi possível abrir o WhatsApp.')),
+        const SnackBar(
+          content: Text('Não foi possível abrir o WhatsApp.'),
+        ),
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    final screenHeight = screenSize.height;
+    final screenWidth = screenSize.width;
+
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Column(
-            children: [
-              _buildHeader(),
-              const Spacer(),
-              _buildTitle(),
-              const SizedBox(height: 60),
-              _buildServiceList(),
-              const Spacer(),
-              _buildContinueButton(),
-              const Spacer(),
-              _buildFooter(),
-            ],
+        child: SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: screenHeight),
+            child: IntrinsicHeight(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.06),
+                child: Column(
+                  children: [
+                    SizedBox(height: screenHeight * 0.01),
+                    _buildHeader(),
+                    SizedBox(height: screenHeight * 0.03),
+                    _buildTitle(screenWidth),
+                    SizedBox(height: screenHeight * 0.04),
+                    _buildServiceList(screenHeight),
+                    const Spacer(),
+                    _buildContinueButton(screenHeight, screenWidth),
+                    SizedBox(height: screenHeight * 0.03),
+                    _buildFooter(),
+                    SizedBox(height: screenHeight * 0.07),
+                  ],
+                ),
+              ),
+            ),
           ),
         ),
       ),
@@ -97,11 +113,11 @@ class _ServicoScreenState extends State<ServicoScreen> {
     );
   }
 
-  Widget _buildTitle() {
+  Widget _buildTitle(double screenWidth) {
     return Text(
       'Selecione um ou mais serviços',
-      style: GoogleFonts.poppins(
-        fontSize: 24,
+      style: AppFonts.main.copyWith(
+        fontSize: screenWidth * 0.06,
         fontWeight: FontWeight.bold,
         color: AppColors.primaryText,
       ),
@@ -109,11 +125,11 @@ class _ServicoScreenState extends State<ServicoScreen> {
     );
   }
 
-  Widget _buildServiceList() {
+  Widget _buildServiceList(double screenHeight) {
     return Column(
       children: _services.keys.map((service) {
         return Padding(
-          padding: const EdgeInsets.only(bottom: 25),
+          padding: EdgeInsets.only(bottom: screenHeight * 0.025),
           child: CustomCheckBox(
             text: service,
             isChecked: _services[service]!,
@@ -124,11 +140,11 @@ class _ServicoScreenState extends State<ServicoScreen> {
     );
   }
 
-  Widget _buildContinueButton() {
+  Widget _buildContinueButton(double screenHeight, double screenWidth) {
     return CustomButton(
       text: 'Continuar',
-      height: 45,
-      width: 200,
+      height: screenHeight * 0.06,
+      width: screenWidth * 0.48,
       onPressed: _onContinuePressed,
     );
   }

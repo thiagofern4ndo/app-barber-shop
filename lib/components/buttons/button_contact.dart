@@ -4,18 +4,7 @@ import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:app_barber_shop/components/theme/fonts.dart';
 
 class ContactButton extends StatelessWidget {
-  final double? width;
-  final double? height;
-  final Color color;
-  final Color textColor;
-
-  const ContactButton({
-    super.key,
-    this.width,
-    this.height,
-    this.color = AppColors.background,
-    this.textColor = AppColors.primaryText,
-  });
+  const ContactButton({super.key});
 
   Future<void> _launchWhatsApp() async {
     const whatsappUrl = 'https://wa.me/5581999999999';
@@ -30,8 +19,8 @@ class ContactButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    final double buttonWidth = width ?? size.width * 0.4;
-    final double buttonHeight = height ?? size.height * 0.06;
+    final double buttonWidth = size.width * 0.3;  // Responsivo
+    final double buttonHeight = size.height * 0.054; // Responsivo
     final double fontSize = size.width * 0.04;
 
     return Column(
@@ -39,11 +28,8 @@ class ContactButton extends StatelessWidget {
       children: [
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: color,
-            padding: EdgeInsets.symmetric(
-              horizontal: size.width * 0.05,
-              vertical: size.height * 0.015,
-            ),
+            backgroundColor: AppColors.background,
+            padding: EdgeInsets.zero,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
               side: const BorderSide(
@@ -62,7 +48,7 @@ class ContactButton extends StatelessWidget {
                 style: AppFonts.main.copyWith(
                   fontSize: fontSize,
                   fontWeight: FontWeight.w300,
-                  color: textColor,
+                  color: AppColors.primaryText,
                 ),
               ),
             ),

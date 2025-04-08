@@ -34,63 +34,81 @@ class _SelectHourPageState extends State<SelectHourPage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
+    final double spacing = size.height * 0.02;
+
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(
+            horizontal: size.width * 0.04,
+            vertical: size.height * 0.015,
+          ),
           child: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CustomBackButton(onPressed: () {
-                    Navigator.pop(context);
-                  }),
+                  CustomBackButton(
+                    onPressed: () => Navigator.pop(context),
+                  ),
                   const ProfileIconButton(),
                 ],
               ),
-              const SizedBox(height: 24),
+              SizedBox(height: spacing * 2),
               Text(
                 'Selecione um horário',
                 style: AppFonts.main.copyWith(
-                  fontSize: 24,
+                  fontSize: size.width * 0.06,
                   fontWeight: FontWeight.w600,
                   color: AppColors.primaryText,
                 ),
               ),
-              const SizedBox(height: 24),
-              Expanded(
-                child: GridView.count(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 16,
-                  crossAxisSpacing: 16,
-                  childAspectRatio: 2.5,
-                  children: hours.map((hour) {
-                    return CustomButton2(
+              SizedBox(height: spacing * 1.9),
+
+              // Grade de horários
+              Wrap(
+                spacing: size.width * 0.04,
+                runSpacing: spacing,
+                children: hours.map((hour) {
+                  return SizedBox(
+                    width: size.width * 0.4,
+                    height: size.height * 0.065,
+                    child: CustomButton2(
                       text: hour,
                       onPressed: () {
                         setState(() {
                           selectedHour = hour;
                         });
                       },
-                      width: double.infinity,
-                      height: 50,
                       key: ValueKey(hour),
-                    );
-                  }).toList(),
-                ),
+                    ),
+                  );
+                }).toList(),
               ),
-              const SizedBox(height: 16),
+
+              // Espaço antes do botão continuar
+              SizedBox(height: size.height * 0.05),
+
+              // Botão continuar
               SizedBox(
-                width: 200,
+                width: size.width * 0.5,
+                height: size.height * 0.06,
                 child: CustomButton(
                   text: 'Continuar',
                   onPressed: () {},
                 ),
               ),
-              const SizedBox(height: 16),
-              ContactButton(),
+
+              SizedBox(height: spacing),
+
+              // Botão de contato
+              SizedBox(
+                height: size.height * 0.2,
+                child: ContactButton(),
+              ),
             ],
           ),
         ),

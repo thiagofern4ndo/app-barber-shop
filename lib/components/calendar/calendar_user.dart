@@ -15,10 +15,12 @@ class CustomCalendar extends StatefulWidget {
 
 class _CustomCalendarState extends State<CustomCalendar> {
   DateTime? _selectedDay;
+  DateTime _currentMonth = DateTime.now();
 
   bool _isValidDay(DateTime day) {
     return day.isAfter(DateTime.now().subtract(const Duration(days: 1))) &&
-        day.month == DateTime.now().month;
+        day.month == _currentMonth.month &&
+        day.year == _currentMonth.year;
   }
 
   bool _isToday(DateTime day) {
@@ -40,11 +42,14 @@ class _CustomCalendarState extends State<CustomCalendar> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final double calendarHeight = size.height * 0.4;
-    final double calendarWidth = size.width * 0.9;
-    final double padding = size.width * 0.02;
+    final double calendarHeight = size.height * 0.375;
+    final double calendarWidth = size.width * 0.7;
+    final double padding = size.width * 0.03;
     final double daySize = size.width * 0.08;
     final double fontSize = size.width * 0.03;
+
+    final String nomeMes =
+        DateFormat.MMMM('pt_BR').format(_currentMonth).capitalize();
 
     return Container(
       height: calendarHeight,
@@ -54,90 +59,113 @@ class _CustomCalendarState extends State<CustomCalendar> {
         color: AppColors.primary,
         borderRadius: BorderRadius.circular(12),
       ),
-      child: CalendarCarousel(
-        onDayPressed: (DateTime date, List events) {
-          _selectDay(date);
-        },
-        weekendTextStyle: _textStyle(fontSize),
-        weekdayTextStyle: _textStyle(fontSize),
-        daysTextStyle: _textStyle(fontSize),
-        inactiveDaysTextStyle: _disabledTextStyle(fontSize),
-        todayButtonColor: AppColors.transparent,
-        todayBorderColor: AppColors.transparent,
-        todayTextStyle: AppFonts.main.copyWith(
-          color: AppColors.background,
-          fontWeight: FontWeight.w700,
-          fontSize: fontSize,
-        ),
-        selectedDayButtonColor: AppColors.transparent,
-        selectedDayBorderColor: AppColors.transparent,
-        selectedDayTextStyle: AppFonts.main.copyWith(
-          color: AppColors.primary,
-          fontWeight: FontWeight.w700,
-          fontSize: fontSize,
-        ),
-        headerTextStyle: _headerTextStyle(size),
-        headerText: _formatMonthHeader(),
-        leftButtonIcon: Icon(Icons.chevron_left,
-            color: AppColors.selectedColor, size: fontSize * 1.5),
-        rightButtonIcon: Icon(Icons.chevron_right,
-            color: AppColors.selectedColor, size: fontSize * 1.5),
-        weekFormat: false,
-        showHeaderButton: true,
-        selectedDateTime: _selectedDay,
-        minSelectedDate: DateTime.now(),
-        daysHaveCircularBorder: false,
-        locale: 'pt',
-        customDayBuilder: (
-          bool isSelectable,
-          int index,
-          bool isSelectedDay,
-          bool isToday,
-          bool isPrevMonthDay,
-          TextStyle? textStyle,
-          bool isNextMonthDay,
-          bool isThisMonthDay,
-          DateTime day,
-        ) {
-          final bool today = _isToday(day);
-          final bool pastOrInvalid = !_isValidDay(day);
-          final bool isSelected = _selectedDay != null &&
-              day.day == _selectedDay!.day &&
-              day.month == _selectedDay!.month &&
-              day.year == _selectedDay!.year;
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Icon(Icons.chevron_left,
+                  color: AppColors.primary, size: fontSize * 1.8),
+              Text(
+                nomeMes,
+                style: AppFonts.main.copyWith(
+                  fontSize: size.width * 0.05,
+                  fontWeight: FontWeight.w800,
+                  color: AppColors.background,
+                ),
+              ),
+              Icon(Icons.chevron_right,
+                  color: AppColors.primary, size: fontSize * 1.8),
+            ],
+          ),
+          Expanded(
+            child: CalendarCarousel(
+              onDayPressed: (DateTime date, List events) {
+                _selectDay(date);
+              },
+              onCalendarChanged: (DateTime date) {
+                setState(() {
+                  _currentMonth = DateTime(date.year, date.month);
+                });
+              },
+              weekendTextStyle: _textStyle(fontSize),
+              weekdayTextStyle: _textStyle(fontSize),
+              daysTextStyle: _textStyle(fontSize),
+              inactiveDaysTextStyle: _disabledTextStyle(fontSize),
+              todayButtonColor: AppColors.transparent,
+              todayBorderColor: AppColors.transparent,
+              todayTextStyle: AppFonts.main.copyWith(
+                color: AppColors.background,
+                fontWeight: FontWeight.w700,
+                fontSize: fontSize,
+              ),
+              selectedDayButtonColor: AppColors.transparent,
+              selectedDayBorderColor: AppColors.transparent,
+              selectedDayTextStyle: AppFonts.main.copyWith(
+                color: AppColors.primary,
+                fontWeight: FontWeight.w700,
+                fontSize: fontSize,
+              ),
+              headerTextStyle: const TextStyle(fontSize: 0),
+              showHeader: false,
+              selectedDateTime: _selectedDay,
+              daysHaveCircularBorder: false,
+              locale: 'pt_BR',
+              customDayBuilder: (
+                bool isSelectable,
+                int index,
+                bool isSelectedDay,
+                bool isToday,
+                bool isPrevMonthDay,
+                TextStyle? textStyle,
+                bool isNextMonthDay,
+                bool isThisMonthDay,
+                DateTime day,
+              ) {
+                final bool today = _isToday(day);
+                final bool pastOrInvalid = !_isValidDay(day);
+                final bool isSelected = _selectedDay != null &&
+                    day.day == _selectedDay!.day &&
+                    day.month == _selectedDay!.month &&
+                    day.year == _selectedDay!.year;
 
-          return Center(
-            child: Container(
-              width: daySize,
-              height: daySize,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: isSelected ? AppColors.background : AppColors.primary,
-                borderRadius: BorderRadius.circular(daySize * 0.25),
-                border: Border.all(
-                  color: today
-                      ? AppColors.background
-                      : isSelected
+                return Center(
+                  child: Container(
+                    width: daySize,
+                    height: daySize,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: isSelected
                           ? AppColors.background
                           : AppColors.primary,
-                  width: today || isSelected ? 2 : 0,
-                ),
-              ),
-              child: Text(
-                "${day.day}",
-                style: AppFonts.main.copyWith(
-                  color: isSelected
-                      ? AppColors.primary
-                      : pastOrInvalid
-                          ? AppColors.secondaryText
-                          : AppColors.background,
-                  fontWeight: FontWeight.w700,
-                  fontSize: fontSize,
-                ),
-              ),
+                      borderRadius: BorderRadius.circular(daySize * 0.25),
+                      border: Border.all(
+                        color: today
+                            ? AppColors.background
+                            : isSelected
+                                ? AppColors.background
+                                : AppColors.primary,
+                        width: today || isSelected ? 2 : 0,
+                      ),
+                    ),
+                    child: Text(
+                      "${day.day}",
+                      style: AppFonts.main.copyWith(
+                        color: isSelected
+                            ? AppColors.primary
+                            : pastOrInvalid
+                                ? AppColors.secondaryText
+                                : AppColors.background,
+                        fontWeight: FontWeight.w700,
+                        fontSize: fontSize,
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
-          );
-        },
+          ),
+        ],
       ),
     );
   }
@@ -146,7 +174,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
     return AppFonts.main.copyWith(
       color: AppColors.background,
       fontSize: fontSize,
-      fontWeight: FontWeight.w700,
+      fontWeight: FontWeight.w900,
     );
   }
 
@@ -154,21 +182,12 @@ class _CustomCalendarState extends State<CustomCalendar> {
     return AppFonts.main.copyWith(
       color: AppColors.secondaryText,
       fontSize: fontSize,
-      fontWeight: FontWeight.w700,
+      fontWeight: FontWeight.w900,
     );
   }
+}
 
-  TextStyle _headerTextStyle(Size size) {
-    return AppFonts.main.copyWith(
-      color: AppColors.selectedColor,
-      fontSize: size.width * 0.05,
-      fontWeight: FontWeight.w700,
-    );
-  }
-
-  String _formatMonthHeader() {
-    DateFormat dateFormat = DateFormat('MMMM yyyy', 'pt_BR');
-    String formattedDate = dateFormat.format(_selectedDay ?? DateTime.now());
-    return formattedDate[0].toUpperCase() + formattedDate.substring(1);
-  }
+extension CapitalizeExtension on String {
+  String capitalize() =>
+      isEmpty ? '' : '${this[0].toUpperCase()}${substring(1)}';
 }

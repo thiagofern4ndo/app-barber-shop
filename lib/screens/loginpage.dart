@@ -169,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                               CustomButton(
                                 text: 'Entrar',
                                 onPressed: _submit,
-                                width: size.width * 0.5,
+                                width: size.width * 0.48,
                                 height: size.height * 0.06,
                                 fontSize: size.width * 0.05,
                               ),
