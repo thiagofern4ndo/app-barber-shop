@@ -1,5 +1,5 @@
 import 'package:app_barber_shop/screens/register.dart';
-import 'package:app_barber_shop/screens/servicos.dart';
+import 'package:app_barber_shop/screens/select_services.dart';
 import 'package:flutter/material.dart';
 import 'package:app_barber_shop/components/buttons/button_instagram.dart';
 import 'package:app_barber_shop/components/buttons/button_back.dart';

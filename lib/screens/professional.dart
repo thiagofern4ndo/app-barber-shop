@@ -5,7 +5,8 @@ import 'package:app_barber_shop/screens/agendamento_info_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:app_barber_shop/components/buttons/button_back.dart';
-import 'package:app_barber_shop/components/cards/professional_card.dart'; 
+import 'package:app_barber_shop/components/cards/professional_card.dart';
+import 'package:app_barber_shop/data/professionals.dart'; 
 
 class ProfessionalSelectionScreen extends StatefulWidget {
   final List<String> selectedServices;
@@ -97,44 +98,16 @@ class _ProfessionalSelectionScreenState
                   mainAxisSpacing: screenHeight * 0.0001,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  children: [
-                    ProfessionalCard(
-                      name: 'Paula',
-                      imagePath: 'assets/paula.png',
-                      isSelected: selectedProfessional == 'Paula',
-                      onTap: () => selectProfessional('Paula'),
-                    ),
-                    ProfessionalCard(
-                      name: 'Carlos',
-                      imagePath: 'assets/carlos.png',
-                      isSelected: selectedProfessional == 'Carlos',
-                      onTap: () => selectProfessional('Carlos'),
-                    ),
-                    ProfessionalCard(
-                      name: 'Eduardo',
-                      imagePath: 'assets/eduardo.png',
-                      isSelected: selectedProfessional == 'Eduardo',
-                      onTap: () => selectProfessional('Eduardo'),
-                    ),
-                    ProfessionalCard(
-                      name: 'Maria',
-                      imagePath: 'assets/maria.png',
-                      isSelected: selectedProfessional == 'Maria',
-                      onTap: () => selectProfessional('Maria'),
-                    ),
-                    ProfessionalCard(
-                      name: 'Paulo',
-                      imagePath: 'assets/paulo.png',
-                      isSelected: selectedProfessional == 'Paulo',
-                      onTap: () => selectProfessional('Paulo'),
-                    ),
-                    ProfessionalCard(
-                      name: 'Antonio',
-                      imagePath: 'assets/antonio.png',
-                      isSelected: selectedProfessional == 'Antonio',
-                      onTap: () => selectProfessional('Antonio'),
-                    ),
-                  ],
+                  children: professionals.map((professional) {
+                    final name = professional['name']!;
+                    final imagePath = professional['imagePath']!;
+                    return ProfessionalCard(
+                      name: name,
+                      imagePath: imagePath,
+                      isSelected: selectedProfessional == name,
+                      onTap: () => selectProfessional(name),
+                    );
+                  }).toList(),
                 ),
               ),
               SizedBox(height: screenHeight * 0.01),

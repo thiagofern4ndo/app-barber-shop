@@ -109,13 +109,6 @@ class AgendamentoInfoPage extends StatelessWidget {
                       width: size.width * 0.75,
                     ),
                   ),
-
-                  const Spacer(),
-
-                  SizedBox(
-                    height: size.height * 0.18,
-                    child: const ContactButton(),
-                  ),
                 ],
               ),
             ),
