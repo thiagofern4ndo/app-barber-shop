@@ -10,12 +10,14 @@ import 'package:app_barber_shop/data/professionals.dart';
 
 class ProfessionalSelectionScreen extends StatefulWidget {
   final List<String> selectedServices;
+  final List<double> selectedPrices; // ✅ Adicionado
   final DateTime selectedDate;
   final String selectedHour;
 
   const ProfessionalSelectionScreen({
     super.key,
     required this.selectedServices,
+    required this.selectedPrices, // ✅ Adicionado
     required this.selectedDate,
     required this.selectedHour,
   });
@@ -43,6 +45,7 @@ class _ProfessionalSelectionScreenState
           builder: (context) => AgendamentoInfoPage(
             selectedProfessional: selectedProfessional!,
             selectedServices: widget.selectedServices,
+            selectedPrices: widget.selectedPrices, // ✅ Adicionado
             selectedDate: widget.selectedDate,
             selectedHour: widget.selectedHour,
           ),

@@ -5,11 +5,13 @@ import 'package:app_barber_shop/components/buttons/profile_button.dart';
 import 'package:app_barber_shop/components/buttons/button_main.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:app_barber_shop/components/theme/fonts.dart';
+import 'package:app_barber_shop/screens/confirmation_page.dart';
 import 'package:intl/intl.dart';
 
 class AgendamentoInfoPage extends StatelessWidget {
   final String selectedProfessional;
   final List<String> selectedServices;
+  final List<double> selectedPrices;
   final DateTime selectedDate;
   final String selectedHour;
 
@@ -17,6 +19,7 @@ class AgendamentoInfoPage extends StatelessWidget {
     super.key,
     required this.selectedProfessional,
     required this.selectedServices,
+    required this.selectedPrices,
     required this.selectedDate,
     required this.selectedHour,
   });
@@ -24,10 +27,13 @@ class AgendamentoInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final verticalSpacing = size.height * 0.03;
+    final verticalSpacing = size.height * 0.018;
     final formattedDate = DateFormat('dd/MM').format(selectedDate);
-
     final double boxWidth = size.width * 0.75;
+
+    String formattedPrices = selectedPrices
+        .map((price) => 'R\$ ${price.toStringAsFixed(2).replaceAll('.', ',')}')
+        .join(', ');
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -40,7 +46,7 @@ class AgendamentoInfoPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  SizedBox(height: size.height * 0.02),
+                  SizedBox(height: size.height * 0.01),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -48,7 +54,7 @@ class AgendamentoInfoPage extends StatelessWidget {
                       const ProfileIconButton(),
                     ],
                   ),
-                  SizedBox(height: size.height * 0.04),
+                  SizedBox(height: size.height * 0.03),
                   Center(
                     child: Text(
                       'Informações de Agendamento',
@@ -60,8 +66,7 @@ class AgendamentoInfoPage extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  SizedBox(height: size.height * 0.06),
-
+                  SizedBox(height: size.height * 0.05),
                   Center(
                     child: Column(
                       children: [
@@ -75,6 +80,13 @@ class AgendamentoInfoPage extends StatelessWidget {
                         buildInfoBox(
                           label: 'Serviço:',
                           value: selectedServices.join(', '),
+                          width: boxWidth,
+                          size: size,
+                        ),
+                        SizedBox(height: verticalSpacing),
+                        buildInfoBox(
+                          label: 'Preço:',
+                          value: formattedPrices,
                           width: boxWidth,
                           size: size,
                         ),
@@ -95,17 +107,27 @@ class AgendamentoInfoPage extends StatelessWidget {
                       ],
                     ),
                   ),
-
-                  SizedBox(height: size.height * 0.05),
-
+                  SizedBox(height: size.height * 0.06),
                   Align(
                     alignment: Alignment.center,
                     child: CustomButton(
                       text: 'Confirmar Agendamento',
                       onPressed: () {
-                        // lógica de confirmação
+                        Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            transitionDuration: const Duration(milliseconds: 600),
+                            pageBuilder: (_, __, ___) => const ConfirmationPage(),
+                            transitionsBuilder: (_, animation, __, child) {
+                              return FadeTransition(
+                                opacity: animation,
+                                child: child,
+                              );
+                            },
+                          ),
+                        );
                       },
-                      height: size.height * 0.06,
+                      height: size.height * 0.055,
                       width: size.width * 0.75,
                     ),
                   ),
@@ -128,7 +150,7 @@ class AgendamentoInfoPage extends StatelessWidget {
       width: width,
       child: Container(
         padding: EdgeInsets.symmetric(
-          vertical: size.height * 0.017,
+          vertical: size.height * 0.015,
           horizontal: size.width * 0.04,
         ),
         decoration: BoxDecoration(

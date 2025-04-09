@@ -10,18 +10,7 @@ import 'package:app_barber_shop/screens/select_date_time.dart';
 import 'package:app_barber_shop/data/services.dart';
 
 class ServicoScreen extends StatefulWidget {
-  final List<String>? selectedServices;
-  final DateTime? selectedDate;
-  final String? selectedHour;
-  final String? selectedProfessional;
-
-  const ServicoScreen({
-    super.key,
-    this.selectedServices,
-    this.selectedDate,
-    this.selectedHour,
-    this.selectedProfessional,
-  });
+  const ServicoScreen({super.key});
 
   @override
   State<ServicoScreen> createState() => _ServicoScreenState();
@@ -55,14 +44,17 @@ class _ServicoScreenState extends State<ServicoScreen> {
           .map((e) => e.key)
           .toList();
 
+      final selectedPrices = selectedServices
+          .map((name) =>
+              serviceList.firstWhere((s) => s.name == name).price)
+          .toList();
+
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => SelectHourPage(
+          builder: (context) => SelectHourPage(  // erro aqui CHAT 
             selectedServices: selectedServices,
-            selectedDate: widget.selectedDate ?? DateTime.now(),
-            selectedHour: widget.selectedHour ?? '',
-            selectedProfessional: widget.selectedProfessional ?? '',
+            selectedPrices: selectedPrices,
           ),
         ),
       );
@@ -93,18 +85,15 @@ class _ServicoScreenState extends State<ServicoScreen> {
                   _buildTitle(size),
                   SizedBox(height: size.height * 0.04),
                   ...serviceList.map(
-                    (service) {
-                      final bool isCombo = service.name == 'Combo: Corte e Barba';
-                      return Padding(
-                        padding: EdgeInsets.only(bottom: size.height * 0.025),
-                        child: CustomCheckBox(
-                          service: service,
-                          isChecked: _selected[service.name] ?? false,
-                          onChanged: (value) => _toggleService(service.name, value),
-                          fontSize: isCombo ? size.width * 0.035 : null,
-                        ),
-                      );
-                    },
+                    (service) => Padding(
+                      padding: EdgeInsets.only(bottom: size.height * 0.025),
+                      child: CustomCheckBox(
+                        service: service,
+                        isChecked: _selected[service.name] ?? false,
+                        onChanged: (value) =>
+                            _toggleService(service.name, value),
+                      ),
+                    ),
                   ),
                   SizedBox(height: size.height * 0.05),
                   _buildContinueButton(size),

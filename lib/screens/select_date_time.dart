@@ -10,10 +10,12 @@ import 'package:flutter/material.dart';
 
 class SelectHourPage extends StatefulWidget {
   final List<String> selectedServices;
+  final List<double> selectedPrices; // ✅
 
   const SelectHourPage({
     super.key,
-    required this.selectedServices, required DateTime selectedDate, required String selectedHour, required String selectedProfessional,
+    required this.selectedServices,
+    required this.selectedPrices, // ✅
   });
 
   @override
@@ -57,31 +59,41 @@ class _SelectHourPageState extends State<SelectHourPage> {
           ),
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomBackButton(
-                    onPressed: () => Navigator.pop(context),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.date_range_sharp,
-                        color: AppColors.primary),
-                    iconSize: 35,
-                    onPressed: () async {
-                      final DateTime? result = await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const CalendarSelectionScreen(),
-                        ),
-                      );
-                      if (result != null) {
-                        setState(() {
-                          selectedDate = result;
-                        });
-                      }
-                    },
-                  ),
-                ],
+              Padding(
+                padding: EdgeInsets.only(
+                  top: size.height * 0.015,
+                  left: size.width * 0.04,
+                  right: size.width * 0.03,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomBackButton(
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                    IconButton(
+                      icon: const Icon(
+                        Icons.date_range_sharp,
+                        color: AppColors.primary,
+                      ),
+                      iconSize: 37,
+                      onPressed: () async {
+                        final DateTime? result = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const CalendarSelectionScreen(),
+                          ),
+                        );
+                        if (result != null) {
+                          setState(() {
+                            selectedDate = result;
+                          });
+                        }
+                      },
+                    ),
+                  ],
+                ),
               ),
               SizedBox(height: spacing * 2),
               Text(
@@ -127,8 +139,9 @@ class _SelectHourPageState extends State<SelectHourPage> {
                         });
                       },
                       key: ValueKey(hour),
-                      backgroundColor:
-                          isSelected ? AppColors.primary : AppColors.background,
+                      backgroundColor: isSelected
+                          ? AppColors.primary
+                          : AppColors.background,
                       textStyle: AppFonts.main.copyWith(
                         fontSize: size.width * 0.050,
                         fontWeight: FontWeight.w900,
@@ -153,6 +166,7 @@ class _SelectHourPageState extends State<SelectHourPage> {
                         MaterialPageRoute(
                           builder: (context) => ProfessionalSelectionScreen(
                             selectedServices: widget.selectedServices,
+                            selectedPrices: widget.selectedPrices,
                             selectedDate: selectedDate!,
                             selectedHour: selectedHour!,
                           ),

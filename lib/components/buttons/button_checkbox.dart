@@ -57,8 +57,10 @@ class CustomCheckBox extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Flexible(
+                    fit: FlexFit.loose,
                     child: Text(
                       service.name,
                       style: AppFonts.main.copyWith(
@@ -69,13 +71,13 @@ class CustomCheckBox extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  const SizedBox(width: 8),
+                  const SizedBox(width: 6),
                   Text(
-                    'R\$ ${service.price.toStringAsFixed(2)}',
+                    'R\$: ${service.price.toStringAsFixed(2)}',
                     style: AppFonts.main.copyWith(
-                      fontSize: screenSize.width * 0.04,
+                      fontSize: screenSize.width * 0.045,
                       color: AppColors.primary,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w900,
                     ),
                   ),
                 ],
