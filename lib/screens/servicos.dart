@@ -1,3 +1,5 @@
+import 'package:app_barber_shop/components/buttons/profile_button.dart';
+import 'package:app_barber_shop/screens/select_time.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
@@ -5,12 +7,21 @@ import 'package:app_barber_shop/components/theme/fonts.dart';
 import 'package:app_barber_shop/components/buttons/button_back.dart';
 import 'package:app_barber_shop/components/buttons/button_checkbox.dart';
 import 'package:app_barber_shop/components/buttons/button_contact.dart';
-import 'package:app_barber_shop/components/buttons/button_instagram.dart';
 import 'package:app_barber_shop/components/buttons/custom_button.dart';
-import 'package:app_barber_shop/screens/select_date.dart';
 
 class ServicoScreen extends StatefulWidget {
-  const ServicoScreen({super.key});
+  final List<String>? selectedServices;
+  final DateTime? selectedDate;
+  final String? selectedHour;
+  final String? selectedProfessional;
+
+  const ServicoScreen({
+    super.key,
+    this.selectedServices,
+    this.selectedDate,
+    this.selectedHour,
+    this.selectedProfessional,
+  });
 
   @override
   _ServicoScreenState createState() => _ServicoScreenState();
@@ -22,7 +33,7 @@ class _ServicoScreenState extends State<ServicoScreen> {
     'Corte Infantil': false,
     'Barba': false,
     'Sobrancelha': false,
-    'Combo': false,
+    'Combo: Corte e Barba': false,
   };
 
   bool _isAnyServiceSelected() {
@@ -37,10 +48,20 @@ class _ServicoScreenState extends State<ServicoScreen> {
 
   void _onContinuePressed() {
     if (_isAnyServiceSelected()) {
+      final selectedServices = _services.entries
+          .where((entry) => entry.value)
+          .map((entry) => entry.key)
+          .toList();
+
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const CalendarSelectionScreen(),
+          builder: (context) => SelectHourPage(
+            selectedServices: selectedServices,
+            selectedDate: widget.selectedDate ?? DateTime.now(),
+            selectedHour: widget.selectedHour ?? '',
+            selectedProfessional: widget.selectedProfessional ?? '',
+          ),
         ),
       );
     } else {
@@ -79,7 +100,7 @@ class _ServicoScreenState extends State<ServicoScreen> {
             constraints: BoxConstraints(minHeight: screenHeight),
             child: IntrinsicHeight(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.06),
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.08),
                 child: Column(
                   children: [
                     SizedBox(height: screenHeight * 0.01),
@@ -87,7 +108,7 @@ class _ServicoScreenState extends State<ServicoScreen> {
                     SizedBox(height: screenHeight * 0.03),
                     _buildTitle(screenWidth),
                     SizedBox(height: screenHeight * 0.04),
-                    _buildServiceList(screenHeight),
+                    _buildServiceList(screenHeight, screenWidth),
                     const Spacer(),
                     _buildContinueButton(screenHeight, screenWidth),
                     SizedBox(height: screenHeight * 0.03),
@@ -108,7 +129,7 @@ class _ServicoScreenState extends State<ServicoScreen> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         CustomBackButton(onPressed: () => Navigator.pop(context)),
-        InstagramIconButton(),
+        const ProfileIconButton(),
       ],
     );
   }
@@ -125,15 +146,17 @@ class _ServicoScreenState extends State<ServicoScreen> {
     );
   }
 
-  Widget _buildServiceList(double screenHeight) {
+  Widget _buildServiceList(double screenHeight, double screenWidth) {
     return Column(
       children: _services.keys.map((service) {
+        final bool isCombo = service == 'Combo: Corte e Barba';
         return Padding(
           padding: EdgeInsets.only(bottom: screenHeight * 0.025),
           child: CustomCheckBox(
             text: service,
             isChecked: _services[service]!,
             onChanged: (value) => _toggleService(service, value),
+            fontSize: isCombo ? screenWidth * 0.035 : null,
           ),
         );
       }).toList(),

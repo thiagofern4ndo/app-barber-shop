@@ -8,6 +8,7 @@ class CustomCheckBox extends StatelessWidget {
   final ValueChanged<bool?> onChanged;
   final double? width;
   final double? height;
+  final double? fontSize;
 
   const CustomCheckBox({
     super.key,
@@ -16,6 +17,7 @@ class CustomCheckBox extends StatelessWidget {
     required this.onChanged,
     this.width,
     this.height,
+    this.fontSize,
   });
 
   @override
@@ -23,6 +25,17 @@ class CustomCheckBox extends StatelessWidget {
     final screenSize = MediaQuery.of(context).size;
     final double boxWidth = width ?? screenSize.width * 0.8;
     final double boxHeight = height ?? screenSize.height * 0.07;
+    final double effectiveFontSize = fontSize ?? screenSize.width * 0.05;
+
+    // AUMENTA A FONTE APENAS PARA O COMBO (título)
+    final double titleFontSize = text == 'Combo: Corte e Barba'
+        ? effectiveFontSize * 1.0
+        : effectiveFontSize;
+
+    // AUMENTA A FONTE APENAS PARA O COMBO (preço)
+    final double priceFontSize = text == 'Combo: Corte e Barba'
+        ? effectiveFontSize
+        : effectiveFontSize * 0.8;
 
     return SizedBox(
       width: boxWidth,
@@ -51,15 +64,30 @@ class CustomCheckBox extends StatelessWidget {
           alignment: Alignment.center,
           children: [
             Align(
-              alignment: Alignment.center,
-              child: Text(
-                text,
-                textAlign: TextAlign.center,
-                style: AppFonts.main.copyWith(
-                  fontSize: screenSize.width * 0.05,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.primaryText,
-                ),
+              alignment: Alignment.centerLeft,
+              child: Row(
+                children: [
+                  Flexible(
+                    child: Text(
+                      text,
+                      style: AppFonts.main.copyWith(
+                        fontSize: titleFontSize,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.primaryText,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    _getPrice(text),
+                    style: AppFonts.main.copyWith(
+                      fontSize: priceFontSize,
+                      color: AppColors.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
             ),
             Positioned(
@@ -88,5 +116,22 @@ class CustomCheckBox extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _getPrice(String service) {
+    switch (service) {
+      case 'Corte':
+        return 'R\$ 40,00';
+      case 'Corte Infantil':
+        return 'R\$ 50,00';
+      case 'Barba':
+        return 'R\$ 30,00';
+      case 'Sobrancelha':
+        return 'R\$ 40,00';
+      case 'Combo: Corte e Barba':
+        return 'R\$ 60,00';
+      default:
+        return '';
+    }
   }
 }

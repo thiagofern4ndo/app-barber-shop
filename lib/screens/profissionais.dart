@@ -1,16 +1,22 @@
+import 'package:app_barber_shop/components/buttons/profile_button.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
+import 'package:app_barber_shop/screens/agendamento_info_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:app_barber_shop/components/buttons/custom_button.dart';
-import 'package:app_barber_shop/components/buttons/button_contact.dart';
-import 'package:app_barber_shop/components/buttons/button_instagram.dart';
 import 'package:app_barber_shop/components/buttons/button_back.dart';
-import 'package:app_barber_shop/screens/servicos.dart';
-
-
 
 class ProfessionalSelectionScreen extends StatefulWidget {
-  const ProfessionalSelectionScreen({super.key});
+  final List<String> selectedServices;
+  final DateTime selectedDate;
+  final String selectedHour;
+
+  const ProfessionalSelectionScreen({
+    super.key,
+    required this.selectedServices,
+    required this.selectedDate,
+    required this.selectedHour,
+  });
 
   @override
   _ProfessionalSelectionScreenState createState() =>
@@ -19,8 +25,7 @@ class ProfessionalSelectionScreen extends StatefulWidget {
 
 class _ProfessionalSelectionScreenState
     extends State<ProfessionalSelectionScreen> {
-  String? selectedProfessional; 
-
+  String? selectedProfessional;
 
   void selectProfessional(String name) {
     setState(() {
@@ -28,13 +33,19 @@ class _ProfessionalSelectionScreenState
     });
   }
 
-
   void navigateToNextScreen() {
     if (selectedProfessional != null) {
       Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const ServicoScreen()),
-    );
+        context,
+        MaterialPageRoute(
+          builder: (context) => AgendamentoInfoPage( // ✅ mudou pra tela final
+            selectedProfessional: selectedProfessional!,
+            selectedServices: widget.selectedServices,
+            selectedDate: widget.selectedDate,
+            selectedHour: widget.selectedHour,
+          ),
+        ),
+      );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Por favor, selecione um profissional.')),
@@ -44,119 +55,82 @@ class _ProfessionalSelectionScreenState
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomBackButton(
-                    onPressed: () {
-                      Navigator.maybePop(context);
-                    },
-                  ),
-                  InstagramIconButton(),
-                ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.09),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomBackButton(
+                      onPressed: () {
+                        Navigator.maybePop(context);
+                      },
+                    ),
+                    const ProfileIconButton(),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: 50),
-            Text(
-              'Escolha um profissional',
-              style: GoogleFonts.poppins(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: AppColors.primaryText
+              SizedBox(height: screenHeight * 0.05),
+              Text(
+                'Escolha um profissional',
+                style: GoogleFonts.poppins(
+                  fontSize: screenWidth * 0.06,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.primaryText,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 50),
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 2,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                padding: const EdgeInsets.all(20),
-                children: [
-                  ProfessionalCard(
-                    name: 'Carlos',
-                    imageUrl: 'assets/carlos.png',
-                    selectedProfessional: selectedProfessional,
-                    onTap: selectProfessional,
-                  ),
-                  ProfessionalCard(
-                    name: 'Eduardo',
-                    imageUrl: 'assets/eduardo.png',
-                    selectedProfessional: selectedProfessional,
-                    onTap: selectProfessional,
-                  ),
-                  ProfessionalCard(
-                    name: 'Paulo',
-                    imageUrl: 'assets/paulo.png',
-                    selectedProfessional: selectedProfessional,
-                    onTap: selectProfessional,
-                  ),
-                  ProfessionalCard(
-                    name: 'Antonio',
-                    imageUrl: 'assets/antonio.jpg',
-                    selectedProfessional: selectedProfessional,
-                    onTap: selectProfessional,
-                  ),
-                ],
+              SizedBox(height: screenHeight * 0.03),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+                child: GridView.count(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: screenWidth * 0.04,
+                  mainAxisSpacing: screenHeight * 0.0001,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    buildProfessionalCard('Paula', 'assets/paula.png'),
+                    buildProfessionalCard('Carlos', 'assets/carlos.png'),
+                    buildProfessionalCard('Eduardo', 'assets/eduardo.png'),
+                    buildProfessionalCard('Maria', 'assets/maria.png'),
+                    buildProfessionalCard('Paulo', 'assets/paulo.png'),
+                    buildProfessionalCard('Antonio', 'assets/antonio.png'),
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Column(
-                children: [
-                  CustomButton(
-                    text: 'Continuar',
-                    onPressed: navigateToNextScreen,
-                    height: 40,
-                    width: 200,
-                  ),
-                  const SizedBox(height: 80),
-                  ContactButton(
-                  ),
-                  const SizedBox(height: 20),
-                ],
+              SizedBox(height: screenHeight * 0.01),
+              CustomButton(
+                text: 'Continuar',
+                onPressed: navigateToNextScreen,
+                height: screenHeight * 0.05,
+                width: screenWidth * 0.5,
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
-}
 
-class ProfessionalCard extends StatelessWidget {
-  final String name;
-  final String imageUrl;
-  final String? selectedProfessional;
-  final Function(String) onTap;
-
-  const ProfessionalCard({
-    super.key,
-    required this.name,
-    required this.imageUrl,
-    required this.selectedProfessional,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    bool isSelected =
-        selectedProfessional == name; 
+  Widget buildProfessionalCard(String name, String imagePath) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final bool isSelected = selectedProfessional == name;
 
     return GestureDetector(
-      onTap: () => onTap(name), 
+      onTap: () => selectProfessional(name),
       child: Column(
         children: [
           Container(
-            width: 120, 
-            height: 120, 
+            width: screenWidth * 0.3,
+            height: screenWidth * 0.3,
             decoration: BoxDecoration(
               border: isSelected
                   ? Border.all(color: AppColors.primary, width: 3)
@@ -166,26 +140,22 @@ class ProfessionalCard extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(15),
               child: Image.asset(
-                imageUrl,
-                width: 120, 
-                height: 120, 
+                imagePath,
                 fit: BoxFit.cover,
               ),
             ),
           ),
-            const SizedBox(height: 5),
-            Text(
-              name,
-              style: GoogleFonts.poppins(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: AppColors.primaryText,
-              ),
-              textAlign: TextAlign.center,
+          SizedBox(height: screenWidth * 0.02),
+          Text(
+            name,
+            style: GoogleFonts.poppins(
+              fontSize: screenWidth * 0.035,
+              fontWeight: FontWeight.bold,
+              color: AppColors.primaryText,
             ),
-            const SizedBox(height: 8),
-          ],
-       ),
-     );
+          ),
+        ],
+      ),
+    );
   }
 }

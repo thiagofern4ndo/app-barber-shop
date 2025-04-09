@@ -75,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
             constraints: BoxConstraints(minHeight: size.height),
             child: IntrinsicHeight(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                padding: EdgeInsets.symmetric(horizontal: size.width * 0.08),
                 child: Column(
                   children: [
                     SizedBox(height: size.height * 0.015),

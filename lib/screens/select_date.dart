@@ -3,7 +3,6 @@ import 'package:app_barber_shop/components/buttons/button_contact.dart';
 import 'package:app_barber_shop/components/buttons/custom_button.dart';
 import 'package:app_barber_shop/components/buttons/profile_button.dart';
 import 'package:app_barber_shop/components/calendar/calendar_user.dart';
-import 'package:app_barber_shop/screens/select_time.dart';
 import 'package:flutter/material.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:app_barber_shop/components/theme/fonts.dart';
@@ -37,12 +36,7 @@ class _CalendarSelectionScreenState extends State<CalendarSelectionScreen> {
       return;
     }
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const SelectHourPage(),
-      ),
-    );
+    Navigator.pop(context, _selectedDate);
   }
 
   void _goBack() {
@@ -96,13 +90,13 @@ class _CalendarSelectionScreenState extends State<CalendarSelectionScreen> {
                         child: CustomButton(
                           text: 'Continuar',
                           onPressed: _handleContinue,
-                          width: screenWidth * 0.57, // ↔️ ajuste aqui
-                          height: screenHeight * 0.06, // ↕️ ajuste aqui
+                          width: screenWidth * 0.57,
+                          height: screenHeight * 0.06,
                         ),
                       ),
                       SizedBox(height: screenHeight * 0.07),
                       SizedBox(
-                        height: screenHeight * 0.2, // ajuste aqui como quiser
+                        height: screenHeight * 0.2,
                         child: ContactButton(),
                       ),
                     ],
