@@ -5,10 +5,12 @@ import 'package:app_barber_shop/components/theme/colors.dart';
 
 class CarouselCalendar extends StatefulWidget {
   final int daysToShow;
+  final void Function(DateTime)? onDateSelected;
 
   const CarouselCalendar({
     super.key,
     this.daysToShow = 30,
+    this.onDateSelected,
   });
 
   @override
@@ -40,12 +42,12 @@ class _CarouselCalendarState extends State<CarouselCalendar> {
         currentMonth = tappedMonth;
       }
     });
+
+    widget.onDateSelected?.call(date);
   }
 
   String _formatWeekday(int weekday) {
-    const weekdays = [
-      'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom',
-    ];
+    const weekdays = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
     return weekdays[weekday - 1];
   }
 
@@ -55,7 +57,6 @@ class _CarouselCalendarState extends State<CarouselCalendar> {
 
     return Column(
       children: [
-        // Nome do mês centralizado
         Padding(
           padding: EdgeInsets.only(bottom: size.height * 0.01),
           child: Center(
@@ -69,8 +70,6 @@ class _CarouselCalendarState extends State<CarouselCalendar> {
             ),
           ),
         ),
-
-        // Carrossel de datas
         SizedBox(
           height: size.height * 0.13,
           child: ListView.builder(

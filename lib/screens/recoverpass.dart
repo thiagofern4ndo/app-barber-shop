@@ -61,7 +61,7 @@ class _RecoverPassPageState extends State<RecoverPassPage> {
             constraints: BoxConstraints(minHeight: screenHeight),
             child: IntrinsicHeight(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.08),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [

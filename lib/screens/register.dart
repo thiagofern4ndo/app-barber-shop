@@ -95,7 +95,7 @@ class _RegisterPageState extends State<RegisterPage> {
             constraints: BoxConstraints(minHeight: screenHeight),
             child: IntrinsicHeight(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.06),
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.08),
                 child: Column(
                   children: [
                     SizedBox(height: screenHeight * 0.02),

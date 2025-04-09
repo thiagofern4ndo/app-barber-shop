@@ -31,9 +31,4 @@ flutter:
   uses-material-design: true
   generate: true
   assets:
-    - assets/logo.png
-    - assets/barber.png
-    - assets/carlos.png
-    - assets/eduardo.png
-    - assets/paulo.png
-    - assets/antonio.png
+    - assets/
