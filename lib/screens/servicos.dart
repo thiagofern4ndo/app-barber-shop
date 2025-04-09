@@ -1,5 +1,5 @@
 import 'package:app_barber_shop/components/buttons/profile_button.dart';
-import 'package:app_barber_shop/screens/select_time.dart';
+import 'package:app_barber_shop/screens/select_date_time.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
@@ -7,7 +7,7 @@ import 'package:app_barber_shop/components/theme/fonts.dart';
 import 'package:app_barber_shop/components/buttons/button_back.dart';
 import 'package:app_barber_shop/components/buttons/button_checkbox.dart';
 import 'package:app_barber_shop/components/buttons/button_contact.dart';
-import 'package:app_barber_shop/components/buttons/custom_button.dart';
+import 'package:app_barber_shop/components/buttons/button_main.dart';
 
 class ServicoScreen extends StatefulWidget {
   final List<String>? selectedServices;

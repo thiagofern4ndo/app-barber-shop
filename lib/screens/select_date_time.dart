@@ -1,10 +1,10 @@
 import 'package:app_barber_shop/components/buttons/button_back.dart';
-import 'package:app_barber_shop/components/buttons/custom_button.dart';
-import 'package:app_barber_shop/components/buttons/custom_button2.dart';
+import 'package:app_barber_shop/components/buttons/button_main.dart';
+import 'package:app_barber_shop/components/buttons/button_secondary.dart';
 import 'package:app_barber_shop/components/calendar/carousel_calendar.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:app_barber_shop/components/theme/fonts.dart';
-import 'package:app_barber_shop/screens/profissionais.dart';
+import 'package:app_barber_shop/screens/professional.dart';
 import 'package:app_barber_shop/screens/select_date.dart';
 import 'package:flutter/material.dart';
 
@@ -74,7 +74,6 @@ class _SelectHourPageState extends State<SelectHourPage> {
                           builder: (context) => const CalendarSelectionScreen(),
                         ),
                       );
-
                       if (result != null) {
                         setState(() {
                           selectedDate = result;

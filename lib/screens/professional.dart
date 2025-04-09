@@ -1,10 +1,11 @@
+import 'package:app_barber_shop/components/buttons/button_main.dart';
 import 'package:app_barber_shop/components/buttons/profile_button.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:app_barber_shop/screens/agendamento_info_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:app_barber_shop/components/buttons/custom_button.dart';
 import 'package:app_barber_shop/components/buttons/button_back.dart';
+import 'package:app_barber_shop/components/cards/professional_card.dart'; 
 
 class ProfessionalSelectionScreen extends StatefulWidget {
   final List<String> selectedServices;
@@ -38,7 +39,7 @@ class _ProfessionalSelectionScreenState
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => AgendamentoInfoPage( // ✅ mudou pra tela final
+          builder: (context) => AgendamentoInfoPage(
             selectedProfessional: selectedProfessional!,
             selectedServices: widget.selectedServices,
             selectedDate: widget.selectedDate,
@@ -97,12 +98,42 @@ class _ProfessionalSelectionScreenState
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   children: [
-                    buildProfessionalCard('Paula', 'assets/paula.png'),
-                    buildProfessionalCard('Carlos', 'assets/carlos.png'),
-                    buildProfessionalCard('Eduardo', 'assets/eduardo.png'),
-                    buildProfessionalCard('Maria', 'assets/maria.png'),
-                    buildProfessionalCard('Paulo', 'assets/paulo.png'),
-                    buildProfessionalCard('Antonio', 'assets/antonio.png'),
+                    ProfessionalCard(
+                      name: 'Paula',
+                      imagePath: 'assets/paula.png',
+                      isSelected: selectedProfessional == 'Paula',
+                      onTap: () => selectProfessional('Paula'),
+                    ),
+                    ProfessionalCard(
+                      name: 'Carlos',
+                      imagePath: 'assets/carlos.png',
+                      isSelected: selectedProfessional == 'Carlos',
+                      onTap: () => selectProfessional('Carlos'),
+                    ),
+                    ProfessionalCard(
+                      name: 'Eduardo',
+                      imagePath: 'assets/eduardo.png',
+                      isSelected: selectedProfessional == 'Eduardo',
+                      onTap: () => selectProfessional('Eduardo'),
+                    ),
+                    ProfessionalCard(
+                      name: 'Maria',
+                      imagePath: 'assets/maria.png',
+                      isSelected: selectedProfessional == 'Maria',
+                      onTap: () => selectProfessional('Maria'),
+                    ),
+                    ProfessionalCard(
+                      name: 'Paulo',
+                      imagePath: 'assets/paulo.png',
+                      isSelected: selectedProfessional == 'Paulo',
+                      onTap: () => selectProfessional('Paulo'),
+                    ),
+                    ProfessionalCard(
+                      name: 'Antonio',
+                      imagePath: 'assets/antonio.png',
+                      isSelected: selectedProfessional == 'Antonio',
+                      onTap: () => selectProfessional('Antonio'),
+                    ),
                   ],
                 ),
               ),
@@ -116,45 +147,6 @@ class _ProfessionalSelectionScreenState
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget buildProfessionalCard(String name, String imagePath) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final bool isSelected = selectedProfessional == name;
-
-    return GestureDetector(
-      onTap: () => selectProfessional(name),
-      child: Column(
-        children: [
-          Container(
-            width: screenWidth * 0.3,
-            height: screenWidth * 0.3,
-            decoration: BoxDecoration(
-              border: isSelected
-                  ? Border.all(color: AppColors.primary, width: 3)
-                  : null,
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: Image.asset(
-                imagePath,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          SizedBox(height: screenWidth * 0.02),
-          Text(
-            name,
-            style: GoogleFonts.poppins(
-              fontSize: screenWidth * 0.035,
-              fontWeight: FontWeight.bold,
-              color: AppColors.primaryText,
-            ),
-          ),
-        ],
       ),
     );
   }
