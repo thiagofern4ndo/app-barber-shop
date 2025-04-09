@@ -7,7 +7,8 @@ class CustomButton2 extends StatelessWidget {
   final VoidCallback onPressed;
   final double? width;
   final double? height;
-  final bool isSelected;
+  final TextStyle? textStyle;
+  final Color? backgroundColor; // Agora ele é armazenado
 
   const CustomButton2({
     super.key,
@@ -15,7 +16,8 @@ class CustomButton2 extends StatelessWidget {
     required this.onPressed,
     this.width,
     this.height,
-    this.isSelected = false,
+    this.textStyle,
+    this.backgroundColor, // Correto no construtor
   });
 
   @override
@@ -30,8 +32,7 @@ class CustomButton2 extends StatelessWidget {
       height: buttonHeight,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor:
-              isSelected ? AppColors.primary : AppColors.background,
+          backgroundColor: backgroundColor ?? AppColors.background,
           side: BorderSide(
             color: AppColors.primary,
             width: buttonHeight * 0.1,
@@ -43,11 +44,12 @@ class CustomButton2 extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           text,
-          style: AppFonts.main.copyWith(
-            fontSize: fontSize,
-            fontWeight: FontWeight.w900,
-            color: isSelected ? AppColors.background : AppColors.primaryText,
-          ),
+          style: textStyle ??
+              AppFonts.main.copyWith(
+                fontSize: fontSize,
+                fontWeight: FontWeight.w900,
+                color: AppColors.primaryText,
+              ),
         ),
       ),
     );

@@ -29,7 +29,7 @@ class CustomCheckBox extends StatelessWidget {
 
     // AUMENTA A FONTE APENAS PARA O COMBO (título)
     final double titleFontSize = text == 'Combo: Corte e Barba'
-        ? effectiveFontSize * 1.1
+        ? effectiveFontSize * 1.0
         : effectiveFontSize;
 
     // AUMENTA A FONTE APENAS PARA O COMBO (preço)

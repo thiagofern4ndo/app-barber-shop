@@ -1,3 +1,4 @@
+import 'package:app_barber_shop/screens/select_time.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
@@ -7,7 +8,6 @@ import 'package:app_barber_shop/components/buttons/button_checkbox.dart';
 import 'package:app_barber_shop/components/buttons/button_contact.dart';
 import 'package:app_barber_shop/components/buttons/button_instagram.dart';
 import 'package:app_barber_shop/components/buttons/custom_button.dart';
-import 'package:app_barber_shop/screens/select_date.dart';
 
 class ServicoScreen extends StatefulWidget {
   const ServicoScreen({super.key});
@@ -40,7 +40,7 @@ class _ServicoScreenState extends State<ServicoScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const CalendarSelectionScreen(),
+          builder: (context) => const SelectHourPage(),
         ),
       );
     } else {

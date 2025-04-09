@@ -46,7 +46,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
     final double calendarWidth = size.width * 0.7;
     final double padding = size.width * 0.03;
     final double daySize = size.width * 0.08;
-    final double fontSize = size.width * 0.03;
+    final double fontSize = size.width * 0.035;
 
     final String nomeMes =
         DateFormat.MMMM('pt_BR').format(_currentMonth).capitalize();
@@ -65,17 +65,17 @@ class _CustomCalendarState extends State<CustomCalendar> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Icon(Icons.chevron_left,
-                  color: AppColors.primary, size: fontSize * 1.8),
+                  color: AppColors.primary, size: fontSize * 2),
               Text(
                 nomeMes,
                 style: AppFonts.main.copyWith(
-                  fontSize: size.width * 0.05,
-                  fontWeight: FontWeight.w800,
+                  fontSize: size.width * 0.055,
+                  fontWeight: FontWeight.w900,
                   color: AppColors.background,
                 ),
               ),
               Icon(Icons.chevron_right,
-                  color: AppColors.primary, size: fontSize * 1.8),
+                  color: AppColors.primary, size: fontSize * 2),
             ],
           ),
           Expanded(
@@ -89,22 +89,22 @@ class _CustomCalendarState extends State<CustomCalendar> {
                 });
               },
               weekendTextStyle: _textStyle(fontSize),
-              weekdayTextStyle: _textStyle(fontSize),
+              weekdayTextStyle: _weekdayTextStyle(fontSize),
               daysTextStyle: _textStyle(fontSize),
               inactiveDaysTextStyle: _disabledTextStyle(fontSize),
               todayButtonColor: AppColors.transparent,
               todayBorderColor: AppColors.transparent,
               todayTextStyle: AppFonts.main.copyWith(
                 color: AppColors.background,
-                fontWeight: FontWeight.w700,
-                fontSize: fontSize,
+                fontWeight: FontWeight.w800,
+                fontSize: fontSize + 1,
               ),
               selectedDayButtonColor: AppColors.transparent,
               selectedDayBorderColor: AppColors.transparent,
               selectedDayTextStyle: AppFonts.main.copyWith(
                 color: AppColors.primary,
-                fontWeight: FontWeight.w700,
-                fontSize: fontSize,
+                fontWeight: FontWeight.w900,
+                fontSize: fontSize + 1,
               ),
               headerTextStyle: const TextStyle(fontSize: 0),
               showHeader: false,
@@ -156,8 +156,8 @@ class _CustomCalendarState extends State<CustomCalendar> {
                             : pastOrInvalid
                                 ? AppColors.secondaryText
                                 : AppColors.background,
-                        fontWeight: FontWeight.w700,
-                        fontSize: fontSize,
+                        fontWeight: FontWeight.w900,
+                        fontSize: fontSize + 1,
                       ),
                     ),
                   ),
@@ -173,7 +173,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
   TextStyle _textStyle(double fontSize) {
     return AppFonts.main.copyWith(
       color: AppColors.background,
-      fontSize: fontSize,
+      fontSize: fontSize + 1,
       fontWeight: FontWeight.w900,
     );
   }
@@ -181,7 +181,16 @@ class _CustomCalendarState extends State<CustomCalendar> {
   TextStyle _disabledTextStyle(double fontSize) {
     return AppFonts.main.copyWith(
       color: AppColors.secondaryText,
-      fontSize: fontSize,
+      fontSize: fontSize + 1,
+      fontWeight: FontWeight.w800,
+    );
+  }
+
+  TextStyle _weekdayTextStyle(double fontSize) {
+    const weekdays = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
+    return AppFonts.main.copyWith(
+      color: AppColors.background,
+      fontSize: fontSize + 2,
       fontWeight: FontWeight.w900,
     );
   }
