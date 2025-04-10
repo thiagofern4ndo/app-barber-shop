@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:app_barber_shop/components/theme/fonts.dart';
 import 'package:app_barber_shop/data/services.dart';
@@ -27,6 +28,9 @@ class CustomCheckBox extends StatelessWidget {
     final double boxWidth = width ?? screenSize.width * 0.8;
     final double boxHeight = height ?? screenSize.height * 0.07;
     final double effectiveFontSize = fontSize ?? screenSize.width * 0.05;
+
+    // Formatar preço com vírgula
+    final String formattedPrice = NumberFormat('#,##0.00', 'pt_BR').format(service.price);
 
     return SizedBox(
       width: boxWidth,
@@ -73,7 +77,7 @@ class CustomCheckBox extends StatelessWidget {
                   ),
                   const SizedBox(width: 6),
                   Text(
-                    'R\$: ${service.price.toStringAsFixed(2)}',
+                    'R\$ $formattedPrice',
                     style: AppFonts.main.copyWith(
                       fontSize: screenSize.width * 0.045,
                       color: AppColors.primary,
