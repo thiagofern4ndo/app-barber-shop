@@ -10,10 +10,10 @@ class CustomCalendar extends StatefulWidget {
   const CustomCalendar({super.key, required this.aoSelecionarDia});
 
   @override
-  _CustomCalendarState createState() => _CustomCalendarState();
+  CustomCalendarState createState() => CustomCalendarState();
 }
 
-class _CustomCalendarState extends State<CustomCalendar> {
+class CustomCalendarState extends State<CustomCalendar> {
   DateTime? _selectedDay;
   DateTime _currentMonth = DateTime.now();
 
@@ -187,7 +187,6 @@ class _CustomCalendarState extends State<CustomCalendar> {
   }
 
   TextStyle _weekdayTextStyle(double fontSize) {
-    const weekdays = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
     return AppFonts.main.copyWith(
       color: AppColors.background,
       fontSize: fontSize + 2,

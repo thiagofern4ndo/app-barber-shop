@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:app_barber_shop/components/buttons/profile_button.dart';
 import 'package:app_barber_shop/components/buttons/button_back.dart';
 import 'package:app_barber_shop/components/buttons/button_checkbox.dart';
@@ -18,6 +19,7 @@ class ServicoScreen extends StatefulWidget {
 
 class _ServicoScreenState extends State<ServicoScreen> {
   final Map<String, bool> _selected = {};
+  final NumberFormat _formatter = NumberFormat('#,##0.00', 'pt_BR');
 
   @override
   void initState() {
@@ -52,7 +54,7 @@ class _ServicoScreenState extends State<ServicoScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => SelectHourPage(  // erro aqui CHAT 
+          builder: (context) => SelectHourPage(
             selectedServices: selectedServices,
             selectedPrices: selectedPrices,
           ),

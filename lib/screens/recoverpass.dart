@@ -72,7 +72,7 @@ class _RecoverPassPageState extends State<RecoverPassPage> {
                         InstagramIconButton(),
                       ],
                     ),
-                    SizedBox(height: screenHeight * 0.1),
+                    SizedBox(height: screenHeight * 0.15),
                     Text(
                       'Esqueceu a senha?',
                       style: AppFonts.main.copyWith(
@@ -82,7 +82,7 @@ class _RecoverPassPageState extends State<RecoverPassPage> {
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: screenHeight * 0.015),
+                    SizedBox(height: screenHeight * 0.05),
                     Text(
                       'Digite Email ou Telefone cadastrados!',
                       style: AppFonts.main.copyWith(
@@ -92,7 +92,7 @@ class _RecoverPassPageState extends State<RecoverPassPage> {
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: screenHeight * 0.05),
+                    SizedBox(height: screenHeight * 0.03),
                     Form(
                       key: _formKey,
                       child: Column(
@@ -102,7 +102,7 @@ class _RecoverPassPageState extends State<RecoverPassPage> {
                             hintText: 'Email ou Telefone',
                             errorText: _emailError,
                           ),
-                          SizedBox(height: screenHeight * 0.04),
+                          SizedBox(height: screenHeight * 0.05),
                           CustomButton(
                             text: 'Recuperar Senha',
                             onPressed: _submit,
@@ -113,8 +113,8 @@ class _RecoverPassPageState extends State<RecoverPassPage> {
                         ],
                       ),
                     ),
-                    const Spacer(),
-                    ContactButton(),
+                     SizedBox(height: screenHeight * 0.22),
+                     ContactButton(),
                   ],
                 ),
               ),

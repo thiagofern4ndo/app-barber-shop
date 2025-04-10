@@ -37,26 +37,36 @@ class _RegisterPageState extends State<RegisterPage> {
     if (_fullNameController.text.isEmpty) {
       _fullNameError = 'Por favor, insira seu nome completo';
       hasErrors = true;
+    } else {
+      _fullNameError = null;
     }
 
     if (_emailController.text.isEmpty) {
       _emailError = 'Por favor, insira um email válido';
       hasErrors = true;
+    } else {
+      _emailError = null;
     }
 
     if (_phoneController.text.isEmpty) {
       _phoneError = 'Por favor, insira seu telefone';
       hasErrors = true;
+    } else {
+      _phoneError = null;
     }
 
     if (_passwordController.text.length < 6) {
       _passwordError = 'A senha deve ter pelo menos 6 caracteres';
       hasErrors = true;
+    } else {
+      _passwordError = null;
     }
 
     if (_confirmPasswordController.text != _passwordController.text) {
       _confirmPasswordError = 'As senhas não coincidem';
       hasErrors = true;
+    } else {
+      _confirmPasswordError = null;
     }
 
     setState(() {});
@@ -151,28 +161,33 @@ class _RegisterPageState extends State<RegisterPage> {
                           CustomTextField(
                             controller: _fullNameController,
                             hintText: 'Nome Completo',
+                            errorText: _fullNameError,
                           ),
                           SizedBox(height: screenHeight * 0.01),
                           CustomTextField(
                             controller: _emailController,
                             hintText: 'Email',
+                            errorText: _emailError,
                           ),
                           SizedBox(height: screenHeight * 0.01),
                           CustomTextField(
                             controller: _phoneController,
                             hintText: 'Telefone',
+                            errorText: _phoneError,
                           ),
                           SizedBox(height: screenHeight * 0.01),
                           CustomTextField(
                             controller: _passwordController,
                             hintText: 'Crie uma senha',
                             obscureText: true,
+                            errorText: _passwordError,
                           ),
                           SizedBox(height: screenHeight * 0.01),
                           CustomTextField(
                             controller: _confirmPasswordController,
                             hintText: 'Confirmar senha',
                             obscureText: true,
+                            errorText: _confirmPasswordError,
                           ),
                           SizedBox(height: screenHeight * 0.01),
                           Row(
