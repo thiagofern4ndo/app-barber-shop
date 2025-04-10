@@ -20,7 +20,7 @@ class ProfileIconButton extends StatelessWidget {
       icon: FaIcon(
         FontAwesomeIcons.circleUser,
         color: AppColors.primary,
-        size: 35,
+        size: 37,
       ),
       onPressed: () => _navigateToTemporaryPage(context),
     );

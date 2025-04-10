@@ -1,19 +1,23 @@
+import 'package:app_barber_shop/components/buttons/button_main.dart';
 import 'package:app_barber_shop/components/buttons/profile_button.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:app_barber_shop/screens/agendamento_info_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:app_barber_shop/components/buttons/custom_button.dart';
 import 'package:app_barber_shop/components/buttons/button_back.dart';
+import 'package:app_barber_shop/components/cards/professional_card.dart';
+import 'package:app_barber_shop/data/professionals.dart'; 
 
 class ProfessionalSelectionScreen extends StatefulWidget {
   final List<String> selectedServices;
+  final List<double> selectedPrices; // ✅ Adicionado
   final DateTime selectedDate;
   final String selectedHour;
 
   const ProfessionalSelectionScreen({
     super.key,
     required this.selectedServices,
+    required this.selectedPrices, // ✅ Adicionado
     required this.selectedDate,
     required this.selectedHour,
   });
@@ -38,9 +42,10 @@ class _ProfessionalSelectionScreenState
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => AgendamentoInfoPage( // ✅ mudou pra tela final
+          builder: (context) => AgendamentoInfoPage(
             selectedProfessional: selectedProfessional!,
             selectedServices: widget.selectedServices,
+            selectedPrices: widget.selectedPrices, // ✅ Adicionado
             selectedDate: widget.selectedDate,
             selectedHour: widget.selectedHour,
           ),
@@ -96,14 +101,16 @@ class _ProfessionalSelectionScreenState
                   mainAxisSpacing: screenHeight * 0.0001,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  children: [
-                    buildProfessionalCard('Paula', 'assets/paula.png'),
-                    buildProfessionalCard('Carlos', 'assets/carlos.png'),
-                    buildProfessionalCard('Eduardo', 'assets/eduardo.png'),
-                    buildProfessionalCard('Maria', 'assets/maria.png'),
-                    buildProfessionalCard('Paulo', 'assets/paulo.png'),
-                    buildProfessionalCard('Antonio', 'assets/antonio.png'),
-                  ],
+                  children: professionals.map((professional) {
+                    final name = professional['name']!;
+                    final imagePath = professional['imagePath']!;
+                    return ProfessionalCard(
+                      name: name,
+                      imagePath: imagePath,
+                      isSelected: selectedProfessional == name,
+                      onTap: () => selectProfessional(name),
+                    );
+                  }).toList(),
                 ),
               ),
               SizedBox(height: screenHeight * 0.01),
@@ -116,45 +123,6 @@ class _ProfessionalSelectionScreenState
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget buildProfessionalCard(String name, String imagePath) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final bool isSelected = selectedProfessional == name;
-
-    return GestureDetector(
-      onTap: () => selectProfessional(name),
-      child: Column(
-        children: [
-          Container(
-            width: screenWidth * 0.3,
-            height: screenWidth * 0.3,
-            decoration: BoxDecoration(
-              border: isSelected
-                  ? Border.all(color: AppColors.primary, width: 3)
-                  : null,
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: Image.asset(
-                imagePath,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          SizedBox(height: screenWidth * 0.02),
-          Text(
-            name,
-            style: GoogleFonts.poppins(
-              fontSize: screenWidth * 0.035,
-              fontWeight: FontWeight.bold,
-              color: AppColors.primaryText,
-            ),
-          ),
-        ],
       ),
     );
   }

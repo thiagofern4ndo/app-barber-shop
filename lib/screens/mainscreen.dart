@@ -3,7 +3,7 @@ import 'package:app_barber_shop/screens/loginpage.dart';
 import 'package:flutter/material.dart';
 import 'package:app_barber_shop/components/buttons/profile_button.dart';
 import 'package:app_barber_shop/components/buttons/button_instagram.dart';
-import 'package:app_barber_shop/components/buttons/custom_button.dart';
+import 'package:app_barber_shop/components/buttons/button_main.dart';
 import 'package:app_barber_shop/components/buttons/button_contact.dart';
 import 'package:app_barber_shop/components/theme/fonts.dart'; 
 

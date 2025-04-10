@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:app_barber_shop/components/theme/fonts.dart';
+import 'package:app_barber_shop/data/services.dart';
 
 class CustomCheckBox extends StatelessWidget {
-  final String text;
+  final Service service;
   final bool isChecked;
   final ValueChanged<bool?> onChanged;
   final double? width;
@@ -12,7 +13,7 @@ class CustomCheckBox extends StatelessWidget {
 
   const CustomCheckBox({
     super.key,
-    required this.text,
+    required this.service,
     required this.isChecked,
     required this.onChanged,
     this.width,
@@ -26,16 +27,6 @@ class CustomCheckBox extends StatelessWidget {
     final double boxWidth = width ?? screenSize.width * 0.8;
     final double boxHeight = height ?? screenSize.height * 0.07;
     final double effectiveFontSize = fontSize ?? screenSize.width * 0.05;
-
-    // AUMENTA A FONTE APENAS PARA O COMBO (título)
-    final double titleFontSize = text == 'Combo: Corte e Barba'
-        ? effectiveFontSize * 1.0
-        : effectiveFontSize;
-
-    // AUMENTA A FONTE APENAS PARA O COMBO (preço)
-    final double priceFontSize = text == 'Combo: Corte e Barba'
-        ? effectiveFontSize
-        : effectiveFontSize * 0.8;
 
     return SizedBox(
       width: boxWidth,
@@ -66,25 +57,27 @@ class CustomCheckBox extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Flexible(
+                    fit: FlexFit.loose,
                     child: Text(
-                      text,
+                      service.name,
                       style: AppFonts.main.copyWith(
-                        fontSize: titleFontSize,
-                        fontWeight: FontWeight.w500,
+                        fontSize: effectiveFontSize,
+                        fontWeight: FontWeight.w900,
                         color: AppColors.primaryText,
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  const SizedBox(width: 8),
+                  const SizedBox(width: 6),
                   Text(
-                    _getPrice(text),
+                    'R\$: ${service.price.toStringAsFixed(2)}',
                     style: AppFonts.main.copyWith(
-                      fontSize: priceFontSize,
+                      fontSize: screenSize.width * 0.045,
                       color: AppColors.primary,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w900,
                     ),
                   ),
                 ],
@@ -116,22 +109,5 @@ class CustomCheckBox extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  String _getPrice(String service) {
-    switch (service) {
-      case 'Corte':
-        return 'R\$ 40,00';
-      case 'Corte Infantil':
-        return 'R\$ 50,00';
-      case 'Barba':
-        return 'R\$ 30,00';
-      case 'Sobrancelha':
-        return 'R\$ 40,00';
-      case 'Combo: Corte e Barba':
-        return 'R\$ 60,00';
-      default:
-        return '';
-    }
   }
 }
