@@ -8,6 +8,7 @@ import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:app_barber_shop/components/theme/fonts.dart';
 import 'package:app_barber_shop/screens/select_date_hour_screen.dart';
 import 'package:app_barber_shop/data/services.dart';
+import 'package:app_barber_shop/components/shared/custom_scaffold.dart';
 
 class ServicoScreen extends StatefulWidget {
   const ServicoScreen({super.key});
@@ -70,52 +71,40 @@ class _ServicoScreenState extends State<ServicoScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(minHeight: size.height),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: size.width * 0.08),
-              child: Column(
-                children: [
-                  SizedBox(height: size.height * 0.01),
-                  _buildHeader(),
-                  SizedBox(height: size.height * 0.03),
-                  _buildTitle(size),
-                  SizedBox(height: size.height * 0.04),
-                  ...serviceList.map(
-                    (service) => Padding(
-                      padding: EdgeInsets.only(bottom: size.height * 0.025),
-                      child: CustomCheckBox(
-                        service: service,
-                        isChecked: _selected[service.name] ?? false,
-                        onChanged: (value) =>
-                            _toggleService(service.name, value),
-                      ),
+
+    return CustomScaffold(
+      showBackButton: true,
+      showProfileRight: true,
+      showContactButton: true,
+      body: SingleChildScrollView(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(minHeight: size.height),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: size.width * 0.08),
+            child: Column(
+              children: [
+                SizedBox(height: size.height * 0.03),
+                _buildTitle(size),
+                SizedBox(height: size.height * 0.04),
+                ...serviceList.map(
+                  (service) => Padding(
+                    padding: EdgeInsets.only(bottom: size.height * 0.025),
+                    child: CustomCheckBox(
+                      service: service,
+                      isChecked: _selected[service.name] ?? false,
+                      onChanged: (value) =>
+                          _toggleService(service.name, value),
                     ),
                   ),
-                  SizedBox(height: size.height * 0.05),
-                  _buildContinueButton(size),
-                  SizedBox(height: size.height * 0.03),
-                  _buildFooter(),
-                  SizedBox(height: size.height * 0.07),
-                ],
-              ),
+                ),
+                SizedBox(height: size.height * 0.02), 
+                _buildContinueButton(size),
+                SizedBox(height: size.height * 0.03),
+              ],
             ),
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildHeader() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        CustomBackButton(onPressed: () => Navigator.pop(context)),
-        const ProfileIconButton(),
-      ],
     );
   }
 
@@ -138,9 +127,5 @@ class _ServicoScreenState extends State<ServicoScreen> {
       width: size.width * 0.48,
       onPressed: _onContinuePressed,
     );
-  }
-
-  Widget _buildFooter() {
-    return const ContactButton();
   }
 }
