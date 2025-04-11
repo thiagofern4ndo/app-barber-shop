@@ -1,5 +1,5 @@
-import 'package:app_barber_shop/screens/register.dart';
-import 'package:app_barber_shop/screens/select_services.dart';
+import 'package:app_barber_shop/screens/register_screen.dart';
+import 'package:app_barber_shop/screens/select_services_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:app_barber_shop/components/buttons/button_instagram.dart';
 import 'package:app_barber_shop/components/buttons/button_back.dart';
@@ -7,7 +7,7 @@ import 'package:app_barber_shop/components/forms/custom_text_field.dart';
 import 'package:app_barber_shop/components/buttons/button_main.dart';
 import 'package:app_barber_shop/components/buttons/button_contact.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
-import 'package:app_barber_shop/screens/recoverpass.dart';
+import 'package:app_barber_shop/screens/recover_pass_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatefulWidget {

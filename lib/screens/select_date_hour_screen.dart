@@ -4,8 +4,8 @@ import 'package:app_barber_shop/components/buttons/button_secondary.dart';
 import 'package:app_barber_shop/components/calendar/carousel_calendar.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:app_barber_shop/components/theme/fonts.dart';
-import 'package:app_barber_shop/screens/professional.dart';
-import 'package:app_barber_shop/screens/select_date.dart';
+import 'package:app_barber_shop/screens/professional_screen.dart';
+import 'package:app_barber_shop/screens/select_date_screen.dart';
 import 'package:flutter/material.dart';
 
 class SelectHourPage extends StatefulWidget {
