@@ -60,7 +60,7 @@ class MainScreen extends StatelessWidget {
                     ),
                   ),
 
-                  const Spacer(),
+                  SizedBox(height: size.height * 0.08),
 
                   Align(
                     alignment: Alignment.center,
@@ -78,13 +78,6 @@ class MainScreen extends StatelessWidget {
                       height: size.height * 0.065,
                       fontSize: size.width * 0.050,
                     ),
-                  ),
-
-                  SizedBox(height: size.height * 0.15),
-
-                  SizedBox(
-                    height: size.height * 0.18,
-                    child: const ContactButton(),
                   ),
                 ],
               ),
