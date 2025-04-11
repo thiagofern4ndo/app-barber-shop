@@ -6,7 +6,7 @@ import 'package:app_barber_shop/components/buttons/button_main.dart';
 import 'package:app_barber_shop/components/buttons/button_contact.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:app_barber_shop/components/theme/fonts.dart';
-import 'package:app_barber_shop/screens/loginpage.dart';
+import 'package:app_barber_shop/screens/login_screen.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});

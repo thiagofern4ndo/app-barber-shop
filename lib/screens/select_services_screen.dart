@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:app_barber_shop/components/buttons/profile_button.dart';
+import 'package:app_barber_shop/components/buttons/button_profile.dart';
 import 'package:app_barber_shop/components/buttons/button_back.dart';
 import 'package:app_barber_shop/components/buttons/button_checkbox.dart';
 import 'package:app_barber_shop/components/buttons/button_contact.dart';
 import 'package:app_barber_shop/components/buttons/button_main.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:app_barber_shop/components/theme/fonts.dart';
-import 'package:app_barber_shop/screens/select_date_time.dart';
+import 'package:app_barber_shop/screens/select_date_hour_screen.dart';
 import 'package:app_barber_shop/data/services.dart';
 
 class ServicoScreen extends StatefulWidget {
@@ -19,7 +18,6 @@ class ServicoScreen extends StatefulWidget {
 
 class _ServicoScreenState extends State<ServicoScreen> {
   final Map<String, bool> _selected = {};
-  final NumberFormat _formatter = NumberFormat('#,##0.00', 'pt_BR');
 
   @override
   void initState() {

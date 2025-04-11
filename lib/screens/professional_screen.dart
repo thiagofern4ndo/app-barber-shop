@@ -1,7 +1,7 @@
 import 'package:app_barber_shop/components/buttons/button_main.dart';
-import 'package:app_barber_shop/components/buttons/profile_button.dart';
+import 'package:app_barber_shop/components/buttons/button_profile.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
-import 'package:app_barber_shop/screens/info_page.dart';
+import 'package:app_barber_shop/screens/info_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:app_barber_shop/components/buttons/button_back.dart';

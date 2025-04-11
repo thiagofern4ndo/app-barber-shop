@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:app_barber_shop/screens/splash.dart';
-import 'package:app_barber_shop/screens/mainscreen.dart';
+import 'package:app_barber_shop/screens/splash_screen.dart';
+import 'package:app_barber_shop/screens/main_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

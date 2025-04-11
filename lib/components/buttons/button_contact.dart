@@ -19,8 +19,8 @@ class ContactButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    final double buttonWidth = size.width * 0.3;  // Responsivo
-    final double buttonHeight = size.height * 0.054; // Responsivo
+    final double buttonWidth = size.width * 0.3;  
+    final double buttonHeight = size.height * 0.054; 
     final double fontSize = size.width * 0.04;
 
     return Column(
