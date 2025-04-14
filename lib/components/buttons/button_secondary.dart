@@ -8,7 +8,7 @@ class CustomButton2 extends StatelessWidget {
   final double? width;
   final double? height;
   final TextStyle? textStyle;
-  final Color? backgroundColor; // Agora ele é armazenado
+  final Color? backgroundColor; 
 
   const CustomButton2({
     super.key,
@@ -17,7 +17,7 @@ class CustomButton2 extends StatelessWidget {
     this.width,
     this.height,
     this.textStyle,
-    this.backgroundColor, // Correto no construtor
+    this.backgroundColor, 
   });
 
   @override
@@ -38,7 +38,7 @@ class CustomButton2 extends StatelessWidget {
             width: buttonHeight * 0.1,
           ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(buttonHeight * 0.5),
+            borderRadius: BorderRadius.circular(buttonHeight * 0.4),
           ),
         ),
         onPressed: onPressed,
