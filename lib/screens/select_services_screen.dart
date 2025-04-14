@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:app_barber_shop/components/buttons/button_profile.dart';
-import 'package:app_barber_shop/components/buttons/button_back.dart';
 import 'package:app_barber_shop/components/buttons/button_checkbox.dart';
-import 'package:app_barber_shop/components/buttons/button_contact.dart';
 import 'package:app_barber_shop/components/buttons/button_main.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:app_barber_shop/components/theme/fonts.dart';
@@ -40,14 +37,11 @@ class _ServicoScreenState extends State<ServicoScreen> {
 
   void _onContinuePressed() {
     if (_isAnyServiceSelected()) {
-      final selectedServices = _selected.entries
-          .where((e) => e.value)
-          .map((e) => e.key)
-          .toList();
+      final selectedServices =
+          _selected.entries.where((e) => e.value).map((e) => e.key).toList();
 
       final selectedPrices = selectedServices
-          .map((name) =>
-              serviceList.firstWhere((s) => s.name == name).price)
+          .map((name) => serviceList.firstWhere((s) => s.name == name).price)
           .toList();
 
       Navigator.push(
@@ -92,12 +86,11 @@ class _ServicoScreenState extends State<ServicoScreen> {
                     child: CustomCheckBox(
                       service: service,
                       isChecked: _selected[service.name] ?? false,
-                      onChanged: (value) =>
-                          _toggleService(service.name, value),
+                      onChanged: (value) => _toggleService(service.name, value),
                     ),
                   ),
                 ),
-                SizedBox(height: size.height * 0.02), 
+                SizedBox(height: size.height * 0.02),
                 _buildContinueButton(size),
                 SizedBox(height: size.height * 0.03),
               ],
