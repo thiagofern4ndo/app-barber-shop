@@ -5,7 +5,7 @@ import 'package:app_barber_shop/screens/main_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initializeDateFormatting('pt_BR', null); // Inicializa a localização para datas
+  await initializeDateFormatting('pt_BR', null); 
   runApp(const MyApp());
 }
 
