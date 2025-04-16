@@ -25,7 +25,7 @@ class MainScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  SizedBox(height: size.height * 0.07), // considerando o espaço já usado no header
+                  SizedBox(height: size.height * 0.07), 
 
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
