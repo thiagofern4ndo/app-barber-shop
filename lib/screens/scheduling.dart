@@ -23,7 +23,8 @@ class SchedulingScreen extends StatelessWidget {
                 ),
               ),
             SizedBox(height: 30), // Espaçamento entre o título e o card
-            CardReservas()
+            CardReservas(),
+           
           ],
         ),
       ),
