@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:app_barber_shop/components/shared/custom_scaffold.dart';
 import 'package:app_barber_shop/components/buttons/button_main.dart';
-import 'package:app_barber_shop/components/buttons/button_contact.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:app_barber_shop/components/theme/fonts.dart';
 import 'package:app_barber_shop/screens/login_screen.dart';
@@ -26,7 +25,7 @@ class MainScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  SizedBox(height: size.height * 0.07), // considerando o espaço já usado no header
+                  SizedBox(height: size.height * 0.07), 
 
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
