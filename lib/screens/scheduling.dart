@@ -7,24 +7,25 @@ import 'package:app_barber_shop/components/theme/colors.dart';
 class SchedulingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final Height = MediaQuery.of(context).size.height;
+    final Width = MediaQuery.of(context).size.width;
+
     return CustomScaffold(
       showProfileRight: true,
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          
           children: [
-            SizedBox(height: 50),// Espaçamento entre o topo e o título
-          Text(
-             'Agendamentos',
+            SizedBox(height: Height * 0.05), 
+            Text(
+              'Agendamentos',
               style: AppFonts.main.copyWith(
-              fontSize: 24, 
-              color: AppColors.primaryText, 
-                ),
+                fontSize: Width * 0.06, 
+                color: AppColors.primaryText,
               ),
-            SizedBox(height: 30), // Espaçamento entre o título e o card
+            ),
+            SizedBox(height: Height * 0.03), 
             CardReservas(),
-           
           ],
         ),
       ),
