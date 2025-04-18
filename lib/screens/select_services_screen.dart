@@ -36,16 +36,14 @@ class ServicoScreen extends StatelessWidget {
                     padding: EdgeInsets.only(bottom: size.height * 0.025),
                     child: CustomCheckBox(
                       service: service,
-                      // Verifica se o serviço está na lista de selecionados
                       isChecked: bookingProvider.currentBooking.selectedServices
                           .any((s) => s.name == service.name),
                       onChanged: (value) {
                         if (value ?? false) {
-                          // Adiciona o serviço à reserva via Provider
                           bookingProvider.addServiceToBooking(service);
                         } else {
-                          // Remove o serviço da reserva via Provider
-                          bookingProvider.removeServiceFromBooking(service.name);
+                          bookingProvider
+                              .removeServiceFromBooking(service.name);
                         }
                       },
                     ),
@@ -74,17 +72,18 @@ class ServicoScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildContinueButton(Size size, BookingProvider bookingProvider, BuildContext context) {
+  Widget _buildContinueButton(
+      Size size, BookingProvider bookingProvider, BuildContext context) {
     return CustomButton(
       text: 'Continuar',
       height: size.height * 0.06,
       width: size.width * 0.48,
       onPressed: () {
-        if (bookingProvider.currentBooking.selectedServices.isNotEmpty) { 
+        if (bookingProvider.currentBooking.selectedServices.isNotEmpty) {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const SelectHourPage(), 
+              builder: (context) => const SelectHourPage(),
             ),
           );
         } else {

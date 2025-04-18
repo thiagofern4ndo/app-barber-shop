@@ -1,3 +1,4 @@
+import 'package:app_barber_shop/screens/history_screen.dart';
 import 'package:app_barber_shop/components/buttons/button_secondary.dart';
 import 'package:app_barber_shop/screens/scheduling.dart';
 import 'package:app_barber_shop/screens/terms_screen.dart';
@@ -65,7 +66,7 @@ class UserProfilePage extends StatelessWidget {
             Column(
               children: [
                 CustomButton2(
-                  text: 'Reservas Ativas',
+                  text: 'Gerenciar Reservas',
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -85,7 +86,14 @@ class UserProfilePage extends StatelessWidget {
                 SizedBox(height: size.height * 0.03),
                 CustomButton2(
                   text: 'Histórico de Reservas',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ReservationHistoryScreen(), 
+                      ),
+                    );
+                  },
                   width: buttonWidth,
                   height: buttonHeight,
                   textStyle: AppFonts.main.copyWith(

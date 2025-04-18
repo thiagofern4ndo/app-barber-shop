@@ -70,6 +70,12 @@ class BookingProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  // Método para remover uma reserva
+  void removeReservation(String id) {
+    _confirmedBookings.removeWhere((reservation) => reservation.id == id);
+    notifyListeners();
+  }
+
   List<ReservationModel> get confirmedBookings => _confirmedBookings;
   BookingModel get currentBooking => _currentBooking;
   DateTime? get selectedDate => _currentBooking.selectedDate;
