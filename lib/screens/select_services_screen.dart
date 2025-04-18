@@ -6,65 +6,16 @@ import 'package:app_barber_shop/components/theme/fonts.dart';
 import 'package:app_barber_shop/screens/select_date_hour_screen.dart';
 import 'package:app_barber_shop/data/services.dart';
 import 'package:app_barber_shop/components/shared/custom_scaffold.dart';
+import 'package:provider/provider.dart';
+import 'package:app_barber_shop/models/booking_provider.dart';
 
-class ServicoScreen extends StatefulWidget {
+class ServicoScreen extends StatelessWidget {
   const ServicoScreen({super.key});
-
-  @override
-  State<ServicoScreen> createState() => _ServicoScreenState();
-}
-
-class _ServicoScreenState extends State<ServicoScreen> {
-  final Map<String, bool> _selected = {};
-
-  @override
-  void initState() {
-    super.initState();
-    for (var service in serviceList) {
-      _selected[service.name] = false;
-    }
-  }
-
-  void _toggleService(String name, bool? value) {
-    setState(() {
-      _selected[name] = value ?? false;
-    });
-  }
-
-  bool _isAnyServiceSelected() {
-    return _selected.values.contains(true);
-  }
-
-  void _onContinuePressed() {
-    if (_isAnyServiceSelected()) {
-      final selectedServices =
-          _selected.entries.where((e) => e.value).map((e) => e.key).toList();
-
-      final selectedPrices = selectedServices
-          .map((name) => serviceList.firstWhere((s) => s.name == name).price)
-          .toList();
-
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => SelectHourPage(
-            selectedServices: selectedServices,
-            selectedPrices: selectedPrices,
-          ),
-        ),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Por favor, selecione ao menos um serviço.'),
-        ),
-      );
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final bookingProvider = Provider.of<BookingProvider>(context);
 
     return CustomScaffold(
       showBackButton: true,
@@ -85,13 +36,23 @@ class _ServicoScreenState extends State<ServicoScreen> {
                     padding: EdgeInsets.only(bottom: size.height * 0.025),
                     child: CustomCheckBox(
                       service: service,
-                      isChecked: _selected[service.name] ?? false,
-                      onChanged: (value) => _toggleService(service.name, value),
+                      // Verifica se o serviço está na lista de selecionados
+                      isChecked: bookingProvider.currentBooking.selectedServices
+                          .any((s) => s.name == service.name),
+                      onChanged: (value) {
+                        if (value ?? false) {
+                          // Adiciona o serviço à reserva via Provider
+                          bookingProvider.addServiceToBooking(service);
+                        } else {
+                          // Remove o serviço da reserva via Provider
+                          bookingProvider.removeServiceFromBooking(service.name);
+                        }
+                      },
                     ),
                   ),
                 ),
                 SizedBox(height: size.height * 0.02),
-                _buildContinueButton(size),
+                _buildContinueButton(size, bookingProvider, context),
                 SizedBox(height: size.height * 0.03),
               ],
             ),
@@ -113,12 +74,27 @@ class _ServicoScreenState extends State<ServicoScreen> {
     );
   }
 
-  Widget _buildContinueButton(Size size) {
+  Widget _buildContinueButton(Size size, BookingProvider bookingProvider, BuildContext context) {
     return CustomButton(
       text: 'Continuar',
       height: size.height * 0.06,
       width: size.width * 0.48,
-      onPressed: _onContinuePressed,
+      onPressed: () {
+        if (bookingProvider.currentBooking.selectedServices.isNotEmpty) { 
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const SelectHourPage(), 
+            ),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Por favor, selecione ao menos um serviço.'),
+            ),
+          );
+        }
+      },
     );
   }
 }

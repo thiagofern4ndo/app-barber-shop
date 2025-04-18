@@ -41,6 +41,7 @@ class CustomScaffold extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.background,
+      resizeToAvoidBottomInset: false, 
       body: SafeArea(
         child: Column(
           children: [

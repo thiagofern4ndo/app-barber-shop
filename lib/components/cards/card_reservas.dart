@@ -1,18 +1,18 @@
+import 'package:app_barber_shop/models/reservation_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:app_barber_shop/components/theme/fonts.dart';
+import 'package:app_barber_shop/models/reservation_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class CardReservas extends StatelessWidget {
-  final double dayOffset;
-  final double monthOffset;
-  final double trashOffset;
+  final ReservationModel reservation;
 
   const CardReservas({
     super.key,
-    this.dayOffset = 5,
-    this.monthOffset = 0,
-    this.trashOffset = -5,
+    required this.reservation,
   });
 
   @override
@@ -29,6 +29,9 @@ class CardReservas extends StatelessWidget {
     final iconSize = 20 * widthFactor;
     final imageSize = screenWidth * 0.2;
     final containerPadding = screenWidth * 0.03;
+
+    final formattedDay = DateFormat('d', 'pt_BR').format(reservation.date);
+    final formattedMonth = DateFormat('MMM', 'pt_BR').format(reservation.date);
 
     return Padding(
       padding: EdgeInsets.all(12 * widthFactor),
@@ -60,20 +63,24 @@ class CardReservas extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20 * widthFactor),
                       border: Border.all(
-                          color: AppColors.primary, width: 3 * widthFactor),
+                        color: AppColors.primary,
+                        width: 3 * widthFactor,
+                      ),
                       color: AppColors.primaryText,
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20 * widthFactor),
-                      child: Image.asset(
-                        'assets/eduardo.png',
-                        fit: BoxFit.cover,
-                      ),
+                      child: reservation.professionalImage.isNotEmpty
+                          ? Image.asset(
+                              reservation.professionalImage,
+                              fit: BoxFit.cover,
+                            )
+                          : const Icon(Icons.person),
                     ),
                   ),
                   SizedBox(height: screenHeight * 0.015),
                   Text(
-                    'Eduardo',
+                    reservation.professional,
                     style: AppFonts.main.copyWith(
                       fontSize: textSize,
                       color: AppColors.primaryText,
@@ -86,32 +93,32 @@ class CardReservas extends StatelessWidget {
             SizedBox(width: screenWidth * 0.03),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: screenWidth *
-                        0.05),
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.055),
                 child: Container(
                   height: screenHeight * 0.18,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20 * widthFactor),
                     color: AppColors.background,
                     border: Border.all(
-                        color: AppColors.primary, width: 3 * widthFactor),
+                      color: AppColors.primary,
+                      width: 3 * widthFactor,
+                    ),
                   ),
                   child: Row(
                     children: [
                       Expanded(
                         child: Padding(
                           padding: EdgeInsets.only(
-                              left: screenWidth * 0.02,
-                              top: screenHeight * 0.03),
+                            left: screenWidth * 0.02,
+                            top: screenHeight * 0.02,
+                          ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: EdgeInsets.only(
-                                    bottom: screenHeight * 0.015),
+                                padding: EdgeInsets.only(bottom: screenHeight * 0.01),
                                 child: Text(
-                                  'Combo',
+                                  reservation.services.map((s) => s.name).join(', '),
                                   style: AppFonts.main.copyWith(
                                     fontSize: 16 * widthFactor,
                                     color: AppColors.primaryText,
@@ -120,10 +127,9 @@ class CardReservas extends StatelessWidget {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.only(
-                                    bottom: screenHeight * 0.015),
+                                padding: EdgeInsets.only(bottom: screenHeight * 0.01),
                                 child: Text(
-                                  'R\$ 70,00',
+                                  'R\$ ${reservation.totalPrice.toStringAsFixed(2)}',
                                   style: AppFonts.main.copyWith(
                                     fontSize: 16 * widthFactor,
                                     color: AppColors.primary,
@@ -132,7 +138,7 @@ class CardReservas extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                '11:00',
+                                reservation.hour,
                                 style: AppFonts.main.copyWith(
                                   fontSize: 16 * widthFactor,
                                   color: AppColors.primaryText,
@@ -151,7 +157,7 @@ class CardReservas extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Text(
-                                '21',
+                                formattedDay,
                                 style: AppFonts.main.copyWith(
                                   fontSize: 22 * widthFactor,
                                   color: AppColors.primaryText,
@@ -159,7 +165,7 @@ class CardReservas extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                'Fev',
+                                formattedMonth,
                                 style: AppFonts.main.copyWith(
                                   fontSize: smallTextSize,
                                   color: AppColors.secondaryText,
@@ -167,9 +173,8 @@ class CardReservas extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(height: screenHeight * 0.02),
-                              
                               SizedBox(
-                                width: screenWidth * 0.06, 
+                                width: screenWidth * 0.06,
                                 child: IconButton(
                                   padding: EdgeInsets.zero,
                                   icon: FaIcon(
@@ -177,7 +182,9 @@ class CardReservas extends StatelessWidget {
                                     color: AppColors.primaryText,
                                     size: iconSize,
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    context.read<ReservationProvider>().removeReservation(reservation.id);
+                                  },
                                 ),
                               ),
                             ],
