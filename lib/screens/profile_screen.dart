@@ -1,4 +1,6 @@
 import 'package:app_barber_shop/components/buttons/button_secondary.dart';
+import 'package:app_barber_shop/screens/scheduling.dart';
+import 'package:app_barber_shop/screens/terms_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:app_barber_shop/components/buttons/button_back.dart';
 import 'package:app_barber_shop/components/buttons/button_instagram.dart';
@@ -16,7 +18,7 @@ class UserProfilePage extends StatelessWidget {
     final double buttonHeight = size.height * 0.065;
     final double fontSizeTitle = size.width * 0.065;
     final double fontSizeEmail = size.width * 0.035;
-    final double buttonFontSize = size.width * 0.05; 
+    final double buttonFontSize = size.width * 0.05;
 
     return Scaffold(
       body: SafeArea(
@@ -60,13 +62,18 @@ class UserProfilePage extends StatelessWidget {
               ],
             ),
             SizedBox(height: size.height * 0.06),
-
-            // Botões com customização
             Column(
               children: [
                 CustomButton2(
                   text: 'Reservas Ativas',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SchedulingScreen(),
+                      ),
+                    );
+                  },
                   width: buttonWidth,
                   height: buttonHeight,
                   textStyle: AppFonts.main.copyWith(
@@ -74,7 +81,6 @@ class UserProfilePage extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                     color: AppColors.primaryText,
                   ),
-   
                 ),
                 SizedBox(height: size.height * 0.03),
                 CustomButton2(
@@ -87,7 +93,6 @@ class UserProfilePage extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                     color: AppColors.primaryText,
                   ),
-          
                 ),
                 SizedBox(height: size.height * 0.03),
                 CustomButton2(
@@ -100,12 +105,17 @@ class UserProfilePage extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                     color: AppColors.primaryText,
                   ),
-  
                 ),
                 SizedBox(height: size.height * 0.03),
                 CustomButton2(
                   text: 'Termos de Uso',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const TermsScreen()),
+                    );
+                  },
                   width: buttonWidth,
                   height: buttonHeight,
                   textStyle: AppFonts.main.copyWith(
@@ -113,13 +123,10 @@ class UserProfilePage extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                     color: AppColors.primaryText,
                   ),
- 
                 ),
               ],
             ),
-
             const Spacer(),
-
             Padding(
               padding: EdgeInsets.symmetric(vertical: size.height * 0.02),
               child: const ContactButton(),

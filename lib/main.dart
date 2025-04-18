@@ -1,7 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:intl/date_symbol_data_local.dart';
+import 'package:app_barber_shop/components/theme/colors.dart';
+import 'package:app_barber_shop/models/booking_provider.dart';
+import 'package:app_barber_shop/models/reservation_provider.dart'; 
 import 'package:app_barber_shop/screens/splash_screen.dart';
 import 'package:app_barber_shop/screens/main_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,16 +18,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        scaffoldBackgroundColor: const Color(0xFF000000), 
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => BookingProvider()),
+        ChangeNotifierProvider(create: (_) => ReservationProvider()), 
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          scaffoldBackgroundColor: AppColors.background,
+        ),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => const SplashScreen(),
+          '/main': (context) => const MainScreen(),
+        },
       ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const SplashScreen(),
-        '/main': (context) => const MainScreen(),
-      },
     );
   }
 }

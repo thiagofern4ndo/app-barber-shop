@@ -1,36 +1,32 @@
 import 'package:app_barber_shop/components/shared/custom_scaffold.dart';
+import 'package:app_barber_shop/models/booking_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:app_barber_shop/components/buttons/button_main.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:app_barber_shop/components/theme/fonts.dart';
 import 'package:app_barber_shop/screens/confirmation_screen.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class AgendamentoInfoPage extends StatelessWidget {
-  final String selectedProfessional;
-  final List<String> selectedServices;
-  final List<double> selectedPrices;
-  final DateTime selectedDate;
-  final String selectedHour;
-
-  const AgendamentoInfoPage({
-    super.key,
-    required this.selectedProfessional,
-    required this.selectedServices,
-    required this.selectedPrices,
-    required this.selectedDate,
-    required this.selectedHour,
-  });
+  const AgendamentoInfoPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final bookingProvider = Provider.of<BookingProvider>(context);
+
     final verticalSpacing = size.height * 0.018;
-    final formattedDate = DateFormat('dd/MM').format(selectedDate);
+    final selectedDate = bookingProvider.selectedDate;
+    final formattedDate = selectedDate != null
+        ? DateFormat('dd/MM').format(selectedDate)
+        : 'N/A'; // Protegendo contra null
+
     final double boxWidth = size.width * 0.75;
 
-    String formattedPrices = selectedPrices
-        .map((price) => 'R\$ ${price.toStringAsFixed(2).replaceAll('.', ',')}')
+    // Acessar os preços e formatá-los
+    String formattedPrices = bookingProvider.selectedServices
+        .map((service) => 'R\$ ${service.price.toStringAsFixed(2).replaceAll('.', ',')}')
         .join(', ');
 
     return CustomScaffold(
@@ -62,14 +58,16 @@ class AgendamentoInfoPage extends StatelessWidget {
                     children: [
                       buildInfoBox(
                         label: 'Profissional:',
-                        value: selectedProfessional,
+                        value: bookingProvider.selectedProfessional ?? 'N/A',
                         width: boxWidth,
                         size: size,
                       ),
                       SizedBox(height: verticalSpacing),
                       buildInfoBox(
                         label: 'Serviço:',
-                        value: selectedServices.join(', '),
+                        value: bookingProvider.selectedServices
+                            .map((service) => service.name)
+                            .join(', '), // Exibindo os nomes dos serviços
                         width: boxWidth,
                         size: size,
                       ),
@@ -90,7 +88,7 @@ class AgendamentoInfoPage extends StatelessWidget {
                       SizedBox(height: verticalSpacing),
                       buildInfoBox(
                         label: 'Hora:',
-                        value: selectedHour,
+                        value: bookingProvider.selectedHour ?? 'N/A',
                         width: boxWidth,
                         size: size,
                       ),
@@ -103,6 +101,11 @@ class AgendamentoInfoPage extends StatelessWidget {
                   child: CustomButton(
                     text: 'Confirmar Agendamento',
                     onPressed: () {
+                      String professionalImage = 'assets/paula.png';  // Exemplo de imagem do profissional
+                      
+                      // Confirmando a reserva através do provider com a imagem do profissional
+                      bookingProvider.confirmBooking(); // ISSO AQUI ESTA DANDO ERRO 
+
                       Navigator.push(
                         context,
                         PageRouteBuilder(

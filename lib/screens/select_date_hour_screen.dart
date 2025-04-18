@@ -4,50 +4,63 @@ import 'package:app_barber_shop/components/calendar/carousel_calendar.dart';
 import 'package:app_barber_shop/components/shared/custom_scaffold.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:app_barber_shop/components/theme/fonts.dart';
-import 'package:app_barber_shop/screens/professional_screen.dart';
+import 'package:app_barber_shop/models/booking_provider.dart';
 import 'package:app_barber_shop/screens/select_date_screen.dart';
+import 'package:app_barber_shop/screens/select_professional_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class SelectHourPage extends StatefulWidget {
-  final List<String> selectedServices;
-  final List<double> selectedPrices;
-
-  const SelectHourPage({
-    super.key,
-    required this.selectedServices,
-    required this.selectedPrices,
-  });
-
-  @override
-  State<SelectHourPage> createState() => _SelectHourPageState();
-}
-
-class _SelectHourPageState extends State<SelectHourPage> {
-  String? selectedHour;
-  DateTime? selectedDate;
-
-  final List<String> hours = [
-    '08:00',
-    '08:50',
-    '09:40',
-    '10:30',
-    '11:20',
-    '12:10',
-    '13:00',
-    '13:50',
-    '14:40',
-    '15:30',
-    '16:20',
-    '17:10',
-    '18:00',
-    '18:50',
-    '19:40',
-  ];
+class SelectHourPage extends StatelessWidget {
+  const SelectHourPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final double spacing = size.height * 0.011;
+    final bookingProvider = Provider.of<BookingProvider>(context);
+    final selectedDate = bookingProvider.selectedDate;
+    final selectedHour = bookingProvider.selectedHour;
+
+    final List<String> hours = [
+      '08:00',
+      '08:50',
+      '09:40',
+      '10:30',
+      '11:20',
+      '12:10',
+      '13:00',
+      '13:50',
+      '14:40',
+      '15:30',
+      '16:20',
+      '17:10',
+      '18:00',
+      '18:50',
+      '19:40',
+    ];
+
+    void navigateToNextScreen() {
+      if (selectedDate != null && selectedHour != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const ProfessionalSelectionScreen(),
+          ),
+        );
+      } else {
+        String message = '';
+        if (selectedDate == null && selectedHour == null) {
+          message = 'Por favor, selecione a data e o horário.';
+        } else if (selectedDate == null) {
+          message = 'Por favor, selecione uma data.';
+        } else {
+          message = 'Por favor, selecione um horário.';
+        }
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(message)),
+        );
+      }
+    }
 
     return CustomScaffold(
       showBackButton: true,
@@ -60,9 +73,7 @@ class _SelectHourPageState extends State<SelectHourPage> {
           ),
         );
         if (result != null) {
-          setState(() {
-            selectedDate = result;
-          });
+          bookingProvider.setDate(result);
         }
       },
       body: SingleChildScrollView(
@@ -72,7 +83,7 @@ class _SelectHourPageState extends State<SelectHourPage> {
         ),
         child: Column(
           children: [
-            SizedBox(height: spacing * 2),
+            SizedBox(height: size.height * 0.022),
             Text(
               'Selecione a data',
               style: AppFonts.main.copyWith(
@@ -81,15 +92,13 @@ class _SelectHourPageState extends State<SelectHourPage> {
                 color: AppColors.primaryText,
               ),
             ),
-            SizedBox(height: spacing),
+            SizedBox(height: size.height * 0.02),
             CarouselCalendar(
               onDateSelected: (date) {
-                setState(() {
-                  selectedDate = date;
-                });
+                bookingProvider.setDate(date);
               },
             ),
-            SizedBox(height: spacing * 2),
+            SizedBox(height: size.height * 0.03),
             Text(
               'Selecione um horário',
               style: AppFonts.main.copyWith(
@@ -98,10 +107,10 @@ class _SelectHourPageState extends State<SelectHourPage> {
                 color: AppColors.primaryText,
               ),
             ),
-            SizedBox(height: spacing * 1.9),
+            SizedBox(height: size.height * 0.018),
             Wrap(
               spacing: size.width * 0.04,
-              runSpacing: spacing,
+              runSpacing: size.height * 0.011,
               children: hours.map((hour) {
                 final bool isSelected = selectedHour == hour;
 
@@ -111,14 +120,11 @@ class _SelectHourPageState extends State<SelectHourPage> {
                   child: CustomButton2(
                     text: hour,
                     onPressed: () {
-                      setState(() {
-                        selectedHour = hour;
-                      });
+                      bookingProvider.setHour(hour);
                     },
                     key: ValueKey(hour),
-                    backgroundColor: isSelected
-                        ? AppColors.primary
-                        : AppColors.background,
+                    backgroundColor:
+                        isSelected ? AppColors.primary : AppColors.background,
                     textStyle: AppFonts.main.copyWith(
                       fontSize: size.width * 0.050,
                       fontWeight: FontWeight.w900,
@@ -131,40 +137,11 @@ class _SelectHourPageState extends State<SelectHourPage> {
               }).toList(),
             ),
             SizedBox(height: size.height * 0.05),
-            SizedBox(
-              width: size.width * 0.5,
+            CustomButton(
+              text: 'Continuar',
+              onPressed: navigateToNextScreen,
               height: size.height * 0.06,
-              child: CustomButton(
-                text: 'Continuar',
-                onPressed: () {
-                  if (selectedDate != null && selectedHour != null) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProfessionalSelectionScreen(
-                          selectedServices: widget.selectedServices,
-                          selectedPrices: widget.selectedPrices,
-                          selectedDate: selectedDate!,
-                          selectedHour: selectedHour!,
-                        ),
-                      ),
-                    );
-                  } else {
-                    String message = '';
-                    if (selectedDate == null && selectedHour == null) {
-                      message = 'Por favor, selecione a data e o horário.';
-                    } else if (selectedDate == null) {
-                      message = 'Por favor, selecione uma data.';
-                    } else {
-                      message = 'Por favor, selecione um horário.';
-                    }
-
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(message)),
-                    );
-                  }
-                },
-              ),
+              width: size.width * 0.5,
             ),
           ],
         ),
