@@ -39,7 +39,7 @@ class BookingModel extends ChangeNotifier {
   }
 
   void setProfessionalImage(String image) {
-    professionalImage = image;  // Adiciona a imagem do profissional
+    professionalImage = image;  
     notifyListeners();
   }
 

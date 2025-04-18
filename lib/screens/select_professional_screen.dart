@@ -10,7 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class ProfessionalSelectionScreen extends StatelessWidget {
-  const ProfessionalSelectionScreen({Key? key}) : super(key: key);
+  const ProfessionalSelectionScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

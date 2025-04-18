@@ -43,7 +43,7 @@ class SchedulingScreen extends StatelessWidget {
                 ),
               )
             else
-              ...reservations.map((reservation) => CardReservas(reservation: reservation)).toList(),
+              ...reservations.map((reservation) => CardReservas(reservation: reservation)),
           ],
         ),
       ),
