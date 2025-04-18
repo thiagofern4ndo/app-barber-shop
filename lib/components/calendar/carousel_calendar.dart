@@ -76,7 +76,6 @@ class _CarouselCalendarState extends State<CarouselCalendar> {
   }
 
   bool _isToday(DateTime date) {
-    // Verifica se a data é o dia de hoje
     final today = DateTime.now();
     return date.year == today.year &&
            date.month == today.month &&
@@ -84,7 +83,6 @@ class _CarouselCalendarState extends State<CarouselCalendar> {
   }
 
   bool _isBlocked(DateTime date) {
-    // Verifica se a data é um domingo, feriado ou o dia de hoje
     return date.weekday == DateTime.sunday || _isHoliday(date) || _isToday(date);
   }
 
