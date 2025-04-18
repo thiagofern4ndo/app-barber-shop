@@ -1,4 +1,4 @@
-import 'package:app_barber_shop/models/reservation_provider.dart';
+import 'package:app_barber_shop/models/booking_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:app_barber_shop/components/theme/colors.dart';
 import 'package:app_barber_shop/components/theme/fonts.dart';
@@ -9,10 +9,12 @@ import 'package:provider/provider.dart';
 
 class CardReservas extends StatelessWidget {
   final ReservationModel reservation;
+  final bool showTrash;
 
   const CardReservas({
     super.key,
     required this.reservation,
+    this.showTrash = true,
   });
 
   @override
@@ -32,6 +34,18 @@ class CardReservas extends StatelessWidget {
 
     final formattedDay = DateFormat('d', 'pt_BR').format(reservation.date);
     final formattedMonth = DateFormat('MMM', 'pt_BR').format(reservation.date);
+
+    // Verificar se a reserva já passou
+    final now = DateTime.now();
+    final hourParts = reservation.hour.split(':');
+    final scheduledDateTime = DateTime(
+      reservation.date.year,
+      reservation.date.month,
+      reservation.date.day,
+      int.parse(hourParts[0]),
+      int.parse(hourParts[1]),
+    );
+    final isPastReservation = scheduledDateTime.isBefore(now);
 
     return Padding(
       padding: EdgeInsets.all(12 * widthFactor),
@@ -109,8 +123,8 @@ class CardReservas extends StatelessWidget {
                       Expanded(
                         child: Padding(
                           padding: EdgeInsets.only(
-                            left: screenWidth * 0.02,
-                            top: screenHeight * 0.02,
+                            left: screenWidth * 0.03,
+                            top: screenHeight * 0.025,
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -151,7 +165,7 @@ class CardReservas extends StatelessWidget {
                       ),
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsets.only(right: screenWidth * 0.03),
+                          padding: EdgeInsets.only(right: screenWidth * 0.045),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.end,
@@ -173,20 +187,63 @@ class CardReservas extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(height: screenHeight * 0.02),
-                              SizedBox(
-                                width: screenWidth * 0.06,
-                                child: IconButton(
-                                  padding: EdgeInsets.zero,
-                                  icon: FaIcon(
-                                    FontAwesomeIcons.trashAlt,
-                                    color: AppColors.primaryText,
-                                    size: iconSize,
+                              // Remover o botão de trash para reservas passadas
+                              if (!isPastReservation && showTrash)
+                                SizedBox(
+                                  width: screenWidth * 0.06,
+                                  child: IconButton(
+                                    padding: EdgeInsets.zero,
+                                    icon: FaIcon(
+                                      FontAwesomeIcons.trashAlt,
+                                      color: AppColors.primaryText,
+                                      size: iconSize,
+                                    ),
+                                    onPressed: () {
+                                      final now = DateTime.now();
+
+                                      try {
+                                        final hourParts = reservation.hour.split(':');
+                                        final scheduledDateTime = DateTime(
+                                          reservation.date.year,
+                                          reservation.date.month,
+                                          reservation.date.day,
+                                          int.parse(hourParts[0]),
+                                          int.parse(hourParts[1]),
+                                        );
+
+                                        final difference = scheduledDateTime.difference(now);
+
+                                        if (difference.inMinutes > 60) {
+                                          // Corrigido: Usando 'context.read<BookingProvider>()'
+                                          context.read<BookingProvider>().removeReservation(reservation.id);
+                                        } else {
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) => AlertDialog(
+                                              title: const Text('Cancelamento não permitido'),
+                                              content: const Text(
+                                                'Reservas só podem ser canceladas com no mínimo 1 hora de antecedência.',
+                                              ),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () => Navigator.of(context).pop(),
+                                                  child: const Text('Ok'),
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        }
+                                      } catch (e) {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          const SnackBar(
+                                            content: Text('Erro ao tentar cancelar a reserva.'),
+
+                                          ),
+                                        );
+                                      }
+                                    },
                                   ),
-                                  onPressed: () {
-                                    context.read<ReservationProvider>().removeReservation(reservation.id);
-                                  },
                                 ),
-                              ),
                             ],
                           ),
                         ),
