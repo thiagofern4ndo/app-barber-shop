@@ -7,7 +7,7 @@ class ReservationModel {
   final DateTime date;
   final String hour;
   final String professional;
-  final String professionalImage;  // Campo para armazenar a imagem do profissional
+  final String professionalImage;  
   final DateTime createdAt;
 
   ReservationModel({
@@ -17,7 +17,7 @@ class ReservationModel {
     required this.date,
     required this.hour,
     required this.professional,
-    required this.professionalImage,  // Passando a imagem do profissional
+    required this.professionalImage, 
     required this.createdAt,
   });
 
@@ -26,7 +26,7 @@ class ReservationModel {
     required DateTime date,
     required String hour,
     required String professional,
-    required String professionalImage, // Novo parâmetro para a imagem
+    required String professionalImage,
   }) {
     final double total = services.fold(0.0, (sum, item) => sum + item.price);
     final String id = '${DateTime.now().millisecondsSinceEpoch}';
@@ -38,7 +38,7 @@ class ReservationModel {
       date: date,
       hour: hour,
       professional: professional,
-      professionalImage: professionalImage, // Agora passando a imagem
+      professionalImage: professionalImage, 
       createdAt: DateTime.now(),
     );
   }

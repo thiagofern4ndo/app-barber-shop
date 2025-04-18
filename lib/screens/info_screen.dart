@@ -20,7 +20,7 @@ class AgendamentoInfoPage extends StatelessWidget {
     final selectedDate = bookingProvider.selectedDate;
     final formattedDate = selectedDate != null
         ? DateFormat('dd/MM').format(selectedDate)
-        : 'N/A'; // Protegendo contra null
+        : 'N/A'; 
 
     final double boxWidth = size.width * 0.75;
 
@@ -67,7 +67,7 @@ class AgendamentoInfoPage extends StatelessWidget {
                         label: 'Serviço:',
                         value: bookingProvider.selectedServices
                             .map((service) => service.name)
-                            .join(', '), // Exibindo os nomes dos serviços
+                            .join(', '), 
                         width: boxWidth,
                         size: size,
                       ),
@@ -101,10 +101,7 @@ class AgendamentoInfoPage extends StatelessWidget {
                   child: CustomButton(
                     text: 'Confirmar Agendamento',
                     onPressed: () {
-                      String professionalImage = 'assets/paula.png';  // Exemplo de imagem do profissional
-                      
-                      // Confirmando a reserva através do provider com a imagem do profissional
-                      bookingProvider.confirmBooking(); // ISSO AQUI ESTA DANDO ERRO 
+                      bookingProvider.confirmBooking(); 
 
                       Navigator.push(
                         context,

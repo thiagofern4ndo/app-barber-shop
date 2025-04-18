@@ -22,7 +22,6 @@ class _ConfirmationPageState extends State<ConfirmationPage>
   void initState() {
     super.initState();
 
-    // Escala para o ícone de check
     _scaleController = AnimationController(
       duration: const Duration(milliseconds: 600),
       vsync: this,
@@ -35,7 +34,6 @@ class _ConfirmationPageState extends State<ConfirmationPage>
 
     _scaleController.forward();
 
-    // Fade para a tela inteira
     _fadeController = AnimationController(
       duration: const Duration(milliseconds: 600),
       vsync: this,
@@ -43,11 +41,8 @@ class _ConfirmationPageState extends State<ConfirmationPage>
 
     _fadeAnimation = Tween<double>(begin: 1.0, end: 0.0).animate(_fadeController);
 
-    // Delay para começar o fade out e navegação
     Future.delayed(const Duration(seconds: 3), () {
-      _fadeController.forward(); // inicia o fade
-
-      // espera o fade terminar antes de navegar
+      _fadeController.forward(); 
       Future.delayed(const Duration(milliseconds: 800), () {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => const MainScreen()),
