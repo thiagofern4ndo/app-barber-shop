@@ -40,7 +40,7 @@ class ReservationHistoryScreen extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(vertical: height * 0.2),
                 child: Text(
-                  'Nenhuma reserva passada',
+                  'Você não possui reservas anteriores',
                   style: AppFonts.main.copyWith(
                     fontSize: width * 0.045,
                     color: AppColors.secondaryText,
